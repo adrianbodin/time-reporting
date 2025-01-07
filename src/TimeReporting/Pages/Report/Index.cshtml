@@ -1,0 +1,19 @@
+@page "/report"
+@model TimeReporting.Pages.Report.Index
+
+
+<section class="container min-vh-100">
+  <h1>Report time</h1>
+  <div class="row min-vh-100">
+    <aside class="col-4 border-end border-dark min-vh-100">
+      <form hx-post="/report?handler=Day" hx-target="#day" hx-swap="innerHTML" hx-trigger="change">
+        <input asp-for="SelectedDate" class="form-control" />
+        @Html.AntiForgeryToken()
+      </form>
+    </aside>
+    <div id="day" class="col-8">
+      @await Html.PartialAsync("_ReportsCurrentDay", Model)
+    </div>
+  </div>
+
+</section>
