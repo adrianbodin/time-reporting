@@ -1,6 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using TimeReporting.Data;
+using TimeReporting.Models;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AppDbContext>(opt =>
+    opt.UseNpgsql(builder.Configuration["PostgreSql:ConnectionString"]));
+
+builder.Services.AddDefaultIdentity<CustomUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
