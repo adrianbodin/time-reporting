@@ -12,6 +12,7 @@ public class Index : PageModel
 
     public void OnGet()
     {
+        ViewData["Title"] = "Report";
         SelectedDate = DateTime.Now;
     }
 
