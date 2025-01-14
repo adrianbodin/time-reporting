@@ -2,9 +2,12 @@ using TimeReporting.Integration.Tests.Infrastructure;
 
 namespace TimeReporting.Integration.Tests;
 
-[Collection("Integration")]
-public class ReportPageTests(IntegrationTestWebAppFactory factory) : IntegrationTestBase(factory)
+public class ReportPageTests : IntegrationTestBase
 {
+    public ReportPageTests(IntegrationTestWebAppFactory factory) : base(factory)
+    {
+    }
+
     [Fact]
     public async Task WhenUserVisitReportPageTheDateInputShouldBeTodaysDate()
     {

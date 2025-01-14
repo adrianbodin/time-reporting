@@ -1,4 +1,5 @@
 using System.Data.Common;
+using DotNet.Testcontainers.Containers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -20,12 +21,15 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         .WithDatabase("time_reporting_test_db")
         .WithUsername("postgres")
         .WithPassword("postgres")
+        .WithReuse(true)
         .Build();
 
     private AppDbContext Db { get; set; } = null!;
     private DbConnection _dbConnection = default!;
     private Respawner _respawner = default!;
     private IHost _host = default!;
+    public IPlaywright PlaywrightInstance { get; set; } = default!;
+    public IBrowser Browser { get; set; } = default!;
 
     public string ServerAddress
     {
@@ -89,6 +93,8 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
 
     public async Task InitializeAsync()
     {
+        PlaywrightInstance = await Playwright.CreateAsync();
+        Browser = await PlaywrightInstance.Chromium.LaunchAsync();
         await _container.StartAsync();
 
         Db = Services.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>();
@@ -114,7 +120,8 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
 
     public async Task DisposeAsync()
     {
+        await Browser.DisposeAsync();
         await _dbConnection.CloseAsync();
-        await _container.DisposeAsync();
+        //await _container.DisposeAsync();
     }
 }
