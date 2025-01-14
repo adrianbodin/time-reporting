@@ -1,4 +1,5 @@
 ﻿@using Htmx.TagHelpers
+@inject IWebHostEnvironment Environment
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,10 +23,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                   <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                      <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                      <a class="nav-link text-dark" asp-page="/Index">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link text-dark" asp-area="" asp-page="/Report/Index">Report</a>
+                      <a class="nav-link text-dark" asp-page="/Report/Index">Report</a>
                     </li>
                     @await Html.PartialAsync("_LoginPartial")
                   </ul>
@@ -47,8 +48,12 @@
 
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/toast.js" asp-append-version="true"></script>
-    @Html.HtmxAntiforgeryScript()
+<script src="~/js/toast.js" asp-append-version="true"></script>
+@if (!Environment.IsProduction())
+{
+  <script src="~/js/htmxplaywright.js"></script>
+}
+@Html.HtmxAntiforgeryScript()
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
