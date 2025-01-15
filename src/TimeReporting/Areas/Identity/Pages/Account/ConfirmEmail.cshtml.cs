@@ -17,9 +17,9 @@ namespace TimeReporting.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<CustomUser> _userManager;
+        private readonly UserManager<Employee> _userManager;
 
-        public ConfirmEmailModel(UserManager<CustomUser> userManager)
+        public ConfirmEmailModel(UserManager<Employee> userManager)
         {
             _userManager = userManager;
         }

@@ -24,17 +24,17 @@ namespace TimeReporting.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<CustomUser> _signInManager;
-        private readonly UserManager<CustomUser> _userManager;
-        private readonly IUserStore<CustomUser> _userStore;
-        private readonly IUserEmailStore<CustomUser> _emailStore;
+        private readonly SignInManager<Employee> _signInManager;
+        private readonly UserManager<Employee> _userManager;
+        private readonly IUserStore<Employee> _userStore;
+        private readonly IUserEmailStore<Employee> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<CustomUser> userManager,
-            IUserStore<CustomUser> userStore,
-            SignInManager<CustomUser> signInManager,
+            UserManager<Employee> userManager,
+            IUserStore<Employee> userStore,
+            SignInManager<Employee> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -155,27 +155,27 @@ namespace TimeReporting.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private CustomUser CreateUser()
+        private Employee CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<CustomUser>();
+                return Activator.CreateInstance<Employee>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(CustomUser)}'. " +
-                    $"Ensure that '{nameof(CustomUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(Employee)}'. " +
+                    $"Ensure that '{nameof(Employee)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<CustomUser> GetEmailStore()
+        private IUserEmailStore<Employee> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<CustomUser>)_userStore;
+            return (IUserEmailStore<Employee>)_userStore;
         }
     }
 }

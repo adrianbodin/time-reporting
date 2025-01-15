@@ -14,13 +14,13 @@ namespace TimeReporting.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        private readonly UserManager<CustomUser> _userManager;
-        private readonly SignInManager<CustomUser> _signInManager;
+        private readonly UserManager<Employee> _userManager;
+        private readonly SignInManager<Employee> _signInManager;
         private readonly ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<CustomUser> userManager,
-            SignInManager<CustomUser> signInManager,
+            UserManager<Employee> userManager,
+            SignInManager<Employee> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

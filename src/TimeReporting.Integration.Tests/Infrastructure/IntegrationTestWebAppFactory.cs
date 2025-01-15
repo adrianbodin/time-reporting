@@ -21,14 +21,13 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         .WithDatabase("time_reporting_test_db")
         .WithUsername("postgres")
         .WithPassword("postgres")
-        .WithReuse(true)
         .Build();
 
     private AppDbContext Db { get; set; } = null!;
     private DbConnection _dbConnection = default!;
     private Respawner _respawner = default!;
     private IHost _host = default!;
-    public IPlaywright PlaywrightInstance { get; set; } = default!;
+    private IPlaywright PlaywrightInstance { get; set; } = default!;
     public IBrowser Browser { get; set; } = default!;
 
     public string ServerAddress
@@ -122,6 +121,6 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
     {
         await Browser.DisposeAsync();
         await _dbConnection.CloseAsync();
-        //await _container.DisposeAsync();
+        await _container.DisposeAsync();
     }
 }

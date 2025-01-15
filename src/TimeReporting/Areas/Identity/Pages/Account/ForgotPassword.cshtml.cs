@@ -19,10 +19,10 @@ namespace TimeReporting.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<CustomUser> _userManager;
+        private readonly UserManager<Employee> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<CustomUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<Employee> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

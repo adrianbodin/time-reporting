@@ -16,10 +16,10 @@ namespace TimeReporting.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<CustomUser> _userManager;
-        private readonly SignInManager<CustomUser> _signInManager;
+        private readonly UserManager<Employee> _userManager;
+        private readonly SignInManager<Employee> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<CustomUser> userManager, SignInManager<CustomUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<Employee> userManager, SignInManager<Employee> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

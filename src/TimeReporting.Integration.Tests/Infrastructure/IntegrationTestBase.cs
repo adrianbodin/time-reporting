@@ -5,7 +5,7 @@ public class IntegrationTestBase : IAsyncLifetime
 {
     private readonly IntegrationTestWebAppFactory Factory;
     protected string RootUrl;
-    public IPage Page { get; set; }
+    protected IPage Page { get; set; }
 
     public IntegrationTestBase(IntegrationTestWebAppFactory factory)
     {

@@ -20,10 +20,10 @@ namespace TimeReporting.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ResendEmailConfirmationModel : PageModel
     {
-        private readonly UserManager<CustomUser> _userManager;
+        private readonly UserManager<Employee> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<CustomUser> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<Employee> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

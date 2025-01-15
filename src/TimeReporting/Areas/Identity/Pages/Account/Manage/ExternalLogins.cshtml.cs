@@ -17,14 +17,14 @@ namespace TimeReporting.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<CustomUser> _userManager;
-        private readonly SignInManager<CustomUser> _signInManager;
-        private readonly IUserStore<CustomUser> _userStore;
+        private readonly UserManager<Employee> _userManager;
+        private readonly SignInManager<Employee> _signInManager;
+        private readonly IUserStore<Employee> _userStore;
 
         public ExternalLoginsModel(
-            UserManager<CustomUser> userManager,
-            SignInManager<CustomUser> signInManager,
-            IUserStore<CustomUser> userStore)
+            UserManager<Employee> userManager,
+            SignInManager<Employee> signInManager,
+            IUserStore<Employee> userStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -70,7 +70,7 @@ namespace TimeReporting.Areas.Identity.Pages.Account.Manage
                 .ToList();
 
             string passwordHash = null;
-            if (_userStore is IUserPasswordStore<CustomUser> userPasswordStore)
+            if (_userStore is IUserPasswordStore<Employee> userPasswordStore)
             {
                 passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
             }

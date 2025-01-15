@@ -9,30 +9,10 @@ public class NavigationTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage()
+    public async Task WhenUserIsNotAuthenticatedThenUserIsRedirectedToLoginPage()
     {
-        (await Page.TitleAsync()).Should().Contain("Software");
-    }
+        await Page.GotoAsync($"{RootUrl}");
 
-    [Fact]
-    public async Task WhenUserClicksOnReportLinkThenUserIsRedirectedToReportPage()
-    {
-        await Page.GetByRole(AriaRole.Link, new() { Name = "Report", Exact = true }).ClickAsync();
-        (await Page.TitleAsync()).Should().Contain("Report");
-        Assert.Equal($"{RootUrl}report", Page.Url);
-    }
-
-    [Fact]
-    public async Task WhenUserClicksRegisterLinkThenUserIsRedirectedToRegisterPage()
-    {
-        await Page.GetByRole(AriaRole.Link, new() { Name = "Register", Exact = true }).ClickAsync();
-        Page.Url.Should().Contain("Register");
-    }
-
-    [Fact]
-    public async Task WhenUserClicksLoginLinkThenUserIsRedirectedToLoginPage()
-    {
-        await Page.GetByRole(AriaRole.Link, new() { Name = "Login", Exact = true }).ClickAsync();
-        Page.Url.Should().Contain("Login");
+        Assert.Contains(Page.Url, "Login");
     }
 }

@@ -158,7 +158,21 @@ namespace TimeReporting.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TimeReporting.Models.CustomUser", b =>
+            modelBuilder.Entity("TimeReporting.Models.Customer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.Employee", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -176,6 +190,14 @@ namespace TimeReporting.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -222,6 +244,37 @@ namespace TimeReporting.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("TimeReporting.Models.TimeEntry", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("Hours")
+                        .HasMaxLength(100)
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("TimeEntries");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -233,7 +286,7 @@ namespace TimeReporting.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TimeReporting.Models.CustomUser", null)
+                    b.HasOne("TimeReporting.Models.Employee", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -242,7 +295,7 @@ namespace TimeReporting.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TimeReporting.Models.CustomUser", null)
+                    b.HasOne("TimeReporting.Models.Employee", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -257,7 +310,7 @@ namespace TimeReporting.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimeReporting.Models.CustomUser", null)
+                    b.HasOne("TimeReporting.Models.Employee", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -266,11 +319,40 @@ namespace TimeReporting.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("TimeReporting.Models.CustomUser", null)
+                    b.HasOne("TimeReporting.Models.Employee", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.TimeEntry", b =>
+                {
+                    b.HasOne("TimeReporting.Models.Customer", "Customer")
+                        .WithMany("TimeEntries")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TimeReporting.Models.Employee", "Employee")
+                        .WithMany("TimeEntries")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.Customer", b =>
+                {
+                    b.Navigation("TimeEntries");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.Employee", b =>
+                {
+                    b.Navigation("TimeEntries");
                 });
 #pragma warning restore 612, 618
         }

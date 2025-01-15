@@ -15,12 +15,12 @@ namespace TimeReporting.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<CustomUser> _userManager;
-        private readonly SignInManager<CustomUser> _signInManager;
+        private readonly UserManager<Employee> _userManager;
+        private readonly SignInManager<Employee> _signInManager;
 
         public IndexModel(
-            UserManager<CustomUser> userManager,
-            SignInManager<CustomUser> signInManager)
+            UserManager<Employee> userManager,
+            SignInManager<Employee> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -61,7 +61,7 @@ namespace TimeReporting.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(CustomUser user)
+        private async Task LoadAsync(Employee user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

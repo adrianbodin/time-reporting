@@ -1,3 +1,4 @@
+using TimeReporting.Integration.Tests.Helpers;
 using TimeReporting.Integration.Tests.Infrastructure;
 
 namespace TimeReporting.Integration.Tests;
@@ -14,7 +15,7 @@ public class ReportPageTests : IntegrationTestBase
         await Page.GotoAsync($"{RootUrl}report");
         var dateInput = await Page.GetByTestId("date-input").GetAttributeAsync("value");
         var date = DateTime.Parse(dateInput);
-        date.Should().BeCloseTo(DateTime.Today, TimeSpan.FromSeconds(60));
+        Assert.True((date - DateTime.Today).Duration() < TimeSpan.FromSeconds(60));
     }
 
     [Fact]
@@ -28,6 +29,17 @@ public class ReportPageTests : IntegrationTestBase
 
         var reportCardDate = await Page.GetByTestId("report-date").First.InnerTextAsync();
 
-        reportCardDate.Should().Be("19");
+        Assert.Equivalent(reportCardDate, "19");
+    }
+
+    [Fact]
+    public async Task WhenAdminVisitReportPageThenAdminCanSeeAllReportCards()
+    {
+        await Page.AuthenticateAdminAsync(RootUrl);
+        await Page.GotoAsync($"{RootUrl}report");
+
+        var test = await Page.GetByTestId("admin-check").First.InnerTextAsync();
+
+        Assert.Equivalent(test, "I am a admin!!!");
     }
 }

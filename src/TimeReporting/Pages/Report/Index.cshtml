@@ -4,6 +4,10 @@
 
 <section class="container min-vh-100">
   <h1>Report time</h1>
+  @if (Model.Admin)
+  {
+    <p data-testid="admin-check">I am a admin!!!</p>
+  }
   <div class="row min-vh-100">
     <aside class="col-4 border-end border-dark min-vh-100">
       <form hx-post="/report?handler=Day" hx-target="#day" hx-swap="innerHTML" hx-trigger="change">
