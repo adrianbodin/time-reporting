@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,17 +11,14 @@ namespace TimeReporting.Pages.Report;
 [Authorize]
 public class Index : PageModel
 {
-    [BindProperty, DataType(DataType.Date)]
+    [BindProperty(SupportsGet = true), DataType(DataType.Date)]
     public DateTime SelectedDate { get; set; }
 
     public void OnGet()
     {
         ViewData["Title"] = "Report";
         SelectedDate = DateTime.Now;
-        Admin = User.IsInRole("Admin");
     }
-
-    public bool Admin { get; set; }
 
     public IActionResult OnPostDay()
     {

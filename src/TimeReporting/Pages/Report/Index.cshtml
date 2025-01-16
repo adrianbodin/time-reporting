@@ -4,21 +4,48 @@
 
 <section class="container min-vh-100">
   <h1>Report time</h1>
-  @if (Model.Admin)
-  {
-    <p data-testid="admin-check">I am a admin!!!</p>
-  }
-  <div class="row min-vh-100">
-    <aside class="col-4 border-end border-dark min-vh-100">
-      <form hx-post="/report?handler=Day" hx-target="#day" hx-swap="innerHTML" hx-trigger="change">
+  <div x-data="{ open: $persist(false) }" class="row">
+    <div class="col-11">
+    </div>
+    <button x-on:click="open = ! open" class="btn btn-primary col-1">Register Time</button>
+    <div style="z-index: 1050;" x-show="open" class="position-absolute top-0 w-25 end-0 h-100 z-5 border-start border-primary bg-light" x-transition>
+      <form action="">
+        <div class="row">
+          <h2 class="col-10">Add time</h2>
+          <button
+            class="col-2 btn btn-primary"
+            x-on:click="open = false">
+            <i class="bi bi-x h3"></i>
+          </button>
+        </div>
         <label for="SelectedDate" class="form-label">
+          Select Date
+          <input
+            asp-for="SelectedDate"
+            x-data="{ date: $persist() }"
+            x-model="date"
+            class="form-control"/>
+        </label>
+          <div class="row">
+              <label class="form-label col-12">
+                  Description
+                  <textarea class="form-control" x-data="{ description: $persist() }" x-model="description"></textarea>
+              </label>
+          </div>
+      </form>
+    </div>
+  </div>
+  <div class="row min-vh-100">
+    <aside class="col-2 border-end border-dark min-vh-100">
+      <form hx-post="/report?handler=Day" hx-target="#day" hx-swap="innerHTML" hx-trigger="change">
+        <label asp-for="SelectedDate" class="form-label">
           Select date
-          <input data-testid="date-input" asp-for="SelectedDate" class="form-control"/>
+          <input data-testid="date-input" asp-for="SelectedDate" class="form-control" name="SelectedDate"/>
         </label>
         @Html.AntiForgeryToken()
       </form>
     </aside>
-    <div id="day" class="col-8">
+    <div id="day" class="col-10 z-1">
       @await Html.PartialAsync("_ReportsCurrentDay", Model)
     </div>
   </div>
