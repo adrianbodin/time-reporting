@@ -1,0 +1,37 @@
+﻿@page
+@model TimeReporting.Pages.Report.Create
+
+<h1>New time entry</h1>
+<hr>
+<div class="row">
+  <form class="col-6" method="post">
+    <div class="row">
+      <div class="mb-3 col-9">
+        <label asp-for="NewEntry.CustomerId" class="form-label">Customer</label>
+        <select asp-for="NewEntry.CustomerId" class="form-select">
+          <option value="">Select a customer</option>
+          @foreach (var customer in Model.Customers)
+          {
+            <option value="@customer.Id">@customer.Name</option>
+          }
+        </select>
+        <span class="text-danger" asp-validation-for="NewEntry.CustomerId"></span>
+      </div>
+      <div class="mb-3 col-3">
+        <label asp-for="NewEntry.Hours" class="form-label">Hours</label>
+        <input type="number" min="0" step="0.5" asp-for="NewEntry.Hours" class="form-control"/>
+        <span class="text-danger" asp-validation-for="NewEntry.Hours"></span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label asp-for="NewEntry.Description" class="form-label">Description</label>
+      <textarea asp-for="NewEntry.Description" class="form-control"></textarea>
+      <span class="text-danger" asp-validation-for="NewEntry.Description"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+</div>
+
+@section Scripts{
+  <partial name="_ValidationScriptsPartial" />
+}

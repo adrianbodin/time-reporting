@@ -1,3 +1,5 @@
+using Microsoft.Build.Framework;
+
 namespace TimeReporting.Models;
 
 public class TimeEntry
@@ -10,6 +12,7 @@ public class TimeEntry
     public string EmployeeId { get; set; }
     public Employee Employee { get; set; }
 
+    [Required]
     public double Hours { get; set; }
 
     public string Description { get; set; }
