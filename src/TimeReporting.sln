@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReporting", "TimeReport
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReporting.Integration.Tests", "TimeReporting.Integration.Tests\TimeReporting.Integration.Tests.csproj", "{499AEE73-5FAA-49C1-89AE-93ED9FBD8B86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeReporting.Unit.Tests", "TimeReporting.Unit.Tests\TimeReporting.Unit.Tests.csproj", "{92A32879-AA3F-4202-8E34-B0D11B7E58F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{499AEE73-5FAA-49C1-89AE-93ED9FBD8B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499AEE73-5FAA-49C1-89AE-93ED9FBD8B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{499AEE73-5FAA-49C1-89AE-93ED9FBD8B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A32879-AA3F-4202-8E34-B0D11B7E58F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A32879-AA3F-4202-8E34-B0D11B7E58F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A32879-AA3F-4202-8E34-B0D11B7E58F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A32879-AA3F-4202-8E34-B0D11B7E58F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

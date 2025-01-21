@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Report;
@@ -21,6 +23,7 @@ public record AddTimeEntryDto()
     public string Description { get; set; }
 }
 
+[Authorize]
 public class Create : PageModel
 {
     private readonly AppDbContext _db;
@@ -63,6 +66,7 @@ public class Create : PageModel
             await _db.SaveChangesAsync();
 
             TempData["Toast-Success"] = "The time entry was added successfully";
+            Response.TriggerToast("Added nice", Toast.Success);
         }
         catch (Exception e)
         {
