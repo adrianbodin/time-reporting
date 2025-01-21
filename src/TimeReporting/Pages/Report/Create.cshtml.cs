@@ -21,6 +21,9 @@ public record AddTimeEntryDto()
 
     [Required]
     public string Description { get; set; }
+
+    [BindProperty(SupportsGet = true), DataType(DataType.Date)]
+    public DateTime Date { get; set; }
 }
 
 [Authorize]
@@ -41,6 +44,7 @@ public class Create : PageModel
     public async Task OnGet()
     {
         NewEntry = new AddTimeEntryDto();
+        NewEntry.Date = DateTime.Now;
         Customers = await _db.Customers.ToListAsync();
     }
 
@@ -57,7 +61,8 @@ public class Create : PageModel
             CustomerId = NewEntry.CustomerId,
             EmployeeId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
             Hours = NewEntry.Hours,
-            Description = NewEntry.Description
+            Description = NewEntry.Description,
+            Date = DateOnly.FromDateTime(NewEntry.Date)
         };
 
         try

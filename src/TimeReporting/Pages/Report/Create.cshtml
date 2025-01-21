@@ -23,10 +23,17 @@
         <span class="text-danger" asp-validation-for="NewEntry.Hours"></span>
       </div>
     </div>
-    <div class="mb-3">
-      <label asp-for="NewEntry.Description" class="form-label">Description</label>
-      <textarea asp-for="NewEntry.Description" class="form-control"></textarea>
-      <span class="text-danger" asp-validation-for="NewEntry.Description"></span>
+    <div class="row">
+      <div class="mb-3 col-9">
+        <label asp-for="NewEntry.Description" class="form-label">Description</label>
+        <textarea asp-for="NewEntry.Description" class="form-control"></textarea>
+        <span class="text-danger" asp-validation-for="NewEntry.Description"></span>
+      </div>
+      <div class="mb-3 col-3">
+        <label asp-for="NewEntry.Date" class="form-label">Date</label>
+        <input asp-for="NewEntry.Date" class="form-control"/>
+        <span class="text-danger" asp-validation-for="NewEntry.Date"></span>
+      </div>
     </div>
     <button type="submit" class="btn btn-success">Save</button>
   </form>
