@@ -30,10 +30,13 @@ public class Index : PageModel
 
     public List<ReadTimeEntryDto> TimeEntries { get; set; }
 
+    public List<Customer> Customers { get; set; }
+
     public async Task OnGet()
     {
         ViewData["Title"] = "Report";
         SelectedDate = DateTime.Now;
+        Customers = await _db.Customers.ToListAsync();
 
         TimeEntries = await _db.TimeEntries
             .Where(t => t.Date == DateOnly.FromDateTime(DateTime.Now))
@@ -78,4 +81,12 @@ public class Index : PageModel
         return new EmptyResult();
     }
 
+    public TimeEntry EditEntry { get; set; }
+
+    public async Task<PartialViewResult> OnPostSubmitEditEntry([FromQuery]string id)
+    {
+        EditEntry = await _db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
+
+        return Partial("_EditEntryRow", this);
+    }
 }
