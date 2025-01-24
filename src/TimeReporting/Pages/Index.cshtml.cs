@@ -18,15 +18,15 @@ public class IndexModel : PageModel
     {
         if (!await _dbContext.Users.AnyAsync())
         {
-            Response.Redirect("/Identity/Account/Register");
+            Response.Redirect("/Account/Register");
         }
         else if(User.Identity.IsAuthenticated)
         {
-            Response.Redirect("/report");
+            Response.Redirect("/Reports");
         }
         else
         {
-            Response.Redirect("/Identity/Account/Login");
+            Response.Redirect("/Account/Login");
         }
     }
 }

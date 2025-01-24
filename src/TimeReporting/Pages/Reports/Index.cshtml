@@ -1,0 +1,104 @@
+@page
+@model TimeReporting.Pages.Report.Index
+
+
+<section class="container min-vh-100">
+  <div class="row">
+    <form class="col-2" x-target="entries" method="get">
+      <input data-testid="date-input" asp-for="SelectedDate" onchange="this.form.submit()" class="form-control"/>
+    </form>
+    <div class="col-9"></div>
+    <a asp-page="/Report/Create" class="btn btn-outline-success col-1"><i class="bi bi-plus-lg"></i></a>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col" id="entries">
+      @if (!Model.TimeEntries.Any())
+{
+  <h1>There are no time entries for this day.</h1>
+}
+else
+{
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Hours</th>
+      <th></th>
+    </tr>
+    </thead>
+    @foreach (var timeEntry in Model.TimeEntries)
+    {
+      <tbody id="entry-@timeEntry.Id" x-data="{ editing: false }">
+      <tr>
+        <td>
+          <select x-show="editing" asp-for="EditEntry.CustomerId" class="form-select">
+            @foreach (var customer in Model.Customers)
+            {
+              <option value="@customer.Id">@customer.Name</option>
+            }
+          </select>
+          <span x-show="!editing">@timeEntry.Customer</span>
+        </td>
+        <td>
+          <input x-show="editing" type="number" min="0" step="0.5" asp-for="EditEntry.Hours" value="@timeEntry.Hours" class="form-control"/>
+          <span x-show="!editing">@timeEntry.Hours</span>
+        </td>
+        <td class="d-flex justify-content-end gap-2">
+          <button x-show="!editing" class="btn btn-outline-primary" x-on:click="editing = true">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button
+            class="btn btn-success"
+            x-show="editing"
+          ><i class="bi bi-check"></i></button>
+          <button
+            class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+          <button x-show="!editing" type="button" data-bs-toggle="collapse" class="btn btn-link"
+                  data-bs-target="#description-@timeEntry.Id" aria-expanded="false"
+                  aria-controls="description-@timeEntry.Id">
+            <i class="bi bi-caret-down-fill"></i>
+          </button>
+          <button x-show="editing" x-on:click="editing = false" type="button" class="btn btn-outline-secondary">
+            <i class="bi bi-x"></i>
+          </button>
+        </td>
+      </tr>
+      <tr x-bind:class="editing ? 'show' : ''" class="collapse" id="description-@timeEntry.Id">
+        <td x-show="!editing" colspan="3">
+          <label class="form-label">
+            Description
+            <textarea class="form-control include-for-edit" rows="8" cols="50" disabled>@timeEntry.Description</textarea>
+          </label>
+        </td>
+        <td x-show="editing" colspan="2">
+          <div class="col-6">
+            <label asp-for="EditEntry.Description" class="form-label">Description</label>
+            <textarea class="form-control" rows="8" cols="50">@timeEntry.Description</textarea>
+            <span class="text-danger" asp-validation-for="EditEntry.Description"></span>
+          </div>
+        </td>
+        <td x-show="editing" colspan="1">
+          <div class="col-6">
+            <label asp-for="EditEntry.Date" class="form-label">Date</label>
+            <input type="date" value="@DateOnly.FromDateTime(DateTime.Now).ToString("yyyy-MM-dd")" class="form-control"/>
+            <span class="text-danger" asp-validation-for="EditEntry.Date"></span>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    }
+  </table>
+}
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+  <script>
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  </script>
+}

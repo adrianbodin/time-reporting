@@ -1,4 +1,3 @@
-using Htmx;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
@@ -13,7 +12,6 @@ builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireC
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

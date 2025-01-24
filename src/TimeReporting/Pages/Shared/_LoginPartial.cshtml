@@ -21,10 +21,10 @@
   <ul class="justify-content-end nav flex-column">
     <hr class="my-3">
     <li class="nav-item fw-bold">
-      <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-person"></i> Profile</a>
+      <a id="manage" class="nav-link" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-person"></i> Profile</a>
     </li>
     <li class="nav-item fw-bold">
-      <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+      <form id="logoutForm" class="form-inline" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
         <button id="logout" type="submit" class="nav-link btn btn-link border-0"><i class="bi bi-door-closed text-light"></i> Sign out</button>
       </form>
     </li>
