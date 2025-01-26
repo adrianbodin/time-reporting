@@ -45,6 +45,8 @@ public class Create : PageModel
         NewEntry = new AddTimeEntryDto();
         NewEntry.Date = DateTime.Now;
         Customers = await _db.Customers.ToListAsync();
+
+        Response.Headers["Sec-Fetch-Dest"] = "document";
     }
 
     public async Task<IActionResult> OnPost()
@@ -69,14 +71,15 @@ public class Create : PageModel
             _db.TimeEntries.Add(timeEntry);
             await _db.SaveChangesAsync();
 
-            TempData["Toast-Success"] = "The time entry was added successfully";
+            TempData["Toast-Type"] = "success";
+            TempData["Toast-Message"] = "The time entry was added successfully";
         }
         catch (Exception e)
         {
-            TempData["Toast-Danger"] = "There was an error adding the new time entry";
+            TempData["Toast-Type"] = "danger";
+            TempData["Toast-Message"] = "There was an error adding the new time entry";
         }
 
-        return RedirectToPage("/Report/Index", new { SelectedDate = NewEntry.Date.ToString("yyyy-MM-dd") });
-
+        return RedirectToPage("/Reports/Index", new { SelectedDate = NewEntry.Date.ToString("yyyy-MM-dd") });
     }
 }

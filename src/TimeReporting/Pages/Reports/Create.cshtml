@@ -1,10 +1,13 @@
 ﻿@page
 @model TimeReporting.Pages.Report.Create
+@{
+  Layout = "_Layout";
+}
 
 <h1>New time entry</h1>
 <hr>
 <div class="row">
-  <form class="col-6" method="post">
+  <form class="col-6" method="post" x-target.push="main">
     <div class="row">
       <div class="mb-3 col-9">
         <label asp-for="NewEntry.CustomerId" class="form-label">Customer</label>
@@ -38,7 +41,3 @@
     <button type="submit" class="btn btn-success">Save</button>
   </form>
 </div>
-
-@section Scripts{
-  <partial name="_ValidationScriptsPartial" />
-}

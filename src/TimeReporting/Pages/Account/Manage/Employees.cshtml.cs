@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TimeReporting.Pages.Account.Manage;
 
 public class Employees : PageModel
 {
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        
+        return Page();
     }
 }

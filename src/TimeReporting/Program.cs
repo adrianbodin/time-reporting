@@ -1,3 +1,4 @@
+using Finbuckle.Html5Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
@@ -12,6 +13,8 @@ builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireC
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddHtml5Validation();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -9,7 +9,7 @@ using TimeReporting.Models;
 using TimeReporting.Pages.Shared;
 using static TimeReporting.Pages.Shared.GlobalFragments;
 
-namespace TimeReporting.Pages.Report;
+namespace TimeReporting.Pages.Reports;
 
 
 public record ReadTimeEntryDto(string Id,string Customer, double Hours, string Description, DateOnly Date);
@@ -54,17 +54,39 @@ public class Index : PageModel
             .ToListAsync();
     }
 
-    public async Task<IActionResult> OnDeleteEntries(string id)
+    public async Task<IActionResult> OnPostDeleteEntry(string id)
     {
-        var timeEntry = await _db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
-
-        if (timeEntry != null)
+        try
         {
+            var timeEntry = await _db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
+
             _db.TimeEntries.Remove(timeEntry);
             await _db.SaveChangesAsync();
         }
+        catch (Exception e)
+        {
+            TempData["Toast-Type"] = "danger";
+            TempData["Toast-Message"] = "There was an error removing the time entry";
 
-        return new EmptyResult();
+            return Page();
+        }
+
+        TempData["Toast-Type"] = "success";
+        TempData["Toast-Message"] = "Time entry removed";
+
+        TimeEntries = await _db.TimeEntries
+            .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
+            .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
+            .Select(t => new ReadTimeEntryDto(
+                t.Id,
+                t.Customer.Name,
+                t.Hours,
+                t.Description,
+                t.Date
+            ))
+            .ToListAsync();
+
+        return Page();
     }
 
     public TimeEntry EditEntry { get; set; }

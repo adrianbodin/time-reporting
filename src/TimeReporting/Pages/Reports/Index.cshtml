@@ -1,14 +1,16 @@
 @page
-@model TimeReporting.Pages.Report.Index
+@model Index
+@{
+  Layout = "_Layout";
+}
 
-
-<section class="container min-vh-100">
+<section class="container min-vh-100" x-init>
   <div class="row">
-    <form class="col-2" x-target="entries" method="get">
-      <input data-testid="date-input" asp-for="SelectedDate" onchange="this.form.submit()" class="form-control"/>
+    <form class="col-2" x-target.push="entries" method="get">
+      <input data-testid="date-input" asp-for="SelectedDate" x-on:change="$el.form.requestSubmit()"  class="form-control"/>
     </form>
     <div class="col-9"></div>
-    <a asp-page="/Report/Create" class="btn btn-outline-success col-1"><i class="bi bi-plus-lg"></i></a>
+    <a  href="@Url.Page("Create")" x-target.push="main" class="btn btn-outline-success col-1"><i class="bi bi-plus-lg"></i></a>
   </div>
   <hr>
   <div class="row">
@@ -52,8 +54,16 @@ else
             class="btn btn-success"
             x-show="editing"
           ><i class="bi bi-check"></i></button>
-          <button
-            class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+          <form
+            method="post"
+            asp-page="Index"
+            asp-page-handler="DeleteEntry"
+            x-target="entry-@timeEntry.Id"
+            asp-route-id="@timeEntry.Id"
+            x-init x-on:ajax:before="confirm('Are you sure?') || $event.preventDefault()">
+            <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash"></i></button>
+            @Html.AntiForgeryToken()
+          </form>
           <button x-show="!editing" type="button" data-bs-toggle="collapse" class="btn btn-link"
                   data-bs-target="#description-@timeEntry.Id" aria-expanded="false"
                   aria-controls="description-@timeEntry.Id">
