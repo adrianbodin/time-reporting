@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Models;
+using TimeReporting.Pages.Shared;
 
-namespace TimeReporting.Pages.Report;
+namespace TimeReporting.Pages.Reports;
 
 public record AddTimeEntryDto()
 {
@@ -42,11 +43,10 @@ public class Create : PageModel
 
     public async Task OnGet()
     {
+        ViewData["Title"] = "Add Time Entry";
         NewEntry = new AddTimeEntryDto();
         NewEntry.Date = DateTime.Now;
         Customers = await _db.Customers.ToListAsync();
-
-        Response.Headers["Sec-Fetch-Dest"] = "document";
     }
 
     public async Task<IActionResult> OnPost()
@@ -71,12 +71,12 @@ public class Create : PageModel
             _db.TimeEntries.Add(timeEntry);
             await _db.SaveChangesAsync();
 
-            TempData["Toast-Type"] = "success";
-            TempData["Toast-Message"] = "The time entry was added successfully";
+            TempData["Notification-Type"] = NotificationType.Success;
+            TempData["Notification-Message"] = "The time entry was added successfully";
         }
         catch (Exception e)
         {
-            TempData["Toast-Type"] = "danger";
+            TempData["Toast-Type"] = NotificationType.Danger;
             TempData["Toast-Message"] = "There was an error adding the new time entry";
         }
 

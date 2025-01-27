@@ -6,11 +6,11 @@
 
 <section class="container min-vh-100" x-init>
   <div class="row">
-    <form class="col-2" x-target.push="entries" method="get">
-      <input data-testid="date-input" asp-for="SelectedDate" x-on:change="$el.form.requestSubmit()"  class="form-control"/>
+    <form class="col-2" method="get" up-target="#entries" up-autosubmit>
+      <input data-testid="date-input" asp-for="SelectedDate" class="form-control"/>
     </form>
     <div class="col-9"></div>
-    <a  href="@Url.Page("Create")" x-target.push="main" class="btn btn-outline-success col-1"><i class="bi bi-plus-lg"></i></a>
+    <a  href="@Url.Page("Create")" up-layer="new" up-follow class="btn btn-outline-success col-1"><i class="bi bi-plus-lg"></i></a>
   </div>
   <hr>
   <div class="row">

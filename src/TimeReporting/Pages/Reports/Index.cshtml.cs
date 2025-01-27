@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Schema;
 using TimeReporting.Data;
 using TimeReporting.Models;
 using TimeReporting.Pages.Shared;
@@ -15,7 +17,7 @@ namespace TimeReporting.Pages.Reports;
 public record ReadTimeEntryDto(string Id,string Customer, double Hours, string Description, DateOnly Date);
 
 [Authorize]
-public class Index : PageModel
+public class Index : BasePageModel
 {
     private readonly AppDbContext _db;
 
@@ -65,14 +67,14 @@ public class Index : PageModel
         }
         catch (Exception e)
         {
-            TempData["Toast-Type"] = "danger";
-            TempData["Toast-Message"] = "There was an error removing the time entry";
+            TempData["Notification-Message"] = "An error occurred while removing the entry.";
+            TempData["Notification-Type"] = NotificationType.Danger;
 
             return Page();
         }
 
-        TempData["Toast-Type"] = "success";
-        TempData["Toast-Message"] = "Time entry removed";
+        TempData["Notification-Message"] = "The entry was removed successfully.";
+        TempData["Notification-Type"] = NotificationType.Success;
 
         TimeEntries = await _db.TimeEntries
             .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
