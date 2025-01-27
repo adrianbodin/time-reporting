@@ -1,15 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Schema;
 using TimeReporting.Data;
 using TimeReporting.Models;
 using TimeReporting.Pages.Shared;
-using static TimeReporting.Pages.Shared.GlobalFragments;
 
 namespace TimeReporting.Pages.Reports;
 
@@ -90,27 +86,6 @@ public class Index : BasePageModel
             return Page();
         }
 
-    }
-
-    public TimeEntry EditEntry { get; set; }
-
-    public async Task<PartialViewResult> OnPostSubmitEditEntry([FromQuery]string id)
-    {
-        EditEntry = await _db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
-
-        return Partial("_EditEntryRow", this);
-    }
-
-    public ContentResult OnPostToast([FromForm] string type)
-    {
-        var parsedType = Enum.Parse<ToastType>(type, true);
-
-        return Content(
-            Toast("Look at the color", parsedType) +
-            Hello("My message") +
-            Num(parsedType.ToString().Length),
-            "text/html"
-            );
     }
 }
 

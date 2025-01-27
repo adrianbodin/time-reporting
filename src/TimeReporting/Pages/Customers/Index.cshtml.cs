@@ -1,29 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Models;
 
-namespace TimeReporting
+namespace TimeReporting.Pages.Customers;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly AppDbContext _context;
+
+    public IndexModel(AppDbContext context)
     {
-        private readonly TimeReporting.Data.AppDbContext _context;
+        _context = context;
+    }
 
-        public IndexModel(TimeReporting.Data.AppDbContext context)
-        {
-            _context = context;
-        }
+    public IList<Customer> Customers { get;set; } = default!;
 
-        public IList<Customer> Customer { get;set; } = default!;
+    public async Task<IActionResult> OnGetAsync()
+    {
+        Customers = await _context.Customers.ToListAsync();
 
-        public async Task OnGetAsync()
-        {
-            Customer = await _context.Customers.ToListAsync();
-        }
+        return Page();
     }
 }

@@ -1,44 +1,53 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using TimeReporting.Data;
 using TimeReporting.Models;
+using TimeReporting.Pages.Shared;
 
-namespace TimeReporting
+namespace TimeReporting.Pages.Customers;
+
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly AppDbContext _context;
+
+    public CreateModel(AppDbContext context)
     {
-        private readonly TimeReporting.Data.AppDbContext _context;
+        _context = context;
+    }
 
-        public CreateModel(TimeReporting.Data.AppDbContext context)
+    public IActionResult OnGet()
+    {
+        Customer = new Customer
         {
-            _context = context;
-        }
+            Id = Guid.NewGuid().ToString()
+        };
+        return Page();
+    }
 
-        public IActionResult OnGet()
+    [BindProperty]
+    public Customer Customer { get; set; } = null!;
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        [BindProperty]
-        public Customer Customer { get; set; } = default!;
-
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        try
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             _context.Customers.Add(Customer);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            TempData["Notification-Type"] = NotificationType.Success;
+            TempData["Notification-Message"] = $"The customer {Customer.Name} was added successfully";
         }
+        catch (Exception e)
+        {
+            TempData["Toast-Type"] = NotificationType.Danger;
+            TempData["Toast-Message"] = $"There was an error adding the customer {Customer.Name}";
+        }
+
+        return RedirectToPage("./Index");
     }
 }

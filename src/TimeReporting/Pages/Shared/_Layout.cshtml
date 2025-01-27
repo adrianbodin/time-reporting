@@ -49,7 +49,7 @@
 @if (notificationMessage != null && notificationStatus != null)
 {
   <div id="toast" up-flashes class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
-    <div id="liveToast" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" class="toast show text-bg-@notificationStatus" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="liveToast" class="toast show text-bg-@notificationStatus" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
       <div class="d-flex">
         <div class="toast-body">
           @notificationMessage

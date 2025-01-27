@@ -4,11 +4,11 @@
   Layout = "_Layout";
 }
 
-<form method="post" up-target="main">
+<form method="post" up-target="main" class="add-entry-form">
   <h1>New time entry</h1>
   <hr>
-    <div class="mb-3">
-      <label asp-for="NewEntry.CustomerId" class="form-label">Customer</label>
+  <label asp-for="NewEntry.CustomerId" class="form-label">Customer</label>
+    <div class="mb-3 input-group">
       <select asp-for="NewEntry.CustomerId" class="form-select">
         <option value="">Select a customer</option>
         @foreach (var customer in Model.Customers)
@@ -16,6 +16,16 @@
           <option value="@customer.Id">@customer.Name</option>
         }
       </select>
+      <a
+        href="/Customers/Create"
+        up-layer="new modal"
+        up-history="auto"
+        up-accept-location="/Customers"
+        up-on-accepted="up.reload('.add-entry-form')">
+        <button class="btn btn-primary rounded-right" type="button">
+          New
+        </button>
+      </a>
       <span class="text-danger" asp-validation-for="NewEntry.CustomerId"></span>
     </div>
     <div class="mb-3">

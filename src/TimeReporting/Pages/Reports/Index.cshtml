@@ -59,36 +59,22 @@ else
             <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash"></i></button>
             @Html.AntiForgeryToken()
           </form>
-          <button x-show="!editing" type="button" data-bs-toggle="collapse" class="btn btn-link"
+          <button type="button" data-bs-toggle="collapse" class="btn btn-link"
                   data-bs-target="#description-@timeEntry.Id" aria-expanded="false"
                   aria-controls="description-@timeEntry.Id">
             <i class="bi bi-caret-down-fill"></i>
           </button>
-          <button x-show="editing" x-on:click="editing = false" type="button" class="btn btn-outline-secondary">
+          <button type="button" class="btn btn-outline-secondary">
             <i class="bi bi-x"></i>
           </button>
         </td>
       </tr>
-      <tr x-bind:class="editing ? 'show' : ''" class="collapse" id="description-@timeEntry.Id">
-        <td x-show="!editing" colspan="3">
+      <tr class="collapse" id="description-@timeEntry.Id">
+        <td colspan="3">
           <label class="form-label">
             Description
             <textarea class="form-control include-for-edit" rows="8" cols="50" disabled>@timeEntry.Description</textarea>
           </label>
-        </td>
-        <td x-show="editing" colspan="2">
-          <div class="col-6">
-            <label asp-for="EditEntry.Description" class="form-label">Description</label>
-            <textarea class="form-control" rows="8" cols="50">@timeEntry.Description</textarea>
-            <span class="text-danger" asp-validation-for="EditEntry.Description"></span>
-          </div>
-        </td>
-        <td x-show="editing" colspan="1">
-          <div class="col-6">
-            <label asp-for="EditEntry.Date" class="form-label">Date</label>
-            <input type="date" value="@DateOnly.FromDateTime(DateTime.Now).ToString("yyyy-MM-dd")" class="form-control"/>
-            <span class="text-danger" asp-validation-for="EditEntry.Date"></span>
-          </div>
         </td>
       </tr>
       </tbody>
