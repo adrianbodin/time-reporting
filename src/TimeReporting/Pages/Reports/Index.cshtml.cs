@@ -64,6 +64,23 @@ public class Index : BasePageModel
 
             _db.TimeEntries.Remove(timeEntry);
             await _db.SaveChangesAsync();
+
+            TempData["Notification-Message"] = "The entry was removed successfully.";
+            TempData["Notification-Type"] = NotificationType.Success;
+
+            TimeEntries = await _db.TimeEntries
+                .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
+                .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
+                .Select(t => new ReadTimeEntryDto(
+                    t.Id,
+                    t.Customer.Name,
+                    t.Hours,
+                    t.Description,
+                    t.Date
+                ))
+                .ToListAsync();
+
+            return Page();
         }
         catch (Exception e)
         {
@@ -73,22 +90,6 @@ public class Index : BasePageModel
             return Page();
         }
 
-        TempData["Notification-Message"] = "The entry was removed successfully.";
-        TempData["Notification-Type"] = NotificationType.Success;
-
-        TimeEntries = await _db.TimeEntries
-            .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
-            .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
-            .Select(t => new ReadTimeEntryDto(
-                t.Id,
-                t.Customer.Name,
-                t.Hours,
-                t.Description,
-                t.Date
-            ))
-            .ToListAsync();
-
-        return Page();
     }
 
     public TimeEntry EditEntry { get; set; }

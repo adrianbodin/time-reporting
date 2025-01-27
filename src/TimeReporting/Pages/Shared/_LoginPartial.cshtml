@@ -14,7 +14,10 @@
     </div>
     <ul class="nav flex-column">
       <li class="nav-item fw-bold">
-        <a class="nav-link d-flex align-items-center gap-2" x-target.push="main" asp-page="/Reports/Index"><i class="bi bi-clock"></i> Time Overview</a>
+        <a class="nav-link d-flex align-items-center gap-2" asp-page="/Reports/Index" up-target="main"><i class="bi bi-clock"></i> Time Overview</a>
+      </li>
+      <li class="nav-item fw-bold">
+        <a class="nav-link d-flex align-items-center gap-2" asp-page="/Customers/Index" up-target="main"><i class="bi bi-people"></i> Customers</a>
       </li>
     </ul>
   </div>
