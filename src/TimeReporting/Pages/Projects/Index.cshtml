@@ -9,6 +9,15 @@
 <section class="container">
   <div class="d-flex justify-content-between">
     <h1 class="m-0">Projects</h1>
+    <form
+      method="get"
+      up-target=".projects"
+      up-history="true"
+      up-autosubmit
+      up-watch-event='input'
+      up-watch-delay=1000>
+      <input type="text" asp-for="SearchTerm" class="form-control" placeholder="Search...">
+    </form>
     <a
       asp-page="Create"
       up-layer="new popup"

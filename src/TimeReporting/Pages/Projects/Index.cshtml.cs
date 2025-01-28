@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
@@ -5,6 +7,7 @@ using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Projects;
 
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly AppDbContext _context;
@@ -14,11 +17,20 @@ public class IndexModel : PageModel
         _context = context;
     }
 
+    [BindProperty(SupportsGet = true)]
+    public string SearchTerm { get; set; }
+
     public IList<Project> Projects { get;set; } = default!;
 
     public async Task OnGetAsync()
     {
-        Projects = await _context.Projects
-            .Include(p => p.Customer).ToListAsync();
+        IQueryable<Project> query = _context.Projects.Include(p => p.Customer);
+
+        if (!string.IsNullOrEmpty(SearchTerm))
+        {
+            query = query.Where(p => p.Name.ToLower().Contains(SearchTerm.ToLower()));
+        }
+
+        Projects = await query.ToListAsync();
     }
 }
