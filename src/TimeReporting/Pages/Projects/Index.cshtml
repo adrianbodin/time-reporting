@@ -1,0 +1,52 @@
+@page
+@model TimeReporting.Pages.Projects.IndexModel
+
+@{
+    Layout = "_Layout";
+}
+
+
+<section class="container">
+  <div class="d-flex justify-content-between">
+    <h1 class="m-0">Projects</h1>
+    <a
+      asp-page="Create"
+      up-layer="new popup"
+      up-position="bottom"
+      up-align="right"
+      up-history="false"
+      up-accept-location="/Projects"
+      up-on-accepted="up.reload('.projects')"
+      class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></a>
+  </div>
+  <hr>
+  <div class="projects">
+    @if(!Model.Projects.Any())
+    {
+    <p>No projects found.</p>
+    }
+    else
+    {
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Customer</th>
+      </tr>
+      </thead>
+      <tbody>
+      @foreach (var project in Model.Projects)
+      {
+      <tr>
+        <td>@project.Name</td>
+        <td>
+          <a asp-page="./Edit" asp-route-id="@project.Name">Edit</a> |
+          <a asp-page="./Details" asp-route-id="@project.Customer">Details</a> |
+        </td>
+      </tr>
+      }
+      </tbody>
+    </table>
+    }
+  </div>
+</section>

@@ -1,6 +1,10 @@
+using System;
 using Finbuckle.Html5Validation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using TimeReporting.Data;
 using TimeReporting.Models;
 

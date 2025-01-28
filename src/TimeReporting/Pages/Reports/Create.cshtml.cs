@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,7 +16,7 @@ namespace TimeReporting.Pages.Reports;
 public record AddTimeEntryDto()
 {
     [Required]
-    public string CustomerId { get; set; }
+    public string ProjectId { get; set; }
 
     [Required]
     [Range(0.5, 24, ErrorMessage = "Hours must be between 0.5 and 24.")]
@@ -59,7 +62,7 @@ public class Create : PageModel
         var timeEntry = new TimeEntry
         {
             Id = Guid.NewGuid().ToString(),
-            CustomerId = NewEntry.CustomerId,
+            ProjectId = NewEntry.ProjectId,
             EmployeeId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
             Hours = NewEntry.Hours,
             Description = NewEntry.Description,

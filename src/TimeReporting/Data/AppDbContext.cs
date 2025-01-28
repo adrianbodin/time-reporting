@@ -8,6 +8,8 @@ public class AppDbContext : IdentityDbContext<Employee>
 {
     public DbSet<Customer> Customers { get; set; }
     public DbSet<TimeEntry> TimeEntries { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<WorkType> WorkTypes { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -19,22 +21,35 @@ public class AppDbContext : IdentityDbContext<Employee>
             .HasKey(c => c.Id);
 
         modelBuilder.Entity<Customer>()
-            .HasMany(c => c.TimeEntries)
-            .WithOne(c => c.Customer)
-            .HasForeignKey(c => c.CustomerId);
+            .HasMany(c => c.Projects)
+            .WithOne(p => p.Customer)
+            .HasForeignKey(p => p.CustomerId);
+
+        modelBuilder.Entity<Project>()
+            .HasKey(p => p.Id);
+
+        modelBuilder.Entity<Project>()
+            .HasMany(p => p.TimeEntries)
+            .WithOne(t => t.Project)
+            .HasForeignKey(t => t.ProjectId);
 
         modelBuilder.Entity<TimeEntry>()
             .HasKey(t => t.Id);
 
         modelBuilder.Entity<TimeEntry>()
-            .HasOne(t => t.Customer)
-            .WithMany(t => t.TimeEntries)
-            .HasForeignKey(t => t.CustomerId);
+            .HasOne(t => t.Project)
+            .WithMany(p => p.TimeEntries)
+            .HasForeignKey(t => t.ProjectId);
 
         modelBuilder.Entity<TimeEntry>()
             .HasOne(t => t.Employee)
-            .WithMany(t => t.TimeEntries)
+            .WithMany(e => e.TimeEntries)
             .HasForeignKey(t => t.EmployeeId);
+
+        modelBuilder.Entity<TimeEntry>()
+            .HasOne(t => t.WorkType)
+            .WithMany(w => w.TimeEntries)
+            .HasForeignKey(t => t.WorkTypeId);
 
         modelBuilder.Entity<TimeEntry>()
             .Property(t => t.Hours)
@@ -56,5 +71,13 @@ public class AppDbContext : IdentityDbContext<Employee>
             .HasMany(e => e.TimeEntries)
             .WithOne(t => t.Employee)
             .HasForeignKey(t => t.EmployeeId);
+
+        modelBuilder.Entity<WorkType>()
+            .HasKey(w => w.Id);
+
+        modelBuilder.Entity<WorkType>()
+            .HasMany(w => w.TimeEntries)
+            .WithOne(t => t.WorkType)
+            .HasForeignKey(t => t.WorkTypeId);
     }
 }

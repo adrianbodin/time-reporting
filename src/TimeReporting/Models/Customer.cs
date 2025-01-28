@@ -6,5 +6,5 @@ public class Customer
 
     public string Name { get; set; }
 
-    public ICollection<TimeEntry> TimeEntries { get; set; } = [];
+    public ICollection<Project> Projects { get; set; } = [];
 }

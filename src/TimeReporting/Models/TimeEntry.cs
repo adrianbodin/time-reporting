@@ -6,8 +6,8 @@ public class TimeEntry
 {
     public string Id { get; set; }
 
-    public string CustomerId { get; set; }
-    public Customer Customer { get; set; }
+    public string ProjectId { get; set; }
+    public Project Project { get; set; }
 
     public string EmployeeId { get; set; }
     public Employee Employee { get; set; }
@@ -18,4 +18,6 @@ public class TimeEntry
 
     public string Description { get; set; }
 
+    public string WorkTypeId { get; set; }
+    public WorkType WorkType { get; set; }
 }

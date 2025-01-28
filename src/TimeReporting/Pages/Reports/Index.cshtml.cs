@@ -44,7 +44,7 @@ public class Index : BasePageModel
             .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
             .Select(t => new ReadTimeEntryDto(
                 t.Id,
-                t.Customer.Name,
+                t.Project.Name,
                 t.Hours,
                 t.Description,
                 t.Date
@@ -69,7 +69,7 @@ public class Index : BasePageModel
                 .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
                 .Select(t => new ReadTimeEntryDto(
                     t.Id,
-                    t.Customer.Name,
+                    t.Project.Name,
                     t.Hours,
                     t.Description,
                     t.Date

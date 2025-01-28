@@ -1,0 +1,37 @@
+@page
+@model TimeReporting.Pages.Projects.CreateModel
+
+@{
+   Layout = "_Layout";
+}
+
+<section>
+  <h2>New Project</h2>
+  <hr>
+  <form method="post" up-target="main">
+    <div class="form-group">
+      <label class="control-label">Customer</label>
+      <select asp-for="Project.CustomerId" class="form-control">
+        <option value="">-- Select Customer --</option>
+        @foreach (var customer in Model.Customers)
+        {
+          <option value="@customer.Id">@customer.Name</option>
+        }
+      </select>
+      <span asp-validation-for="Project.CustomerId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <label asp-for="Project.Name" class="control-label"></label>
+      <input asp-for="Project.Name" class="form-control"/>
+      <span asp-validation-for="Project.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <label asp-for="Project.Description" class="control-label"></label>
+      <textarea asp-for="Project.Description" class="form-control"></textarea>
+      <span asp-validation-for="Project.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Create" class="btn btn-primary"/>
+    </div>
+  </form>
+</section>

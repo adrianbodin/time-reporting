@@ -13,6 +13,15 @@
   <script defer src="~/js/alpine-core.min.js"></script>*@
   <script defer src="~/lib/unpoly/unpoly.js"></script>
   <script src="~/js/bootstrap-auto-dark-mode.js"></script>
+  <script defer>
+    console.log("hello")
+up.log.enable();
+    up.compiler('.toast', function(element) {
+      setTimeout(function() {
+        element.remove();
+      }, 2000);
+    });
+  </script>
 </head>
 <body id="body">
 @RenderBody()

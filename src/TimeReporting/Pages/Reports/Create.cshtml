@@ -7,9 +7,9 @@
 <form method="post" up-target="main" class="add-entry-form">
   <h1>New time entry</h1>
   <hr>
-  <label asp-for="NewEntry.CustomerId" class="form-label">Customer</label>
+  <label asp-for="NewEntry.ProjectId" class="form-label">Customer</label>
     <div class="mb-3 input-group">
-      <select asp-for="NewEntry.CustomerId" class="form-select">
+      <select asp-for="NewEntry.ProjectId" class="form-select">
         <option value="">Select a customer</option>
         @foreach (var customer in Model.Customers)
         {
@@ -26,7 +26,7 @@
           New
         </button>
       </a>
-      <span class="text-danger" asp-validation-for="NewEntry.CustomerId"></span>
+      <span class="text-danger" asp-validation-for="NewEntry.ProjectId"></span>
     </div>
     <div class="mb-3">
       <label asp-for="NewEntry.Hours" class="form-label">Hours</label>
