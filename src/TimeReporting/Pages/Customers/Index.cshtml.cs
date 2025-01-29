@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +7,7 @@ using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Customers;
 
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly AppDbContext _context;
@@ -17,11 +17,21 @@ public class IndexModel : PageModel
         _context = context;
     }
 
+    [BindProperty(SupportsGet = true)]
+    public string SearchTerm { get; set; }
+
     public IList<Customer> Customers { get;set; } = default!;
 
     public async Task<IActionResult> OnGetAsync()
     {
-        Customers = await _context.Customers.ToListAsync();
+        IQueryable<Customer> query = _context.Customers;
+
+        if (!string.IsNullOrEmpty(SearchTerm))
+        {
+            query = query.Where(c => c.Name.ToLower().Contains(SearchTerm.ToLower()));
+        }
+
+        Customers = await query.ToListAsync();
 
         return Page();
     }

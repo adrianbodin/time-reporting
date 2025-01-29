@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TimeReporting.Data;
@@ -11,9 +12,11 @@ using TimeReporting.Data;
 namespace TimeReporting.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250129095000_MadeAnEnumRoleType")]
+    partial class MadeAnEnumRoleType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,11 +199,8 @@ namespace TimeReporting.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<DateOnly?>("HireDate")
+                    b.Property<DateOnly>("HireDate")
                         .HasColumnType("date");
-
-                    b.Property<string>("JobTitleId")
-                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -227,6 +227,9 @@ namespace TimeReporting.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -239,8 +242,6 @@ namespace TimeReporting.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("JobTitleId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -249,20 +250,6 @@ namespace TimeReporting.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("TimeReporting.Models.JobTitle", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("JobTitles");
                 });
 
             modelBuilder.Entity("TimeReporting.Models.Project", b =>
@@ -397,15 +384,6 @@ namespace TimeReporting.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TimeReporting.Models.Employee", b =>
-                {
-                    b.HasOne("TimeReporting.Models.JobTitle", "JobTitle")
-                        .WithMany("Employees")
-                        .HasForeignKey("JobTitleId");
-
-                    b.Navigation("JobTitle");
-                });
-
             modelBuilder.Entity("TimeReporting.Models.Project", b =>
                 {
                     b.HasOne("TimeReporting.Models.Customer", "Customer")
@@ -452,11 +430,6 @@ namespace TimeReporting.Data.Migrations
             modelBuilder.Entity("TimeReporting.Models.Employee", b =>
                 {
                     b.Navigation("TimeEntries");
-                });
-
-            modelBuilder.Entity("TimeReporting.Models.JobTitle", b =>
-                {
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("TimeReporting.Models.Project", b =>

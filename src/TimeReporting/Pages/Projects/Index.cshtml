@@ -2,6 +2,7 @@
 @model TimeReporting.Pages.Projects.IndexModel
 
 @{
+    ViewData["Title"] = "Projects";
     Layout = "_Layout";
 }
 
@@ -9,24 +10,25 @@
 <section class="container">
   <div class="d-flex justify-content-between">
     <h1 class="m-0">Projects</h1>
-    <form
-      method="get"
-      up-target=".projects"
-      up-history="true"
-      up-autosubmit
-      up-watch-event='input'
-      up-watch-delay=1000>
-      <input type="text" asp-for="SearchTerm" class="form-control" placeholder="Search...">
-    </form>
-    <a
-      asp-page="Create"
-      up-layer="new popup"
-      up-position="bottom"
-      up-align="right"
-      up-history="false"
-      up-accept-location="/Projects"
-      up-on-accepted="up.reload('.projects')"
-      class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></a>
+    <div class="d-flex gap-3">
+      <form
+        method="get"
+        up-target=".projects"
+        up-history="true"
+        up-autosubmit
+        up-watch-event='input'
+        up-watch-delay=1000>
+        <input type="text" asp-for="SearchTerm" class="form-control h-100" placeholder="Search...">
+      </form>
+      <a
+        asp-page="Create"
+        up-layer="new drawer"
+        up-position="right"
+        up-history="false"
+        up-accept-location="/Projects"
+        up-on-accepted="up.reload('.projects')"
+        class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></a>
+    </div>
   </div>
   <hr>
   <div class="projects">

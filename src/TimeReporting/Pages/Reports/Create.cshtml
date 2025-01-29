@@ -7,21 +7,21 @@
 <form method="post" up-target="main" class="add-entry-form">
   <h1>New time entry</h1>
   <hr>
-  <label asp-for="NewEntry.ProjectId" class="form-label">Customer</label>
+  <label asp-for="NewEntry.ProjectId" class="form-label">Project</label>
     <div class="mb-3 input-group">
-      <select asp-for="NewEntry.ProjectId" class="form-select">
-        <option value="">Select a customer</option>
-        @foreach (var customer in Model.Customers)
+      <select asp-for="NewEntry.ProjectId" class="form-select project-selection">
+        <option value="">Select a Project</option>
+        @foreach (var project in Model.Projects)
         {
-          <option value="@customer.Id">@customer.Name</option>
+          <option value="@project.Id">@project.Name</option>
         }
       </select>
       <a
-        href="/Customers/Create"
+        href="/Projects/Create"
         up-layer="new modal"
         up-history="auto"
-        up-accept-location="/Customers"
-        up-on-accepted="up.reload('.add-entry-form')">
+        up-accept-location="/Projects"
+        up-on-accepted="up.reload('.project-selection')">
         <button class="btn btn-primary rounded-right" type="button">
           New
         </button>

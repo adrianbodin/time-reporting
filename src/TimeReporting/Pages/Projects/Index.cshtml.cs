@@ -22,7 +22,7 @@ public class IndexModel : PageModel
 
     public IList<Project> Projects { get;set; } = default!;
 
-    public async Task OnGetAsync()
+    public async Task<IActionResult> OnGetAsync()
     {
         IQueryable<Project> query = _context.Projects.Include(p => p.Customer);
 
@@ -32,5 +32,7 @@ public class IndexModel : PageModel
         }
 
         Projects = await query.ToListAsync();
+
+        return Page();
     }
 }

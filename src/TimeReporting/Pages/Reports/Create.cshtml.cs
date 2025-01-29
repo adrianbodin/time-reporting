@@ -42,14 +42,14 @@ public class Create : PageModel
     [BindProperty]
     public AddTimeEntryDto NewEntry { get; set; }
 
-    public List<Customer> Customers { get; set; }
+    public IList<Project> Projects { get; set; }
 
     public async Task OnGet()
     {
         ViewData["Title"] = "Add Time Entry";
         NewEntry = new AddTimeEntryDto();
         NewEntry.Date = DateTime.Now;
-        Customers = await _db.Customers.ToListAsync();
+        Projects = await _db.Projects.ToListAsync();
     }
 
     public async Task<IActionResult> OnPost()

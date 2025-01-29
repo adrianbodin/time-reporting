@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TimeReporting.Data;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Account
@@ -29,13 +30,15 @@ namespace TimeReporting.Pages.Account
         private readonly IUserEmailStore<Employee> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<Employee> userManager,
             IUserStore<Employee> userStore,
             SignInManager<Employee> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +46,7 @@ namespace TimeReporting.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -78,6 +82,16 @@ namespace TimeReporting.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [Required]
+            [Display(Name = "Full Name")]
+            [StringLength(100, ErrorMessage = "Full name cant be longer than 100 characters.")]
+            public string FullName { get; set; }
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            [Phone]
+            public string PhoneNumber { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -116,11 +130,31 @@ namespace TimeReporting.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.FullName = Input.FullName;
+                user.PhoneNumber = Input.PhoneNumber;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    const string adminRoleName = "Admin";
+                    if (!await _roleManager.RoleExistsAsync(adminRoleName))
+                    {
+                        var roleResult = await _roleManager.CreateAsync(new IdentityRole(adminRoleName));
+                        if (!roleResult.Succeeded)
+                        {
+                            ModelState.AddModelError(string.Empty, "Failed to create Admin role.");
+                            return Page();
+                        }
+                    }
+
+                    var roleAssignResult = await _userManager.AddToRoleAsync(user, adminRoleName);
+                    if (!roleAssignResult.Succeeded)
+                    {
+                        ModelState.AddModelError(string.Empty, "Failed to assign Admin role.");
+                        return Page();
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

@@ -2,23 +2,33 @@
 @model IndexModel
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Customers";
+    Layout = "_Layout";
 }
 
 
 <section class="container">
   <div class="d-flex justify-content-between">
     <h1 class="m-0">Customers</h1>
-    <a
+    <div class="d-flex gap-3">
+      <form
+        method="get"
+        up-target=".customers"
+        up-history="true"
+        up-autosubmit
+        up-watch-event='input'
+        up-watch-delay=1000>
+        <input type="text" asp-for="SearchTerm" class="form-control h-100" placeholder="Search...">
+      </form>
+      <a
         asp-page="Create"
-        up-layer="new popup"
-        up-position="bottom"
-        up-align="right"
+        up-layer="new drawer"
+        up-position="right"
         up-history="false"
         up-accept-location="/Customers"
         up-on-accepted="up.reload('.customers')"
         class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></a>
+    </div>
   </div>
   <hr>
   <div class="customers">
