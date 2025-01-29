@@ -1,8 +1,8 @@
-﻿:root,[data-bs-theme=light]{
+﻿[data-bs-theme=light]{
   --background: #fff;
 }
 
-:root,[data-bs-theme=dark]{
+[data-bs-theme=dark]{
   --background: #2b3035;
 }
 

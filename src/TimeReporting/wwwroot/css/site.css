@@ -24,8 +24,26 @@ body {
   color: black; /* Default color for light mode */
 }
 
+.up-current{
+  background-color: #ffffff;
+  text-decoration: underline;
+  border-right: 0;
+}
+
 @media (prefers-color-scheme: dark) {
   .bi {
     color: white; /* Icon color for dark mode */
   }
+
+  .up-current{
+    background-color: #212529;
+  }
+}
+.up-current::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
 }

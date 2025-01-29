@@ -8,20 +8,9 @@
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-  @*<script defer src="~/js/alpine-persist.min.js"></script>
-  <script defer src="~/js/alpine-ajax.min.js"></script>
-  <script defer src="~/js/alpine-core.min.js"></script>*@
   <script defer src="~/lib/unpoly/unpoly.js"></script>
   <script src="~/js/bootstrap-auto-dark-mode.js"></script>
-  <script defer>
-    console.log("hello")
-up.log.enable();
-    up.compiler('.toast', function(element) {
-      setTimeout(function() {
-        element.remove();
-      }, 2000);
-    });
-  </script>
+  <script defer src="~/js/unpoly-scripts.js"></script>
 </head>
 <body id="body">
 @RenderBody()
