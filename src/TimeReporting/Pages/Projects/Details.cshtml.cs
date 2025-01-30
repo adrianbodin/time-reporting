@@ -6,7 +6,7 @@ using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Projects;
 
-public record ProjectDetailsDto(string Id, string Name, string Description, string Customer, double TotalHours, List<TimeEntryDto> TimeEntries);
+public record ProjectDetailsDto(string Id, string Name, string Description, string Customer, double TotalHours, decimal TotalBilledAmount,List<TimeEntryDto> TimeEntries);
 
 public record TimeEntryDto(string Id, string Employee, double Hours, DateOnly Date, string Description);
 
@@ -36,6 +36,7 @@ public class DetailsModel : PageModel
                 p.Description,
                 p.Customer.Name,
                 p.TimeEntries.Sum(t => t.Hours),
+                p.TimeEntries.Sum(t => (decimal)(t.Hours * t.WorkType.HourlyRate)),
                 p.TimeEntries.Select(t => new TimeEntryDto(
                     t.Id,
                     t.Employee.FullName,

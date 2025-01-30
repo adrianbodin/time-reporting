@@ -1,0 +1,47 @@
+@page
+@model TimeReporting.Pages.WorkTypes.IndexModel
+
+@{
+  Layout = "_Layout";
+}
+
+<section class="container">
+  <div class="d-flex justify-content-between">
+    <h1 class="m-0">WorkTypes</h1>
+      <a
+        asp-page="Create"
+        up-layer="new drawer"
+        up-position="right"
+        up-history="false"
+        up-accept-location="/Projects"
+        up-on-accepted="up.reload('.projects')"
+        class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></a>
+  </div>
+  <hr>
+  <div class="projects">
+    @if(!Model.WorkTypes.Any())
+    {
+      <p>No worktypes found.</p>
+    }
+    else
+    {
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Hourly rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var workType in Model.WorkTypes)
+        {
+          <tr>
+            <td>@workType.Name</td>
+            <td>@workType.HourlyRate</td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    }
+  </div>
+</section>

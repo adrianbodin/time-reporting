@@ -10,7 +10,7 @@ using TimeReporting.Pages.Shared;
 namespace TimeReporting.Pages.Reports;
 
 
-public record ReadTimeEntryDto(string Id,string Customer, double Hours, string Description, DateOnly Date);
+public record ReadTimeEntryDto(string Id,string Project, double Hours, string Description, DateOnly Date, string WorkType);
 
 [Authorize]
 public class Index : BasePageModel
@@ -47,7 +47,8 @@ public class Index : BasePageModel
                 t.Project.Name,
                 t.Hours,
                 t.Description,
-                t.Date
+                t.Date,
+                t.WorkType.Name
             ))
             .ToListAsync();
     }
@@ -72,7 +73,8 @@ public class Index : BasePageModel
                     t.Project.Name,
                     t.Hours,
                     t.Description,
-                    t.Date
+                    t.Date,
+                    t.WorkType.Name
                 ))
                 .ToListAsync();
 

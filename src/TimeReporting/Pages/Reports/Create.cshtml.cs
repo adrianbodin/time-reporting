@@ -27,6 +27,9 @@ public record AddTimeEntryDto()
 
     [BindProperty(SupportsGet = true), DataType(DataType.Date)]
     public DateTime Date { get; set; }
+
+    [Required]
+    public string WorkTypeId { get; set; }
 }
 
 [Authorize]
@@ -44,12 +47,16 @@ public class Create : PageModel
 
     public IList<Project> Projects { get; set; }
 
+    public IList<WorkType> WorkTypes { get; set; }
+
+    //todo make this better
     public async Task OnGet()
     {
         ViewData["Title"] = "Add Time Entry";
         NewEntry = new AddTimeEntryDto();
         NewEntry.Date = DateTime.Now;
-        Projects = await _db.Projects.ToListAsync();
+        Projects = await _db.Projects.AsNoTracking().ToListAsync();
+        WorkTypes = await _db.WorkTypes.AsNoTracking().ToListAsync();
     }
 
     public async Task<IActionResult> OnPost()
@@ -66,7 +73,8 @@ public class Create : PageModel
             EmployeeId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
             Hours = NewEntry.Hours,
             Description = NewEntry.Description,
-            Date = DateOnly.FromDateTime(NewEntry.Date)
+            Date = DateOnly.FromDateTime(NewEntry.Date),
+            WorkTypeId = NewEntry.WorkTypeId
         };
 
         try

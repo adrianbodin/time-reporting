@@ -27,7 +27,10 @@
   <ul class="justify-content-end nav flex-column">
     <hr class="my-3 mx-3">
     <li class="nav-item fw-bold">
-      <a id="manage" class="nav-link" asp-page="/Account/Manage/Index" x-target.push="main" title="Manage"><i class="bi bi-person text-primary"></i> Profile</a>
+      <a id="manage" class="nav-link d-flex align-items-center gap-2" asp-page="/Account/Manage/Index" up-follow up-alias="/Account/*" title="Manage"><i class="bi bi-person text-primary"></i> Profile</a>
+    </li>
+    <li class="nav-item fw-bold">
+      <a id="worktypes" class="nav-link d-flex align-items-center gap-2" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*" up-follow title="Manage"><i class="bi bi-wallet text-primary"></i> Worktypes</a>
     </li>
     <li class="nav-item fw-bold">
       <form id="logoutForm" class="form-inline" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
