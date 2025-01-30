@@ -49,10 +49,8 @@
       @foreach (var project in Model.Projects)
       {
       <tr>
-        <td>@project.Name</td>
+        <td><a asp-page="./Details" up-follow asp-route-id="@project.Id">@project.Name</a></td>
         <td>
-          <a asp-page="./Edit" asp-route-id="@project.Name">Edit</a> |
-          <a asp-page="./Details" asp-route-id="@project.Customer">Details</a> |
         </td>
       </tr>
       }
