@@ -8,7 +8,7 @@ namespace TimeReporting.Pages.Projects;
 
 public record ProjectDetailsDto(string Id, string Name, string Description, string Customer, double TotalHours, decimal TotalBilledAmount,List<TimeEntryDto> TimeEntries);
 
-public record TimeEntryDto(string Id, string Employee, double Hours, DateOnly Date, string Description);
+public record TimeEntryDto(string Id, string Employee, double Hours, DateOnly Date, string Description, string WorkType, double HourlyRate);
 
 public class DetailsModel : PageModel
 {
@@ -36,13 +36,15 @@ public class DetailsModel : PageModel
                 p.Description,
                 p.Customer.Name,
                 p.TimeEntries.Sum(t => t.Hours),
-                p.TimeEntries.Sum(t => (decimal)(t.Hours * t.WorkType.HourlyRate)),
+                p.TimeEntries.Sum(t => (decimal)(t.Hours * t.HourlyRate)),
                 p.TimeEntries.Select(t => new TimeEntryDto(
                     t.Id,
                     t.Employee.FullName,
                     t.Hours,
                     t.Date,
-                    t.Description)).ToList()))
+                    t.Description,
+                    t.WorkType.Name,
+                    t.HourlyRate)).ToList()))
             .FirstOrDefaultAsync();
 
         if (project is not null)

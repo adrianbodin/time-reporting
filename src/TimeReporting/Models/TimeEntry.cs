@@ -18,6 +18,8 @@ public class TimeEntry
 
     public string Description { get; set; }
 
+    public double HourlyRate { get; set; }
+
     public string WorkTypeId { get; set; }
     public WorkType WorkType { get; set; }
 }

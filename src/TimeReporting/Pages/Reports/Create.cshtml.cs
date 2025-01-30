@@ -66,6 +66,14 @@ public class Create : PageModel
             return Page();
         }
 
+        var workType = await _db.WorkTypes.FindAsync(NewEntry.WorkTypeId);
+        if (workType == null)
+        {
+            TempData["Toast-Type"] = NotificationType.Danger;
+            TempData["Toast-Message"] = "Invalid work type selected.";
+            return Page();
+        }
+
         var timeEntry = new TimeEntry
         {
             Id = Guid.NewGuid().ToString(),
@@ -74,7 +82,8 @@ public class Create : PageModel
             Hours = NewEntry.Hours,
             Description = NewEntry.Description,
             Date = DateOnly.FromDateTime(NewEntry.Date),
-            WorkTypeId = NewEntry.WorkTypeId
+            WorkTypeId = NewEntry.WorkTypeId,
+            HourlyRate = workType.HourlyRate
         };
 
         try
