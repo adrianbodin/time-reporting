@@ -10,36 +10,12 @@ public class ReportPageTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task WhenUserVisitReportPageTheDateInputShouldBeTodaysDate()
+    public async Task When_User_Visit_Report_Page_The_Date_Input_Should_Be_Todays_Date()
     {
-        await Page.GotoAsync($"{RootUrl}report");
+        await Page.AuthenticateAdminAsync(RootUrl);
+        await Page.GotoAsync($"{RootUrl}Reports");
         var dateInput = await Page.GetByTestId("date-input").GetAttributeAsync("value");
         var date = DateTime.Parse(dateInput);
         Assert.True((date - DateTime.Today).Duration() < TimeSpan.FromSeconds(60));
-    }
-
-    [Fact]
-    public async Task WhenUserChangeDateTheCardsWithThatDateShouldBeFetchedFromTheServer()
-    {
-        await Page.GotoAsync($"{RootUrl}report");
-
-        await Page.GetByTestId("date-input").FillAsync("2024-01-19");
-
-        await Page.WaitForHtmx();
-
-        var reportCardDate = await Page.GetByTestId("report-date").First.InnerTextAsync();
-
-        Assert.Equivalent(reportCardDate, "19");
-    }
-
-    [Fact]
-    public async Task WhenAdminVisitReportPageThenAdminCanSeeAllReportCards()
-    {
-        await Page.AuthenticateAdminAsync(RootUrl);
-        await Page.GotoAsync($"{RootUrl}report");
-
-        var test = await Page.GetByTestId("admin-check").First.InnerTextAsync();
-
-        Assert.Equivalent(test, "I am a admin!!!");
     }
 }

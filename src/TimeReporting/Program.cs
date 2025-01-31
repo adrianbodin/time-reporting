@@ -21,7 +21,7 @@ builder.Services.AddHtml5Validation();
 
 var app = builder.Build();
 
-/*if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     using (var scope = app.Services.CreateScope())
     {
@@ -39,7 +39,7 @@ var app = builder.Build();
             Console.WriteLine($"Error seeding database: {ex.Message}");
         }
     }
-}*/
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

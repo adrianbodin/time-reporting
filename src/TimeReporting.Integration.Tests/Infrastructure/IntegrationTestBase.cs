@@ -17,7 +17,6 @@ public class IntegrationTestBase : IAsyncLifetime
     {
         var context = await Factory.Browser.NewContextAsync();
         Page = await context.NewPageAsync();
-        await Page.GotoAsync(RootUrl);
     }
 
     public async Task DisposeAsync()

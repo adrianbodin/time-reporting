@@ -1,10 +1,10 @@
 namespace TimeReporting.Integration.Tests.Infrastructure;
 
-public static class HtmxTestingExtensions
+public static class UnpolyTestingExtensions
 {
     private const string Continue = "playwright:continue";
 
-    public static Task WaitForHtmx(this IPage page)
+    public static Task WaitForUnpoly(this IPage page)
     {
         return page.WaitForConsoleMessageAsync(new() {
             Predicate = message => message.Text == Continue

@@ -35,6 +35,9 @@ public static class SeedData
             {
                 UserName = adminEmail,
                 Email = adminEmail,
+                FullName = "Anders Admin",
+                PhoneNumber = "1234567890",
+                HireDate = new DateOnly(2022, 1, 1),
                 EmailConfirmed = true
             };
 

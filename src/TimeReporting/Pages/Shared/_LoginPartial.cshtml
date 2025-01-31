@@ -14,23 +14,49 @@
     </div>
     <ul class="nav flex-column">
       <li class="nav-item fw-bold">
-        <a class="nav-link d-flex align-items-center gap-2" asp-page="/Reports/Index" up-alias="/Reports/*" up-target="main"><i class="bi bi-clock text-primary"></i> Time Overview</a>
+        <a class="nav-link d-flex align-items-center gap-2"
+           asp-page="/Reports/Index"
+           up-alias="/Reports/*"
+           up-target="main">
+          <i class="bi bi-clock text-primary"></i> Time Overview
+        </a>
       </li>
       <li class="nav-item fw-bold">
-        <a class="nav-link d-flex align-items-center gap-2" asp-page="/Projects/Index" up-alias="/Projects/*" up-target="main"><i class="bi bi-kanban text-primary"></i> Projects</a>
+        <a class="nav-link d-flex align-items-center gap-2"
+           asp-page="/Projects/Index"
+           up-alias="/Projects/*"
+           up-target="main">
+          <i class="bi bi-kanban text-primary"></i> Projects
+        </a>
       </li>
       <li class="nav-item fw-bold">
-        <a class="nav-link d-flex align-items-center gap-2" asp-page="/Customers/Index" up-alias="/Customers/*" up-target="main"><i class="bi bi-people text-primary"></i> Customers</a>
+        <a class="nav-link d-flex align-items-center gap-2"
+           asp-page="/Customers/Index"
+           up-alias="/Customers/*"
+           up-target="main">
+          <i class="bi bi-people text-primary"></i> Customers
+        </a>
       </li>
     </ul>
   </div>
   <ul class="justify-content-end nav flex-column">
     <hr class="my-3 mx-3">
     <li class="nav-item fw-bold">
-      <a id="manage" class="nav-link d-flex align-items-center gap-2" asp-page="/Account/Manage/Index" up-follow up-alias="/Account/*" title="Manage"><i class="bi bi-person text-primary"></i> Profile</a>
+      <a class="nav-link d-flex align-items-center gap-2"
+         asp-page="/Account/Manage/Index"
+         data-testid="ProfilePageLink"
+         up-follow up-alias="/Account/*"
+         title="Manage">
+        <i class="bi bi-person text-primary"></i> Profile
+      </a>
     </li>
     <li class="nav-item fw-bold">
-      <a id="worktypes" class="nav-link d-flex align-items-center gap-2" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*" up-follow title="Manage"><i class="bi bi-wallet text-primary"></i> Worktypes</a>
+      <a class="nav-link d-flex align-items-center gap-2"
+         asp-page="/WorkTypes/Index"
+         up-alias="/WorkTypes/*"
+         up-follow title="Manage">
+        <i class="bi bi-wallet text-primary"></i> Worktypes
+      </a>
     </li>
     <li class="nav-item fw-bold">
       <form id="logoutForm" class="form-inline" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
@@ -38,14 +64,5 @@
       </form>
     </li>
   </ul>
-}
-else
-{
-    @*<li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>*@
 }
 </nav>
