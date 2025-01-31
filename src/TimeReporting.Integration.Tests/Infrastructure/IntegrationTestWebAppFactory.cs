@@ -3,6 +3,7 @@ using DotNet.Testcontainers.Containers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ using Npgsql;
 using Respawn;
 using Testcontainers.PostgreSql;
 using TimeReporting.Data;
+using TimeReporting.Models;
 
 namespace TimeReporting.Integration.Tests.Infrastructure;
 
@@ -26,7 +28,7 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
 
     private AppDbContext Db { get; set; } = null!;
     private DbConnection _dbConnection = default!;
-    private Respawner _respawner = default!;
+    private Respawner _respawner = null!;
     private IHost _host = default!;
     private IPlaywright PlaywrightInstance { get; set; } = default!;
     public IBrowser Browser { get; set; } = default!;
@@ -93,8 +95,6 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
 
     public async Task InitializeAsync()
     {
-        PlaywrightInstance = await Playwright.CreateAsync();
-        Browser = await PlaywrightInstance.Chromium.LaunchAsync();
         await _container.StartAsync();
 
         Db = Services.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>();
@@ -106,6 +106,9 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
             DbAdapter = DbAdapter.Postgres,
             SchemasToInclude = new[] { "public" }
         });
+
+        PlaywrightInstance = await Playwright.CreateAsync();
+        Browser = await PlaywrightInstance.Chromium.LaunchAsync();
     }
 
     public async Task ResetDatabaseAsync()
@@ -116,12 +119,23 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
 
             await _respawner.ResetAsync(conn);
         }
+
+        // todo this should probably be made in a better way.
+        using var scope = Services.CreateScope();
+        var serviceProvider = scope.ServiceProvider;
+
+        var context = serviceProvider.GetRequiredService<AppDbContext>();
+        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = serviceProvider.GetRequiredService<UserManager<Employee>>();
+
+        await SeedData.SeedRolesAndAdminUserAsync(context, roleManager, userManager);
+
     }
 
-    public async Task DisposeAsync()
+    public new async Task DisposeAsync()
     {
         await Browser.DisposeAsync();
         await _dbConnection.CloseAsync();
-        await _container.StopAsync();
+        await _container.DisposeAsync();
     }
 }
