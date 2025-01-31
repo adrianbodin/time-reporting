@@ -47,6 +47,7 @@ public class DetailsModel : PageModel
                     t.HourlyRate)).ToList()))
             .FirstOrDefaultAsync();
 
+
         if (project is not null)
         {
             Project = project;

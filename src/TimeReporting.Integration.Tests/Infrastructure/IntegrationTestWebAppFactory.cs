@@ -21,6 +21,7 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         .WithDatabase("time_reporting_test_db")
         .WithUsername("postgres")
         .WithPassword("postgres")
+        .WithCleanUp(true)
         .Build();
 
     private AppDbContext Db { get; set; } = null!;
@@ -121,6 +122,6 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
     {
         await Browser.DisposeAsync();
         await _dbConnection.CloseAsync();
-        await _container.DisposeAsync();
+        await _container.StopAsync();
     }
 }

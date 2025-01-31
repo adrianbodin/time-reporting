@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TimeReporting.Pages.Projects;
+
 namespace TimeReporting.Models;
 
 public class Project

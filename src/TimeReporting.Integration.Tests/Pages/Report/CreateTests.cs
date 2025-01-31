@@ -27,10 +27,8 @@ public class CreatePageTests : IntegrationTestBase
     public async Task CreatePage_WhenUserIsAuthenticatedThenUserCanAccessPage()
     {
         await Page.AuthenticateAdminAsync(RootUrl);
-        _testOutputHelper.WriteLine($"Authenticated as Admin. Navigating to {RootUrl}Report/Create");
 
-        await Page.GotoAsync($"{RootUrl}Report/Create");
-        _testOutputHelper.WriteLine($"Current URL: {Page.Url}");
+        await Page.GotoAsync($"{RootUrl}Reports/Create");
 
         Assert.Contains("Report/Create", Page.Url);
     }
