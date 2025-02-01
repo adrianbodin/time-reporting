@@ -23,7 +23,8 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         .WithDatabase("time_reporting_test_db")
         .WithUsername("postgres")
         .WithPassword("postgres")
-        .WithCleanUp(true)
+        .WithReuse(true)
+        .WithName("TimeReporting")
         .Build();
 
     private AppDbContext Db { get; set; } = null!;
@@ -120,7 +121,6 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
             await _respawner.ResetAsync(conn);
         }
 
-        // todo this should probably be made in a better way.
         using var scope = Services.CreateScope();
         var serviceProvider = scope.ServiceProvider;
 
@@ -129,13 +129,12 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         var userManager = serviceProvider.GetRequiredService<UserManager<Employee>>();
 
         await SeedData.SeedRolesAndAdminUserAsync(context, roleManager, userManager);
-
     }
 
     public new async Task DisposeAsync()
     {
         await Browser.DisposeAsync();
         await _dbConnection.CloseAsync();
-        await _container.DisposeAsync();
+        //await _container.DisposeAsync();
     }
 }

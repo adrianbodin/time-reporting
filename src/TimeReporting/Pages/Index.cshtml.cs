@@ -30,4 +30,9 @@ public class IndexModel : PageModel
             Response.Redirect("/Account/Login");
         }
     }
+
+    public async Task<IActionResult> OnGetNum()
+    {
+        return ViewComponent("Timer");
+    }
 }

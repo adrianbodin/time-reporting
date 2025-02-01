@@ -12,8 +12,8 @@ using TimeReporting.Data;
 namespace TimeReporting.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250115101353_AddedInitTables")]
-    partial class AddedInitTables
+    [Migration("20250131141537_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,15 +194,16 @@ namespace TimeReporting.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                    b.Property<DateOnly?>("HireDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("JobTitleId")
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -222,7 +223,9 @@ namespace TimeReporting.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
@@ -239,6 +242,8 @@ namespace TimeReporting.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("JobTitleId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -249,7 +254,21 @@ namespace TimeReporting.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("TimeReporting.Models.TimeEntry", b =>
+            modelBuilder.Entity("TimeReporting.Models.JobTitle", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobTitles");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.Project", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -260,6 +279,29 @@ namespace TimeReporting.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.TimeEntry", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
@@ -267,17 +309,47 @@ namespace TimeReporting.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<double>("HourlyRate")
+                        .HasColumnType("double precision");
+
                     b.Property<double>("Hours")
                         .HasMaxLength(100)
                         .HasColumnType("double precision");
 
-                    b.HasKey("Id");
+                    b.Property<string>("ProjectId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasIndex("CustomerId");
+                    b.Property<string>("WorkTypeId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("WorkTypeId");
+
                     b.ToTable("TimeEntries");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.WorkType", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("HourlyRate")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -331,31 +403,74 @@ namespace TimeReporting.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TimeReporting.Models.TimeEntry", b =>
+            modelBuilder.Entity("TimeReporting.Models.Employee", b =>
+                {
+                    b.HasOne("TimeReporting.Models.JobTitle", "JobTitle")
+                        .WithMany("Employees")
+                        .HasForeignKey("JobTitleId");
+
+                    b.Navigation("JobTitle");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.Project", b =>
                 {
                     b.HasOne("TimeReporting.Models.Customer", "Customer")
-                        .WithMany("TimeEntries")
+                        .WithMany("Projects")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.TimeEntry", b =>
+                {
                     b.HasOne("TimeReporting.Models.Employee", "Employee")
                         .WithMany("TimeEntries")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.HasOne("TimeReporting.Models.Project", "Project")
+                        .WithMany("TimeEntries")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TimeReporting.Models.WorkType", "WorkType")
+                        .WithMany("TimeEntries")
+                        .HasForeignKey("WorkTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Employee");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("WorkType");
                 });
 
             modelBuilder.Entity("TimeReporting.Models.Customer", b =>
                 {
-                    b.Navigation("TimeEntries");
+                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("TimeReporting.Models.Employee", b =>
+                {
+                    b.Navigation("TimeEntries");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.JobTitle", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.Project", b =>
+                {
+                    b.Navigation("TimeEntries");
+                });
+
+            modelBuilder.Entity("TimeReporting.Models.WorkType", b =>
                 {
                     b.Navigation("TimeEntries");
                 });
