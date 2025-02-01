@@ -1,8 +1,10 @@
-using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Models;
 
 namespace TimeReporting.Pages;
 
@@ -31,8 +33,41 @@ public class IndexModel : PageModel
         }
     }
 
-    public async Task<IActionResult> OnGetNum()
+    public async Task<IActionResult> OnGetStartTimer()
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        var timer = await _dbContext.EntryTimers.FirstOrDefaultAsync(et => et.EmployeeId == userId);
+
+
+        if (timer is null)
+        {
+
+            var newEntryTimer = new EntryTimer
+            {
+                Id = Guid.NewGuid().ToString(),
+                StartTime = DateTime.UtcNow,
+                EmployeeId = userId
+            };
+
+            _dbContext.EntryTimers.Add(newEntryTimer);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        return ViewComponent("Timer");
+    }
+
+    public async Task<IActionResult> OnGetStopTimer()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        var timer = await _dbContext.EntryTimers.FirstOrDefaultAsync(et => et.EmployeeId == userId);
+
+        if (timer is not null)
+        {
+            timer.EndTime = DateTime.UtcNow;
+            await _dbContext.SaveChangesAsync();
+        }
         return ViewComponent("Timer");
     }
 }

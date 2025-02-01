@@ -11,6 +11,7 @@ public class AppDbContext : IdentityDbContext<Employee>
     public DbSet<Project> Projects { get; set; }
     public DbSet<WorkType> WorkTypes { get; set; }
     public DbSet<JobTitle> JobTitles { get; set; }
+    public DbSet<EntryTimer> EntryTimers { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -93,5 +94,9 @@ public class AppDbContext : IdentityDbContext<Employee>
             .HasMany(w => w.TimeEntries)
             .WithOne(t => t.WorkType)
             .HasForeignKey(t => t.WorkTypeId);
+
+
+        modelBuilder.Entity<EntryTimer>()
+            .HasKey(t => t.Id);
     }
 }

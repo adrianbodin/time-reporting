@@ -1,5 +1,31 @@
 ﻿@model TimeReporting.Pages.Shared.Components.Timer.TimerViewComponent
 
-<h1 id="time" up-poll up-interval="2000" up-source="/?handler=Num">
-  @Model.Num
-</h1>
+@switch (Model.Status)
+{
+  case TimerStatus.NotStarted:
+    <div id="timer" class="w-100 p-3">
+      <a class="btn btn-success w-100"
+         up-target="#timer"
+         asp-page="/Index"
+         asp-page-handler="StartTimer">
+        Start timer
+      </a>
+    </div>
+    break;
+
+  case TimerStatus.Running:
+    <div id="timer" class="w-100 p-3" up-poll up-interval="2000">
+      <span>Timer is running: <strong>@Model.TimerTime.Minutes</strong> minutes <strong>@Model.TimerTime.Seconds</strong> seconds</span>
+      <a asp-page="/Index"
+         asp-page-handler="StopTimer"
+         up-target="#timer"
+        ><button class="btn btn-danger">Stop</button></a>
+    </div>
+    break;
+
+  case TimerStatus.Stopped:
+    <div id="timer" class="w-100 p-3">
+      <span>Timer is stopped</span>
+    </div>
+    break;
+}
