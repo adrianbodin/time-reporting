@@ -1,42 +1,80 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Models;
+using TimeReporting.Pages.Shared;
 
-namespace TimeReporting.Pages.WorkTypes
+namespace TimeReporting.Pages.WorkTypes;
+
+public record AddWorkTypeDto
 {
-    public class CreateModel : PageModel
+    [Required(ErrorMessage = "You must provide a name for the work type")]
+    public string Name { get; init; } = null!;
+
+    [Required]
+    [Display(Name = "Hourly Rate")]
+    public int HourlyRate { get; init; }
+};
+
+public class CreateModel : PageModel
+{
+    private readonly AppDbContext _context;
+
+    public CreateModel(AppDbContext context)
     {
-        private readonly TimeReporting.Data.AppDbContext _context;
+        _context = context;
+    }
 
-        public CreateModel(TimeReporting.Data.AppDbContext context)
-        {
-            _context = context;
-        }
+    [BindProperty]
+    public AddWorkTypeDto WorkType { get; set; } = null!;
 
-        public IActionResult OnGet()
+    public IActionResult OnGet()
+    {
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
+            Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             return Page();
         }
 
-        [BindProperty]
-        public WorkType WorkType { get; set; } = default!;
-
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        try
         {
-            if (!ModelState.IsValid)
+            bool doesWorkTypeExist = await _context.WorkTypes
+                .AnyAsync(wt => wt.Name.ToLower() == WorkType.Name.ToLower());
+
+            if (doesWorkTypeExist)
             {
+                ModelState.AddModelError("WorkType.Name", "A work type with this name already exists.");
+                Response.StatusCode = StatusCodes.Status409Conflict;
                 return Page();
             }
 
-            _context.WorkTypes.Add(WorkType);
+
+            var newWorkType = new WorkType
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = WorkType.Name,
+                HourlyRate = WorkType.HourlyRate,
+            };
+
+            _context.WorkTypes.Add(newWorkType);
             await _context.SaveChangesAsync();
+
+            TempData["Notification-Type"] = NotificationType.Success;
+            TempData["Notification-Message"] = $"Work Type {newWorkType.Name} has been created";
+
+            return RedirectToPage("./Index");
+        }
+        catch (Exception e)
+        {
+            TempData["Notification-Type"] = NotificationType.Danger;
+            TempData["Notification-Message"] = "There was an error, please try again.";
 
             return RedirectToPage("./Index");
         }

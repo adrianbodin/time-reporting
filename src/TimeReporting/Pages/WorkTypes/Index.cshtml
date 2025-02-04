@@ -13,12 +13,12 @@
         up-layer="new drawer"
         up-position="right"
         up-history="false"
-        up-accept-location="/Projects"
-        up-on-accepted="up.reload('.projects')"
+        up-accept-location="/WorkTypes"
+        up-on-accepted="up.reload('.worktypes')"
         class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></a>
   </div>
   <hr>
-  <div class="projects">
+  <div class="worktypes">
     @if(!Model.WorkTypes.Any())
     {
       <p>No worktypes found.</p>

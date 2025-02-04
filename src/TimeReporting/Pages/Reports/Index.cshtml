@@ -31,7 +31,7 @@ else
     <tr>
       <th>Project</th>
       <th>Hours</th>
-      <th>Worktype</th>
+      <th>Work type</th>
       <th></th>
     </tr>
     </thead>
@@ -49,10 +49,15 @@ else
           <span>@timeEntry.WorkType</span>
         </td>
         <td class="d-flex justify-content-end gap-2">
-          <button
-            class="btn btn-success"
-            x-show="editing"
-          ><i class="bi bi-check"></i></button>
+          <a asp-page="Edit"
+             asp-route-id="@timeEntry.Id"
+             up-layer="new drawer"
+             up-position="right"
+             up-accept-location="/Reports"
+             up-on-accepted="up.reload('.entries')"
+             class="btn btn-primary">
+            <i class="bi bi-pencil"></i>
+          </a>
           <form
             method="post"
             asp-page="Index"
@@ -64,22 +69,6 @@ else
             <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash"></i></button>
             @Html.AntiForgeryToken()
           </form>
-          <button type="button" data-bs-toggle="collapse" class="btn btn-link"
-                  data-bs-target="#description-@timeEntry.Id" aria-expanded="false"
-                  aria-controls="description-@timeEntry.Id">
-            <i class="bi bi-caret-down-fill"></i>
-          </button>
-          <button type="button" class="btn btn-outline-secondary">
-            <i class="bi bi-x"></i>
-          </button>
-        </td>
-      </tr>
-      <tr class="collapse" id="description-@timeEntry.Id">
-        <td colspan="3">
-          <label class="form-label">
-            Description
-            <textarea class="form-control include-for-edit" rows="8" cols="50" disabled>@timeEntry.Description</textarea>
-          </label>
         </td>
       </tr>
       </tbody>
