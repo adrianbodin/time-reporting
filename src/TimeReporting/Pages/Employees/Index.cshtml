@@ -1,0 +1,46 @@
+@page
+@model IndexModel
+
+
+<section class="container">
+  <div class="d-flex justify-content-between">
+    <h1 class="m-0">Employees</h1>
+    <a
+      asp-page="Create"
+      up-layer="new drawer"
+      up-position="right"
+      up-history="false"
+      up-accept-location="/Employees"
+      up-on-accepted="up.reload('.employees')"
+      class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center">
+      <i class="bi bi-plus-lg"></i>
+    </a>
+  </div>
+  <hr>
+  <div class="employees">
+    @if(!Model.Employees.Any())
+    {
+      <p>No employees found.</p>
+    }
+    else
+    {
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Hire Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var employee in Model.Employees)
+        {
+          <tr>
+            <td>@employee.FullName</td>
+            <td>@employee.HireDate</td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    }
+  </div>
+</section>
