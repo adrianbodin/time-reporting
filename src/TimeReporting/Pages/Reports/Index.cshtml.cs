@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 using TimeReporting.Pages.Shared;
 
@@ -29,7 +30,7 @@ public class Index : BasePageModel
 
     public List<Customer> Customers { get; set; }
 
-    public async Task OnGet()
+    public async Task<IActionResult> OnGet()
     {
         ViewData["Title"] = "Report";
         Customers = await _db.Customers.ToListAsync();
@@ -51,6 +52,10 @@ public class Index : BasePageModel
                 t.WorkType.Name
             ))
             .ToListAsync();
+
+        this.SetTitle("Reports");
+
+        return Page();
     }
 
     public async Task<IActionResult> OnPostDeleteEntry(string id)

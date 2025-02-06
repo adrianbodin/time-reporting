@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Employees;
@@ -21,8 +22,9 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        //todo more efficient query
         Employees = await _db.Users.AsNoTracking().ToListAsync();
+
+        this.SetTitle("Employees");
 
         return Page();
     }

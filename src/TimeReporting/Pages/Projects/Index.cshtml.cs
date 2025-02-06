@@ -1,8 +1,10 @@
+using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Projects;
@@ -32,6 +34,8 @@ public class IndexModel : PageModel
         }
 
         Projects = await query.ToListAsync();
+
+        this.SetTitle("Projects");
 
         return Page();
     }

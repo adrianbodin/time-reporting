@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Customers;
@@ -32,6 +33,8 @@ public class IndexModel : PageModel
         }
 
         Customers = await query.ToListAsync();
+
+        this.SetTitle("Customers");
 
         return Page();
     }

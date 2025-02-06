@@ -1,10 +1,13 @@
 ﻿@page
 @model TimeReporting.Pages.Employees.CreateModel
+@{
+  Layout = "_Layout";
+}
 
 <section>
   <h2>Add Employee</h2>
   <hr>
-  <form method="post" up-target="main">
+  <form method="post" up-target="main" up-transition="move-right">
     <div class="form-group mb-3">
       <label asp-for="Employee.FullName" class="control-label"></label>
       <input asp-for="Employee.FullName" class="form-control"/>

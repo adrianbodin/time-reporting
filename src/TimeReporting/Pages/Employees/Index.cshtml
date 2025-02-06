@@ -1,16 +1,16 @@
 @page
 @model IndexModel
-
+@{
+    Layout = "_Layout";
+}
 
 <section class="container">
   <div class="d-flex justify-content-between">
     <h1 class="m-0">Employees</h1>
     <a
-      asp-page="Create"
-      up-layer="new drawer"
-      up-position="right"
-      up-accept-location="/Employees"
-      up-on-accepted="up.reload('.employees')"
+      href="/Employees/Create"
+      up-follow
+      up-transition="move-left"
       class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center">
       <i class="bi bi-plus-lg"></i>
     </a>
