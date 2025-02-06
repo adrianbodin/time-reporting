@@ -10,6 +10,8 @@ public record ProjectDetailsDto(string Id, string Name, string Description, stri
 
 public record TimeEntryDto(string Id, string Employee, double Hours, DateOnly Date, string Description, string WorkType, double HourlyRate);
 
+public record TableData(List<string> Labels, List<int> Data);
+
 public class DetailsModel : PageModel
 {
     private readonly AppDbContext _context;
@@ -19,6 +21,8 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
+    public TableData TableData { get; set; }
+
     public ProjectDetailsDto Project { get; set; }
 
     public async Task<IActionResult> OnGetAsync(string? id)
@@ -27,6 +31,16 @@ public class DetailsModel : PageModel
         {
             return NotFound();
         }
+
+        TableData = new TableData(
+            new List<string>
+            {
+                "Red", "Blue"
+            },
+            new List<int>
+            {
+                2, 5
+            });
 
         var project = await _context.Projects
             .Where(p => p.Id == id)

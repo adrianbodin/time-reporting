@@ -1,4 +1,5 @@
 @page
+@using NuGet.Protocol
 @model TimeReporting.Pages.Projects.DetailsModel
 
 @{
@@ -48,4 +49,6 @@
       </table>
     </div>
   </section>
+  <canvas up-data="@Model.TableData.ToJson()" id="test-chart"></canvas>
 </div>
+
