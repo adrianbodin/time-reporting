@@ -11,6 +11,11 @@
       <span asp-validation-for="Employee.FullName" class="text-danger"></span>
     </div>
     <div class="form-group mb-3">
+      <label asp-for="Employee.Email" class="control-label"></label>
+      <input asp-for="Employee.Email" class="form-control"/>
+      <span asp-validation-for="Employee.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
       <label asp-for="Employee.Password" class="control-label"></label>
       <input asp-for="Employee.Password" class="form-control"/>
       <span asp-validation-for="Employee.Password" class="text-danger"></span>
