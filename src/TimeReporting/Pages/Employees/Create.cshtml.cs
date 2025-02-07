@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TimeReporting.Models;
-using TimeReporting.Pages.Shared;
 
 namespace TimeReporting.Pages.Employees;
 
@@ -16,25 +15,25 @@ public record AddEmployeeDto
 
     [Required]
     [EmailAddress]
-    public string Email {get; set;}
+    public string Email { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
-    public string Password {get; set;}
+    public string Password { get; set; }
 
     [Display(Name = "Confirm Password")]
     [DataType(DataType.Password)]
     [Compare(nameof(Password), ErrorMessage = "Passwords don't match.")]
-    public string ConfirmPassword {get; set;}
+    public string ConfirmPassword { get; set; }
 
     [Required]
     [Phone]
     [Display(Name = "Phone Number")]
-    public string PhoneNumber {get; set;}
+    public string PhoneNumber { get; set; }
 
     [Display(Name = "Hire Date")]
     [DataType(DataType.Date)]
-    public DateOnly HireDate {get; set;}
+    public DateOnly HireDate { get; set; }
 }
 
 [Authorize(Roles = "Admin")]

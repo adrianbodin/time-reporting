@@ -1,4 +1,3 @@
-using DotNet.Testcontainers.Builders;
 using TimeReporting.Integration.Tests.Helpers;
 using TimeReporting.Integration.Tests.Infrastructure;
 
@@ -19,25 +18,25 @@ public class NavigationTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task Admin_Should_Be_Able_To_Navigate_To_Profile_Page()
+    public async Task Admin_Should_Be_Able_To_Navigate_To_Account_Page()
     {
         await Page.AuthenticateAdminAsync(RootUrl);
-        await Page.GotoAsync($"{RootUrl}Profile");
-        Assert.Contains("Profile", Page.Url);
+        await Page.GotoAsync($"{RootUrl}Account/Manage");
+        Assert.Contains("Account/Manage", Page.Url);
     }
 
     [Fact]
-    public async Task Admin_Should_Be_Able_To_Navigate_To_Profile_Page_Through_Nav()
+    public async Task Admin_Should_Be_Able_To_Navigate_To_Account_Page_Through_Nav()
     {
         await Page.AuthenticateAdminAsync(RootUrl);
 
         await Page
             .GetByRole(AriaRole.Navigation)
-            .GetByTestId("ProfilePageLink")
+            .GetByTestId("AccountLink")
             .ClickAsync();
 
         await Page.WaitForUnpoly();
 
-        Assert.Contains("Manage", Page.Url);
+        Assert.Contains("Account/Manage", Page.Url);
     }
 }

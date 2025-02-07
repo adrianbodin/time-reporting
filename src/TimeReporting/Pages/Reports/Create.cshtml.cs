@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Models;
-using TimeReporting.Pages.Shared;
 
 namespace TimeReporting.Pages.Reports;
 
@@ -50,8 +46,14 @@ public class Create : PageModel
     public IList<WorkType> WorkTypes { get; set; }
 
     //todo make this better
-    public async Task OnGet()
+    public async Task OnGet([FromQuery] int? hours, [FromQuery] int? minutes)
     {
+        if (hours.HasValue && minutes.HasValue)
+        {
+            double totalHours = hours.Value + Math.Round((double)minutes.Value / 30) * 0.5;
+            NewEntry.Hours = totalHours;
+        }
+
         ViewData["Title"] = "Add Time Entry";
         NewEntry = new AddTimeEntryDto();
         NewEntry.Date = DateTime.Now;

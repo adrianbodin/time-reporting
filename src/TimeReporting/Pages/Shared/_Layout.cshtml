@@ -1,4 +1,4 @@
-﻿ @using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<Employee> SignInManager
 @inject UserManager<Employee> UserManager
 
@@ -13,9 +13,8 @@
 <header class="flex-md-nowrap d-flex z-3 justify-content-end p-0 d-md-none" data-bs-theme="dark">
   <ul class="navbar-nav flex-row">
     <li class="nav-item text-nowrap">
-      <button class="nav-link px-3 text-dark" type="button" data-bs-toggle="offcanvas"
-              data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
-              aria-expanded="false" aria-label="Toggle navigation">
+      <button class="nav-link px-3 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
+        aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <i class="bi bi-list h1"></i>
       </button>
     </li>
@@ -26,7 +25,7 @@
     <div
       class="sidebar z-3 border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary position-fixed bottom-0 top-0 min-vh-100">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
-           aria-labelledby="sidebarMenuLabel">
+        aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
           <nav class="nav d-flex flex-column justify-content-between">
             @if (SignInManager.IsSignedIn(User))
@@ -38,34 +37,26 @@
                 </div>
                 <ul class="nav flex-column">
                   <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2"
-                       asp-page="/Reports/Index"
-                       up-alias="/Reports/*"
-                       up-target="main">
+                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Reports/Index" up-alias="/Reports/*"
+                      up-target="main">
                       <i class="bi bi-clock text-primary"></i> Time Overview
                     </a>
                   </li>
                   <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2"
-                       asp-page="/Projects/Index"
-                       up-alias="/Projects/*"
-                       up-target="main">
+                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Projects/Index" up-alias="/Projects/*"
+                      up-target="main">
                       <i class="bi bi-kanban text-primary"></i> Projects
                     </a>
                   </li>
                   <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2"
-                       asp-page="/Customers/Index"
-                       up-alias="/Customers/*"
-                       up-target="main">
+                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Customers/Index"
+                      up-alias="/Customers/*" up-target="main">
                       <i class="bi bi-people text-primary"></i> Customers
                     </a>
                   </li>
                   <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2"
-                       asp-page="/Employees/Index"
-                       up-alias="/Employees/*"
-                       up-target="main">
+                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Employees/Index"
+                      up-alias="/Employees/*" up-target="main">
                       <i class="bi bi-people text-primary"></i> Employees
                     </a>
                   </li>
@@ -74,25 +65,20 @@
               <ul class="mt-auto nav flex-column">
                 <hr class="my-3 mx-3">
                 <li class="nav-item fw-bold">
-                  <a class="nav-link d-flex align-items-center gap-2"
-                     asp-page="/Account/Manage/Index"
-                     data-testid="ProfilePageLink"
-                     up-follow up-alias="/Account/*"
-                     title="Manage">
+                  <a class="nav-link d-flex align-items-center gap-2" asp-page="/Account/Manage/Index"
+                    data-testid="AccountLink" up-follow up-alias="/Account/*" title="Manage">
                     <i class="bi bi-person text-primary"></i> Profile
                   </a>
                 </li>
                 <li class="nav-item fw-bold">
-                  <a class="nav-link d-flex align-items-center gap-2"
-                     asp-page="/WorkTypes/Index"
-                     up-alias="/WorkTypes/*"
-                     up-follow title="Manage">
+                  <a class="nav-link d-flex align-items-center gap-2" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*"
+                    up-follow title="Manage">
                     <i class="bi bi-wallet text-primary"></i> Worktypes
                   </a>
                 </li>
                 <li class="nav-item fw-bold">
                   <form id="logoutForm" class="form-inline" asp-page="/Account/Logout"
-                        asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                    asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
                     <button id="logout" type="submit" class="nav-link btn btn-link border-0"><i
                         class="bi bi-door-closed text-primary"></i> Sign out
                     </button>
@@ -104,28 +90,28 @@
         </div>
       </div>
     </div>
-    <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="main">
+    <main role="main" class="col-md-9 ms-sm-auto col-lg-10 pt-4" id="main">
       @RenderBody()
     </main>
   </div>
 </div>
- @{
-   var notificationMessage = TempData["Notification-Message"];
-   var notificationStatus = TempData["Notification-Type"];
- }
- @if (notificationMessage != null && notificationStatus != null)
- {
-   <div id="toast" up-flashes class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
-     <div id="liveToast" class="toast show text-bg-@notificationStatus" role="alert" aria-live="assertive"
-          aria-atomic="true" data-bs-delay="5000">
-       <div class="d-flex">
-         <div class="toast-body">
-           @notificationMessage
-         </div>
-         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                 aria-label="Close"></button>
-       </div>
-     </div>
-   </div>
- }
- @await RenderSectionAsync("Scripts", required: false)
+@{
+  var notificationMessage = TempData["Notification-Message"];
+  var notificationStatus = TempData["Notification-Type"];
+}
+@if (notificationMessage != null && notificationStatus != null)
+{
+  <div id="toast" up-flashes class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+    <div id="liveToast" class="toast show text-bg-@notificationStatus" role="alert" aria-live="assertive"
+      aria-atomic="true" data-bs-delay="5000">
+      <div class="d-flex">
+        <div class="toast-body">
+          @notificationMessage
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+}
+@await RenderSectionAsync("Scripts", required: false)

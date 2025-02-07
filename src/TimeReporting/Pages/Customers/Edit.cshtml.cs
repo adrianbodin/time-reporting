@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Models;
@@ -13,9 +8,9 @@ namespace TimeReporting
 {
     public class EditModel : PageModel
     {
-        private readonly TimeReporting.Data.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public EditModel(TimeReporting.Data.AppDbContext context)
+        public EditModel(AppDbContext context)
         {
             _context = context;
         }

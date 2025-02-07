@@ -1,11 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Models;
-using TimeReporting.Pages.Shared;
 
 namespace TimeReporting.Pages.Projects;
 

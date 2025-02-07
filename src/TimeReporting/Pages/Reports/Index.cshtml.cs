@@ -2,11 +2,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
-using TimeReporting.Pages.Shared;
 
 namespace TimeReporting.Pages.Reports;
 
@@ -14,7 +14,7 @@ namespace TimeReporting.Pages.Reports;
 public record ReadTimeEntryDto(string Id,string Project, double Hours, string Description, DateOnly Date, string WorkType);
 
 [Authorize]
-public class Index : BasePageModel
+public class Index : PageModel
 {
     private readonly AppDbContext _db;
 

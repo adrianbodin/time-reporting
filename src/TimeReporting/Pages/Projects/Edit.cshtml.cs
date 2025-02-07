@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,9 +9,9 @@ namespace TimeReporting.Pages.Projects
 {
     public class EditModel : PageModel
     {
-        private readonly TimeReporting.Data.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public EditModel(TimeReporting.Data.AppDbContext context)
+        public EditModel(AppDbContext context)
         {
             _context = context;
         }
@@ -30,13 +26,13 @@ namespace TimeReporting.Pages.Projects
                 return NotFound();
             }
 
-            var project =  await _context.Projects.FirstOrDefaultAsync(m => m.Id == id);
+            var project = await _context.Projects.FirstOrDefaultAsync(m => m.Id == id);
             if (project == null)
             {
                 return NotFound();
             }
             Project = project;
-           ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
             return Page();
         }
 

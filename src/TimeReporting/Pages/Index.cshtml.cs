@@ -23,7 +23,7 @@ public class IndexModel : PageModel
         {
             Response.Redirect("/Account/Register");
         }
-        else if(User.Identity.IsAuthenticated)
+        else if (User.Identity.IsAuthenticated)
         {
             Response.Redirect("/Reports");
         }
@@ -57,7 +57,7 @@ public class IndexModel : PageModel
         return ViewComponent("Timer");
     }
 
-    public async Task<IActionResult> OnGetStopTimer()
+    public async Task<IActionResult> OnGetStopTimer([FromQuery] int hours, [FromQuery] int minutes)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 

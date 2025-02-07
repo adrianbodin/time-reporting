@@ -46,7 +46,7 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         }
     }
 
-    public IntegrationTestWebAppFactory() {}
+    public IntegrationTestWebAppFactory() { }
 
     protected override IHost CreateHost(IHostBuilder builder)
     {
@@ -135,6 +135,6 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
     {
         await Browser.DisposeAsync();
         await _dbConnection.CloseAsync();
-        //await _container.DisposeAsync();
+        await _container.DisposeAsync();
     }
 }

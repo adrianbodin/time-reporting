@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Models;
-using TimeReporting.Pages.Shared;
 
 namespace TimeReporting.Pages.Reports;
 

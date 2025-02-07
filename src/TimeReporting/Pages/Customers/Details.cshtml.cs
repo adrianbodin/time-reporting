@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +8,9 @@ namespace TimeReporting
 {
     public class DetailsModel : PageModel
     {
-        private readonly TimeReporting.Data.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public DetailsModel(TimeReporting.Data.AppDbContext context)
+        public DetailsModel(AppDbContext context)
         {
             _context = context;
         }

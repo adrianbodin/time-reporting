@@ -47,3 +47,73 @@ body {
   bottom: 0;
   width: 1px;
 }
+
+.clock-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.clock {
+  border-radius: 50%;
+  border: 2px solid #fff;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.clock:after {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  top: 8px;
+  left: 48%;
+  height: 25px;
+  width: 2px;
+  border-radius: 2px;
+  transform-origin: 50% 97%;
+  animation: grdAiguille 2s linear infinite;
+}
+
+.clock:before {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  top: 12px;
+  left: 48%;
+  height: 20px;
+  width: 2px;
+  border-radius: 2px;
+  transform-origin: 50% 94%;
+  animation: ptAiguille 12s linear infinite;
+}
+
+@-webkit-keyframes grdAiguille{
+    0%{-webkit-transform:rotate(0deg);}
+    100%{-webkit-transform:rotate(360deg);}
+}
+
+@keyframes grdAiguille{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+@-webkit-keyframes ptAiguille{
+    0%{-webkit-transform:rotate(0deg);}
+    100%{-webkit-transform:rotate(360deg);}
+}
+
+@keyframes ptAiguille{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+/* Timer specific styles */
+#timer .clock-wrapper {
+  flex-shrink: 0;
+}
+
+#timer .alert {
+  border-radius: 1rem;
+}

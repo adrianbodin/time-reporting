@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
-using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Projects;
 

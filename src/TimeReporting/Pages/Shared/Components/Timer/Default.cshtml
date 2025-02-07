@@ -3,29 +3,55 @@
 @switch (Model.Status)
 {
   case TimerStatus.NotStarted:
-    <div id="timer" class="w-100 p-3">
-      <a class="btn btn-success w-100"
-         up-target="#timer"
-         asp-page="/Index"
-         asp-page-handler="StartTimer">
-        Start timer
+    <div id="timer" class="w-100 p-3 text-center">
+      <a class="btn btn-success btn-lg w-75 shadow-sm" up-target="#timer" asp-page="/Index" asp-page-handler="StartTimer">
+        <i class="bi bi-play-circle me-2"></i> Start Timer
       </a>
     </div>
     break;
 
   case TimerStatus.Running:
-    <div id="timer" class="w-100 p-3" up-poll up-interval="2000">
-      <span>Timer is running: <strong>@Model.TimerTime.Minutes</strong> minutes <strong>@Model.TimerTime.Seconds</strong> seconds</span>
-      <a asp-page="/Index"
-         asp-page-handler="StopTimer"
-         up-target="#timer"
-        ><button class="btn btn-danger">Stop</button></a>
+    <div id="timer" class="w-100 px-2" up-poll up-interval="60000">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+          <h5 class="mb-1">Timer Running</h5>
+          <p class="mb-0 text-muted">
+            @if (Model.TimerTime.Hours > 0)
+            {
+              <strong>@Model.TimerTime.Hours</strong> @(Model.TimerTime.Hours == 1 ? "hour" : "hours")
+            }
+
+            <strong>@Model.TimerTime.Minutes</strong> @(Model.TimerTime.Minutes == 1 ? "minute" : "minutes")
+          </p>
+        </div>
+        <div class="clock-wrapper ms-3">
+          <div class="clock"></div>
+        </div>
+      </div>
+      <a asp-page="/Index" asp-page-handler="StopTimer" asp-route-minutes="@Model.TimerTime.Minutes" asp-route-hours="@Model.TimerTime.Hours" up-target="#timer" class="btn btn-danger w-100">
+        <i class="bi bi-stop-circle me-2"></i> Stop Timer
+      </a>
     </div>
     break;
 
   case TimerStatus.Stopped:
-    <div id="timer" class="w-100 p-3">
-      <span>Timer is stopped</span>
+    <div id="timer" class="w-100 px-2">
+      <div class="mb-3 text-center">
+        @if (Model.TimerTime.Hours > 0)
+        {
+          <span><strong>@Model.TimerTime.Hours</strong> @(Model.TimerTime.Hours == 1 ? "hour" : "hours")</span>
+        }
+        <span><strong>@Model.TimerTime.Minutes</strong> @(Model.TimerTime.Minutes == 1 ? "minute" : "minutes")</span>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="/Reports/Create?hours=@Model.TimerTime.Hours&minutes=@Model.TimerTime.Minutes"
+          class="btn btn-success flex-grow-1" up-layer="new modal" up-target="main" up-history="false">
+          <i class="bi bi-plus-circle me-2"></i>
+        </a>
+        <a asp-page="/Index" asp-page-handler="DiscardTimer" up-target="#timer" class="btn btn-outline-danger flex-grow-1">
+          <i class="bi bi-trash me-2"></i>
+        </a>
+      </div>
     </div>
     break;
 }
