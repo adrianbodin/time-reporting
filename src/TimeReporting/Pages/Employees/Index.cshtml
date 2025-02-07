@@ -28,6 +28,7 @@
         <tr>
           <th>Full Name</th>
           <th>Hire Date</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +37,10 @@
           <tr>
             <td>@employee.FullName</td>
             <td>@employee.HireDate</td>
+            <td>
+              <a asp-page="./Edit" asp-route-id="@employee.Id">Edit</a> |
+              <a asp-page="./Details" asp-route-id="@employee.Id">Details</a> |
+            </td>
           </tr>
         }
         </tbody>

@@ -30,6 +30,7 @@
         <tr>
           <th>Name</th>
           <th>Hourly rate</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,14 @@
           <tr>
             <td>@workType.Name</td>
             <td>@workType.HourlyRate</td>
+            <td>
+              <a class="btn btn-primary"
+                 asp-page="./Edit"
+                 up-layer="new drawer"
+                 up-position="right"
+                 asp-route-id="@workType.Id">Edit
+              </a>
+            </td>
           </tr>
         }
         </tbody>

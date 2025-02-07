@@ -48,15 +48,16 @@ public class Create : PageModel
     //todo make this better
     public async Task OnGet([FromQuery] int? hours, [FromQuery] int? minutes)
     {
+        ViewData["Title"] = "Add Time Entry";
+        NewEntry = new AddTimeEntryDto();
+        NewEntry.Date = DateTime.Now;
+
         if (hours.HasValue && minutes.HasValue)
         {
             double totalHours = hours.Value + Math.Round((double)minutes.Value / 30) * 0.5;
             NewEntry.Hours = totalHours;
         }
 
-        ViewData["Title"] = "Add Time Entry";
-        NewEntry = new AddTimeEntryDto();
-        NewEntry.Date = DateTime.Now;
         Projects = await _db.Projects.AsNoTracking().ToListAsync();
         WorkTypes = await _db.WorkTypes.AsNoTracking().ToListAsync();
     }

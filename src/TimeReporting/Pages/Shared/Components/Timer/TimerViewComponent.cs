@@ -29,8 +29,15 @@ public class TimerViewComponent : ViewComponent
 
     public TimeSpan TimerTime { get; set; }
 
-    public async Task<IViewComponentResult> InvokeAsync()
+    public async Task<IViewComponentResult> InvokeAsync(TimeSpan? duration)
     {
+        TimerTime = TimeSpan.Zero;
+
+        if (duration.HasValue)
+        {
+            TimerTime = duration.Value;
+        }
+
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var timer = await _db.EntryTimers.FirstOrDefaultAsync(et => et.EmployeeId == userId);
 
@@ -44,7 +51,6 @@ public class TimerViewComponent : ViewComponent
             Status = TimerStatus.Running;
 
             TimerTime = DateTime.UtcNow - timer.StartTime;
-
 
             return View(this);
         }

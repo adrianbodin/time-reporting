@@ -66,8 +66,11 @@ public class IndexModel : PageModel
         if (timer is not null)
         {
             timer.EndTime = DateTime.UtcNow;
+            var duration = timer.EndTime - timer.StartTime;
             await _dbContext.SaveChangesAsync();
+            return ViewComponent("Timer", new { duration });
         }
+
         return ViewComponent("Timer");
     }
 }
