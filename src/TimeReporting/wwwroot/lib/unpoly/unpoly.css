@@ -61,8 +61,13 @@ up-drawer-box, up-modal-box {
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
 }
 
+up-modal-box{
+  border-radius: 10px;
+}
+
 up-popup {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
 up-popup:focus, up-cover-box:focus, up-drawer-box:focus, up-modal-box:focus, up-cover:focus, up-drawer:focus, up-modal:focus, up-popup:focus-visible, up-cover-box:focus-visible, up-drawer-box:focus-visible, up-modal-box:focus-visible, up-cover:focus-visible, up-drawer:focus-visible, up-modal:focus-visible {

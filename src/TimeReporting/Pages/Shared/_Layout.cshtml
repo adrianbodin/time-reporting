@@ -22,7 +22,6 @@
 </header>
 <div class="container-fluid">
   <div class="row">
-    <!-- Sidebar -->
     <div class="sidebar col-md-3 col-lg-2 p-0 bg-body-tertiary position-fixed" style="height: 100vh; overflow-y: auto;">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary h-100" tabindex="-1" id="sidebarMenu"
         aria-labelledby="sidebarMenuLabel">
@@ -35,9 +34,8 @@
         </div>
       </div>
     </div>
-    <!-- Add offset div for main content -->
     <div class="col-md-3 col-lg-2"></div>
-    <main role="main" class="col-md-9 col-lg-10" id="main">
+    <main role="main" class="col" id="main">
       @RenderBody()
     </main>
   </div>

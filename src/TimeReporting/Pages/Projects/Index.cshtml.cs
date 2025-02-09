@@ -25,7 +25,8 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnGetAsync()
     {
-        IQueryable<Project> query = _context.Projects.Include(p => p.Customer);
+        //todo fix better
+        IQueryable<Project> query = _context.Projects.Include(p => p.Customer).Include(p => p.TimeEntries);
 
         if (!string.IsNullOrEmpty(SearchTerm))
         {

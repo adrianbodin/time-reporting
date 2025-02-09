@@ -4,8 +4,7 @@
   Layout = "_Layout";
 }
 
-<section class="container-fluid px-4 py-3">
-  <!-- Header Section -->
+<section class="container mt-3">
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <form method="get" up-target=".entries" up-history="true" up-autosubmit>
@@ -23,8 +22,9 @@
     </div>
     <div class="col-12 col-sm-6 col-md-8 col-lg-9 d-flex justify-content-end">
       <a href="@Url.Page("Create")"
-         up-layer="new drawer"
+         up-layer="new modal"
          up-accept-location="/Reports/?*"
+         up-history="false"
          up-on-accepted="up.reload('.entries')"
          up-position="right"
          class="btn btn-primary">
@@ -48,7 +48,7 @@
     {
       <div class="table-responsive">
         <table class="table table-hover align-middle">
-          <thead class="table-light">
+          <thead>
             <tr>
               <th>Project</th>
               <th>Hours</th>
