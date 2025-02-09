@@ -32,8 +32,4 @@
       <ProjectReference Include="..\TimeReporting\TimeReporting.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages/Report/" />
-    </ItemGroup>
-
 </Project>

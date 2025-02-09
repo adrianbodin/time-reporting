@@ -1,3 +1,4 @@
+using Renci.SshNet;
 using TimeReporting.Integration.Tests.Helpers;
 using TimeReporting.Integration.Tests.Infrastructure;
 
@@ -38,5 +39,20 @@ public class NavigationTests : IntegrationTestBase
         await Page.WaitForUnpoly();
 
         Assert.Contains("Account/Manage", Page.Url);
+    }
+
+    [Fact]
+    public async Task Admin_Should_Be_Able_To_Navigate_To_Projects_Page_Through_Nav()
+    {
+        await Page.AuthenticateAdminAsync(RootUrl);
+
+        await Page
+            .GetByRole(AriaRole.Navigation)
+            .GetByTestId("ProjectsLink")
+            .ClickAsync();
+
+        await Page.WaitForUnpoly();
+
+        Assert.Contains("Projects", Page.Url);
     }
 }
