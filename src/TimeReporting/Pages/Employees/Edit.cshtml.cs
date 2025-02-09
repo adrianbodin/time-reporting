@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TimeReporting.Data;
@@ -6,6 +7,7 @@ using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Employees;
 
+[Authorize(Roles = "Admin")]
 public class Edit : PageModel
 {
     private readonly AppDbContext _db;

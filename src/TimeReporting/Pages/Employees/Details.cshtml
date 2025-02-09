@@ -1,0 +1,90 @@
+@page
+@model TimeReporting.Pages.Employees.DetailsModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <!-- Employee Information Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Employee Information</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Name</dt>
+                        <dd class="col-sm-8">@Model.Employee.FullName</dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">
+                            <a href="mailto:@Model.Employee.Email">@Model.Employee.Email</a>
+                        </dd>
+
+                        <dt class="col-sm-4">Phone</dt>
+                        <dd class="col-sm-8">
+                            <a href="tel:@Model.Employee.PhoneNumber">@Model.Employee.PhoneNumber</a>
+                        </dd>
+
+                        <dt class="col-sm-4">Hire Date</dt>
+                        <dd class="col-sm-8">@(Model.Employee.HireDate?.ToString("MMM dd, yyyy") ?? "Not set")</dd>
+
+                        <dt class="col-sm-4">Job Title</dt>
+                        <dd class="col-sm-8">@Model.Employee.JobTitle</dd>
+                    </dl>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="d-flex gap-2">
+                        <a asp-page="./Edit" 
+                           asp-route-id="@Model.Employee.Id"
+                           class="btn btn-primary">
+                            <i class="bi bi-pencil me-2"></i>Edit
+                        </a>
+                        <a asp-page="./Index" 
+                           class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Time Entries Card -->
+        <div class="col-md-8 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Recent Time Entries</h5>
+                    @if (!Model.Employee.RecentTimeEntries.Any())
+                    {
+                        <p class="text-muted">No recent time entries found.</p>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Project</th>
+                                        <th>Work Type</th>
+                                        <th>Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var entry in Model.Employee.RecentTimeEntries)
+                                    {
+                                        <tr>
+                                            <td>@entry.Date.ToString("MMM dd, yyyy")</td>
+                                            <td>@entry.ProjectName</td>
+                                            <td>@entry.WorkType</td>
+                                            <td>@entry.Hours</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

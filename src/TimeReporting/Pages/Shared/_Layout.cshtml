@@ -23,7 +23,7 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <div class="sidebar col-md-3 col-lg-2 p-0 bg-body-tertiary min-vh-100">
+    <div class="sidebar col-md-3 col-lg-2 p-0 bg-body-tertiary position-fixed" style="height: 100vh; overflow-y: auto;">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary h-100" tabindex="-1" id="sidebarMenu"
         aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
@@ -31,69 +31,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-          <nav class="nav d-flex flex-column justify-content-between h-100">
-            @if (SignInManager.IsSignedIn(User))
-            {
-              <div>
-                <div class="d-flex flex-column align-items-center">
-                  @await Component.InvokeAsync("Timer")
-                  <hr class="mb-3 mx-3 w-100">
-                </div>
-                <ul class="nav flex-column">
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Reports/Index" up-alias="/Reports/*"
-                      up-target="main">
-                      <i class="bi bi-clock text-primary"></i> Time Overview
-                    </a>
-                  </li>
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Projects/Index" up-alias="/Projects/*"
-                      up-target="main">
-                      <i class="bi bi-kanban text-primary"></i> Projects
-                    </a>
-                  </li>
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Customers/Index"
-                      up-alias="/Customers/*" up-target="main">
-                      <i class="bi bi-people text-primary"></i> Customers
-                    </a>
-                  </li>
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Employees/Index"
-                      up-alias="/Employees/*" up-target="main">
-                      <i class="bi bi-people text-primary"></i> Employees
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <ul class="nav flex-column mb-auto">
-                <hr class="my-3 mx-3">
-                <li class="nav-item fw-bold">
-                  <a class="nav-link d-flex align-items-center gap-2" asp-page="/Account/Manage/Index"
-                    data-testid="AccountLink" up-follow up-alias="/Account/*" title="Manage">
-                    <i class="bi bi-person text-primary"></i> Profile
-                  </a>
-                </li>
-                <li class="nav-item fw-bold">
-                  <a class="nav-link d-flex align-items-center gap-2" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*"
-                    up-follow title="Manage">
-                    <i class="bi bi-wallet text-primary"></i> Worktypes
-                  </a>
-                </li>
-                <li class="nav-item fw-bold">
-                  <form id="logoutForm" class="form-inline" asp-page="/Account/Logout"
-                    asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                    <button id="logout" type="submit" class="nav-link btn btn-link border-0"><i
-                        class="bi bi-door-closed text-primary"></i> Sign out
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            }
-          </nav>
+          @await Html.PartialAsync("_LoginPartial")
         </div>
       </div>
     </div>
+    <!-- Add offset div for main content -->
+    <div class="col-md-3 col-lg-2"></div>
     <main role="main" class="col-md-9 col-lg-10" id="main">
       @RenderBody()
     </main>

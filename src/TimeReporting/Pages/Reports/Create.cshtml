@@ -8,49 +8,54 @@
   <h1>New time entry</h1>
   <hr>
   <form method="post" up-target="main" class="add-entry-form">
-    <label asp-for="NewEntry.ProjectId" class="form-label">Project</label>
     <div class="mb-3 input-group">
-      <select asp-for="NewEntry.ProjectId" class="form-select project-selection">
-        <option value="">Select a Project</option>
-        @foreach (var project in Model.Projects)
-        {
-          <option value="@project.Id">@project.Name</option>
-        }
-      </select>
-      <a
-        class="btn btn-outline-secondary rounded-end"
-        href="/Projects/Create"
-        up-layer="new modal"
-        up-history="auto"
-        up-accept-location="/Projects"
-        up-on-accepted="up.reload('.project-selection')">
-        New
-      </a>
-      <span class="text-danger" asp-validation-for="NewEntry.ProjectId"></span>
+      <label asp-for="NewEntry.ProjectId" class="form-label">Project
+        <select asp-for="NewEntry.ProjectId" class="form-select project-selection">
+          <option value="">Select a Project</option>
+          @foreach (var project in Model.Projects)
+          {
+            <option value="@project.Id">@project.Name</option>
+          }
+        </select>
+        <a
+          class="btn btn-outline-secondary rounded-end"
+          href="/Projects/Create"
+          up-layer="new modal"
+          up-history="auto"
+          up-accept-location="/Projects"
+          up-on-accepted="up.reload('.project-selection')">
+          New
+        </a>
+        <span class="text-danger" asp-validation-for="NewEntry.ProjectId"></span>
+      </label>
     </div>
     <div class="mb-3">
-      <label asp-for="NewEntry.Hours" class="form-label">Hours</label>
-      <input type="number" min="0" step="0.5" asp-for="NewEntry.Hours" class="form-control"/>
+      <label asp-for="NewEntry.Hours" class="form-label">Hours
+        <input type="number" min="0" step="0.5" asp-for="NewEntry.Hours" class="form-control"/>
+      </label>
       <span class="text-danger" asp-validation-for="NewEntry.Hours"></span>
     </div>
     <div class="mb-3">
-      <label asp-for="NewEntry.WorkTypeId" class="form-label">Work type</label>
-      <select asp-for="NewEntry.WorkTypeId" class="form-select work-type-selection">
-        <option value="">Select a work type</option>
-        @foreach (var workType in Model.WorkTypes)
-        {
-          <option value="@workType.Id">@workType.Name</option>
-        }
-      </select>
+      <label asp-for="NewEntry.WorkTypeId" class="form-label">Work type
+        <select asp-for="NewEntry.WorkTypeId" class="form-select work-type-selection">
+          <option value="">Select a work type</option>
+          @foreach (var workType in Model.WorkTypes)
+          {
+            <option value="@workType.Id">@workType.Name</option>
+          }
+        </select>
+      </label>
     </div>
     <div class="mb-3">
-      <label asp-for="NewEntry.Description" class="form-label">Description</label>
-      <textarea asp-for="NewEntry.Description" class="form-control"></textarea>
+      <label asp-for="NewEntry.Description" class="form-label">Description
+        <textarea asp-for="NewEntry.Description" class="form-control"></textarea>
+      </label>
       <span class="text-danger" asp-validation-for="NewEntry.Description"></span>
     </div>
     <div class="mb-3">
-      <label asp-for="NewEntry.Date" class="form-label">Date</label>
-      <input asp-for="NewEntry.Date" class="form-control"/>
+      <label asp-for="NewEntry.Date" class="form-label">Date
+        <input asp-for="NewEntry.Date" class="form-control"/>
+      </label>
       <span class="text-danger" asp-validation-for="NewEntry.Date"></span>
     </div>
     <button type="submit" class="btn btn-success">Save</button>
