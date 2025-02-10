@@ -3,23 +3,26 @@
 @switch (Model.Status)
 {
   case TimerStatus.NotStarted:
-    <div id="timer" class="w-100 p-4">
+    <div id="timer">
       <div class="text-center">
         <div class="mb-3">
-          <i class="bi bi-stopwatch display-4 text-muted"></i>
+          <i class="bi bi-stopwatch display-5 text-muted"></i>
         </div>
-        <a class="btn btn-success btn-lg px-4 rounded-pill shadow-sm hover-lift" 
-           up-target="#timer" 
-           asp-page="/Index" 
+        <a class="btn btn-success d-flex w-100 rounded-pill"
+           up-target="#timer"
+           asp-page="/Index"
            asp-page-handler="StartTimer">
-          <i class="bi bi-play-circle me-2"></i> Start Timer
+          <i class="bi bi-play-circle me-2"></i>
+          <span class="timer-text">
+            Start Timer
+          </span>
         </a>
       </div>
     </div>
     break;
 
   case TimerStatus.Running:
-    <div id="timer" class="w-100 p-3" up-poll up-interval="60000">
+    <div id="timer" up-poll up-interval="60000">
       <div class="card border-0 bg-body-tertiary">
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between">
@@ -37,18 +40,18 @@
         </div>
       </div>
       <div class="mt-3">
-        <a asp-page="/Index" 
-           asp-page-handler="StopTimer" 
-           up-target="#timer" 
+        <a asp-page="/Index"
+           asp-page-handler="StopTimer"
+           up-target="#timer"
            class="btn btn-danger w-100 rounded-pill">
-          <i class="bi bi-stop-circle me-2"></i>
+          <i class="bi bi-stop-circle"></i>
         </a>
       </div>
     </div>
     break;
 
   case TimerStatus.Stopped:
-    <div id="timer" class="w-100 p-3">
+    <div id="timer">
       <div class="card border-0 bg-body-tertiary mb-3">
         <div class="card-body text-center">
           <div class="fs-5 py-3">
@@ -70,10 +73,10 @@
            up-history="false">
           <i class="bi bi-plus-circle"></i>
         </a>
-        <a asp-page="/Index" 
-           asp-page-handler="DiscardTimer" 
-           up-target="#timer" 
-           up-confirm="Are you sure you want to discard this timer?" 
+        <a asp-page="/Index"
+           asp-page-handler="DiscardTimer"
+           up-target="#timer"
+           up-confirm="Are you sure you want to discard this timer?"
            class="btn btn-outline-danger flex-grow-1 rounded-pill">
           <i class="bi bi-trash"></i>
         </a>

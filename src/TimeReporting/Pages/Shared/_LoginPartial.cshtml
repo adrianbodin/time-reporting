@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject SignInManager<Employee> SignInManager
 
-<nav class="d-flex flex-column min-vh-100">
+<nav class="d-flex flex-column min-vh-100 sidebar-nav">
   @if (SignInManager.IsSignedIn(User))
   {
     <div class="d-flex flex-column flex-grow-1">
@@ -14,22 +14,25 @@
         </div>
         <ul class="nav flex-column">
           <li class="nav-item fw-bold">
-            <a class="nav-link d-flex align-items-center gap-2" asp-page="/Reports/Index" up-alias="/Reports/*"
+            <a class="nav-link d-flex align-items-center" asp-page="/Reports/Index" up-alias="/Reports/*"
                up-target="main">
-              <i class="bi bi-clock text-primary"></i> Time Overview
+              <i class="bi bi-clock text-primary"></i>
+              <span class="menu-text ms-2">Time Overview</span>
             </a>
           </li>
           <li class="nav-item fw-bold">
-            <a class="nav-link d-flex align-items-center gap-2" data-testid="ProjectsLink" asp-page="/Projects/Index"
+            <a class="nav-link d-flex align-items-center" data-testid="ProjectsLink" asp-page="/Projects/Index"
                up-alias="/Projects/*"
                up-target="main">
-              <i class="bi bi-kanban text-primary"></i> Projects
+              <i class="bi bi-kanban text-primary"></i>
+              <span class="menu-text ms-2">Projects</span>
             </a>
           </li>
           <li class="nav-item fw-bold">
-            <a class="nav-link d-flex align-items-center gap-2" asp-page="/Customers/Index"
+            <a class="nav-link d-flex align-items-center" asp-page="/Customers/Index"
                up-alias="/Customers/*" up-target="main">
-              <i class="bi bi-people text-primary"></i> Customers
+              <i class="bi bi-people text-primary"></i>
+              <span class="menu-text ms-2">Customers</span>
             </a>
           </li>
         </ul>
@@ -42,29 +45,33 @@
           @if (User.IsInRole("Admin"))
           {
             <li class="nav-item fw-bold">
-              <a class="nav-link d-flex align-items-center gap-2" data-testid="EmployeesLink" asp-page="/Employees/Index"
+              <a class="nav-link d-flex align-items-center" data-testid="EmployeesLink" asp-page="/Employees/Index"
                  up-alias="/Employees/*" up-target="main">
-                <i class="bi bi-people text-primary"></i> Employees
+                <i class="bi bi-people text-primary"></i>
+                <span class="menu-text ms-2">Employees</span>
               </a>
             </li>
           }
           <li class="nav-item fw-bold">
-            <a class="nav-link d-flex align-items-center gap-2" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*"
+            <a class="nav-link d-flex align-items-center" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*"
                up-follow title="Manage">
-              <i class="bi bi-wallet text-primary"></i> Work types
+              <i class="bi bi-wallet text-primary"></i>
+              <span class="menu-text ms-2">Work types</span>
             </a>
           </li>
           <li class="nav-item fw-bold">
-            <a class="nav-link d-flex align-items-center gap-2" asp-page="/Account/Manage/Index"
+            <a class="nav-link d-flex align-items-center" asp-page="/Account/Manage/Index"
                data-testid="AccountLink" up-follow up-alias="/Account/*" title="Manage">
-              <i class="bi bi-person text-primary"></i> Account
+              <i class="bi bi-person text-primary"></i>
+              <span class="menu-text ms-2">Account</span>
             </a>
           </li>
           <li class="nav-item fw-bold">
             <form id="logoutForm" class="form-inline" asp-page="/Account/Logout"
                   asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-              <button id="logout" type="submit" class="nav-link btn btn-link border-0">
-                <i class="bi bi-door-closed text-primary"></i> Sign out
+              <button id="logout" type="submit" class="nav-link btn btn-link border-0 d-flex align-items-center w-100">
+                <i class="bi bi-door-closed text-primary"></i>
+                <span class="menu-text ms-2">Sign out</span>
               </button>
             </form>
           </li>
