@@ -2,66 +2,74 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject SignInManager<Employee> SignInManager
 
- <nav class="nav d-flex flex-column justify-content-between h-100">
-            @if (SignInManager.IsSignedIn(User))
-            {
-              <div>
-                <div class="d-flex flex-column align-items-center">
-                  @await Component.InvokeAsync("Timer")
-                  <hr class="mb-3 mx-3 w-100">
-                </div>
-                <ul class="nav flex-column">
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Reports/Index" up-alias="/Reports/*"
-                      up-target="main">
-                      <i class="bi bi-clock text-primary"></i> Time Overview
-                    </a>
-                  </li>
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" data-testid="ProjectsLink" asp-page="/Projects/Index" up-alias="/Projects/*"
-                      up-target="main">
-                      <i class="bi bi-kanban text-primary"></i> Projects
-                    </a>
-                  </li>
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" asp-page="/Customers/Index"
-                      up-alias="/Customers/*" up-target="main">
-                      <i class="bi bi-people text-primary"></i> Customers
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <ul class="nav flex-column mb-auto">
-                <hr class="my-3 mx-3">
-                <li class="nav-item fw-bold">
-                  <a class="nav-link d-flex align-items-center gap-2" asp-page="/Account/Manage/Index"
-                     data-testid="AccountLink" up-follow up-alias="/Account/*" title="Manage">
-                    <i class="bi bi-person text-primary"></i> Profile
-                  </a>
-                </li>
-                @if (User.IsInRole("Admin"))
-                {
-                  <li class="nav-item fw-bold">
-                    <a class="nav-link d-flex align-items-center gap-2" data-testid="EmployeesLink" asp-page="/Employees/Index"
-                       up-alias="/Employees/*" up-target="main">
-                      <i class="bi bi-people text-primary"></i> Employees
-                    </a>
-                  </li>
-                }
-                <li class="nav-item fw-bold">
-                  <a class="nav-link d-flex align-items-center gap-2" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*"
-                    up-follow title="Manage">
-                    <i class="bi bi-wallet text-primary"></i> Worktypes
-                  </a>
-                </li>
-                <li class="nav-item fw-bold">
-                  <form id="logoutForm" class="form-inline" asp-page="/Account/Logout"
-                    asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                    <button id="logout" type="submit" class="nav-link btn btn-link border-0"><i
-                        class="bi bi-door-closed text-primary"></i> Sign out
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            }
-          </nav>
+<nav class="d-flex flex-column min-vh-100">
+  @if (SignInManager.IsSignedIn(User))
+  {
+    <div class="d-flex flex-column flex-grow-1">
+      <!-- Top section -->
+      <div>
+        <div class="d-flex flex-column align-items-center">
+          @await Component.InvokeAsync("Timer")
+          <hr class="mb-3 mx-3 w-100">
+        </div>
+        <ul class="nav flex-column">
+          <li class="nav-item fw-bold">
+            <a class="nav-link d-flex align-items-center gap-2" asp-page="/Reports/Index" up-alias="/Reports/*"
+               up-target="main">
+              <i class="bi bi-clock text-primary"></i> Time Overview
+            </a>
+          </li>
+          <li class="nav-item fw-bold">
+            <a class="nav-link d-flex align-items-center gap-2" data-testid="ProjectsLink" asp-page="/Projects/Index"
+               up-alias="/Projects/*"
+               up-target="main">
+              <i class="bi bi-kanban text-primary"></i> Projects
+            </a>
+          </li>
+          <li class="nav-item fw-bold">
+            <a class="nav-link d-flex align-items-center gap-2" asp-page="/Customers/Index"
+               up-alias="/Customers/*" up-target="main">
+              <i class="bi bi-people text-primary"></i> Customers
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bottom section -->
+      <div class="mt-auto mb-4">
+        <hr class="my-3 mx-3">
+        <ul class="nav flex-column">
+          @if (User.IsInRole("Admin"))
+          {
+            <li class="nav-item fw-bold">
+              <a class="nav-link d-flex align-items-center gap-2" data-testid="EmployeesLink" asp-page="/Employees/Index"
+                 up-alias="/Employees/*" up-target="main">
+                <i class="bi bi-people text-primary"></i> Employees
+              </a>
+            </li>
+          }
+          <li class="nav-item fw-bold">
+            <a class="nav-link d-flex align-items-center gap-2" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*"
+               up-follow title="Manage">
+              <i class="bi bi-wallet text-primary"></i> Work types
+            </a>
+          </li>
+          <li class="nav-item fw-bold">
+            <a class="nav-link d-flex align-items-center gap-2" asp-page="/Account/Manage/Index"
+               data-testid="AccountLink" up-follow up-alias="/Account/*" title="Manage">
+              <i class="bi bi-person text-primary"></i> Account
+            </a>
+          </li>
+          <li class="nav-item fw-bold">
+            <form id="logoutForm" class="form-inline" asp-page="/Account/Logout"
+                  asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+              <button id="logout" type="submit" class="nav-link btn btn-link border-0">
+                <i class="bi bi-door-closed text-primary"></i> Sign out
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  }
+</nav>

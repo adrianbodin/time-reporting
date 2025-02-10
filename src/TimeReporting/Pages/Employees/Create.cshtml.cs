@@ -10,7 +10,7 @@ namespace TimeReporting.Pages.Employees;
 public record AddEmployeeDto
 {
     [Required]
-    [Display(Name = "First Name")]
+    [Display(Name = "Full Name")]
     public string FullName { get; set; }
 
     [Required]
@@ -30,6 +30,10 @@ public record AddEmployeeDto
     [Phone]
     [Display(Name = "Phone Number")]
     public string PhoneNumber { get; set; }
+
+    [Required]
+    [Display(Name = "Job Title")]
+    public string JobTitle { get; set; }
 
     [Display(Name = "Hire Date")]
     [DataType(DataType.Date)]
@@ -70,6 +74,7 @@ public class CreateModel : PageModel
             user.Email = Employee.Email;
             user.PhoneNumber = Employee.PhoneNumber;
             user.HireDate = Employee.HireDate;
+            user.JobTitle = Employee.JobTitle;
             user.UserName = Employee.Email;
             user.EmailConfirmed = true;
 

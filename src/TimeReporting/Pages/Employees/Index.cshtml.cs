@@ -8,6 +8,8 @@ using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Employees;
 
+public record EmployeeDto(string Id, string FullName, string JobTitle, DateTime HireDate);
+
 [Authorize(Roles = "Admin")]
 public class IndexModel : PageModel
 {
@@ -18,11 +20,15 @@ public class IndexModel : PageModel
         _db = db;
     }
 
-    public IList<Employee>? Employees { get; set; }
+    public IList<EmployeeDto>? Employees { get; set; }
 
     public async Task<IActionResult> OnGet()
     {
-        Employees = await _db.Users.AsNoTracking().ToListAsync();
+        Employees = await _db.Users
+            .AsNoTracking()
+            .Select(e => new EmployeeDto(e.Id, e.FullName, e.JobTitle, DateTime.Parse(e.HireDate.ToString())))
+            .ToListAsync();
+
 
         this.SetTitle("Employees");
 

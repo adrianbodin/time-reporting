@@ -10,7 +10,6 @@ public class AppDbContext : IdentityDbContext<Employee>
     public DbSet<TimeEntry> TimeEntries { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<WorkType> WorkTypes { get; set; }
-    public DbSet<JobTitle> JobTitles { get; set; }
     public DbSet<EntryTimer> EntryTimers { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -73,19 +72,6 @@ public class AppDbContext : IdentityDbContext<Employee>
             .HasMany(e => e.TimeEntries)
             .WithOne(t => t.Employee)
             .HasForeignKey(t => t.EmployeeId);
-
-        modelBuilder.Entity<Employee>()
-            .HasOne(e => e.JobTitle)
-            .WithMany(r => r.Employees)
-            .HasForeignKey(e => e.JobTitleId);
-
-        modelBuilder.Entity<JobTitle>()
-            .HasKey(r => r.Id);
-
-        modelBuilder.Entity<JobTitle>()
-            .HasMany(r => r.Employees)
-            .WithOne(e => e.JobTitle)
-            .HasForeignKey(e => e.JobTitleId);
 
         modelBuilder.Entity<WorkType>()
             .HasKey(w => w.Id);

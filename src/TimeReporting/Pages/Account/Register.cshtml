@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
-<div class="row">
-  <div class="col-md-4">
+<section class="col-4 mt-5">
+  <div>
     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
       <h2>Create a Admin for your organisation</h2>
       <hr/>
@@ -17,6 +17,12 @@
                aria-required="true" placeholder="John Wick"/>
         <label asp-for="Input.FullName">Full Name</label>
         <span asp-validation-for="Input.FullName" class="text-danger"></span>
+      </div>
+      <div class="form-floating mb-3">
+        <input asp-for="Input.JobTitle" class="form-control" autocomplete="fullname" data-testid="fullname-input"
+               aria-required="true" placeholder="John Wick"/>
+        <label asp-for="Input.JobTitle">Job Title</label>
+        <span asp-validation-for="Input.JobTitle" class="text-danger"></span>
       </div>
       <div class="form-floating mb-3">
         <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="phone" data-testid="phone-input"
@@ -41,4 +47,4 @@
       </button>
     </form>
   </div>
-</div>
+</section>

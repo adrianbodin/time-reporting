@@ -44,7 +44,6 @@ public class DetailsModel : PageModel
         }
 
         var employee = await _db.Users
-            .Include(e => e.JobTitle)
             .Include(e => e.TimeEntries)
                 .ThenInclude(t => t.Project)
             .Include(e => e.TimeEntries)
@@ -62,7 +61,7 @@ public class DetailsModel : PageModel
             employee.Email,
             employee.PhoneNumber,
             employee.HireDate,
-            employee.JobTitle?.Name ?? "Not Assigned",
+            employee.JobTitle ?? "Not Assigned",
             employee.TimeEntries
                 .OrderByDescending(t => t.Date)
                 .Take(5)

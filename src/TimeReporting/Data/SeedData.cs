@@ -12,16 +12,14 @@ public static class SeedData
     UserManager<Employee> userManager)
 {
     const string adminRoleName = "Admin";
-    string normalizedAdminRoleName = adminRoleName.ToUpper(); // Normalized name
+    string normalizedAdminRoleName = adminRoleName.ToUpper();
 
-    // Directly query the database to check for the role
     var existingRole = await context.Roles
         .AsNoTracking()
         .FirstOrDefaultAsync(r => r.NormalizedName == normalizedAdminRoleName);
 
     if (existingRole == null)
     {
-        // Only create the role if it doesn't exist in the database
         var roleResult = await roleManager.CreateAsync(new IdentityRole(adminRoleName));
         if (!roleResult.Succeeded)
         {
@@ -30,37 +28,40 @@ public static class SeedData
         }
     }
 
-    const string adminEmail = "admin@example.com";
-    const string adminPassword = "Admin123!";
-
-    // Directly query the database for the admin user
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    if (adminUser == null)
+    if (context.Database.GetConnectionString()?.Contains("time_reporting_test_db") == true)
     {
-        adminUser = new Employee
-        {
-            UserName = adminEmail,
-            Email = adminEmail,
-            FullName = "Admin User",
-            PhoneNumber = "1234567890",
-            EmailConfirmed = true
-        };
+        const string adminEmail = "admin@example.com";
+        const string adminPassword = "Admin123!";
 
-        var userResult = await userManager.CreateAsync(adminUser, adminPassword);
-        if (!userResult.Succeeded)
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser == null)
         {
-            Console.WriteLine($"Failed to create Admin user: {string.Join(", ", userResult.Errors.Select(e => e.Description))}");
-            return;
+            adminUser = new Employee
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                FullName = "Admin User",
+                HireDate = DateOnly.FromDateTime(DateTime.Now),
+                JobTitle = "Administrator",
+                PhoneNumber = "1234567890",
+                EmailConfirmed = true
+            };
+
+            var userResult = await userManager.CreateAsync(adminUser, adminPassword);
+            if (!userResult.Succeeded)
+            {
+                Console.WriteLine($"Failed to create Admin user: {string.Join(", ", userResult.Errors.Select(e => e.Description))}");
+                return;
+            }
         }
-    }
 
-    // Ensure the admin user is assigned to the "Admin" role
-    if (!await userManager.IsInRoleAsync(adminUser, adminRoleName))
-    {
-        var roleAssignResult = await userManager.AddToRoleAsync(adminUser, adminRoleName);
-        if (!roleAssignResult.Succeeded)
+        if (!await userManager.IsInRoleAsync(adminUser, adminRoleName))
         {
-            Console.WriteLine($"Failed to assign Admin role: {string.Join(", ", roleAssignResult.Errors.Select(e => e.Description))}");
+            var roleAssignResult = await userManager.AddToRoleAsync(adminUser, adminRoleName);
+            if (!roleAssignResult.Succeeded)
+            {
+                Console.WriteLine($"Failed to assign Admin role: {string.Join(", ", roleAssignResult.Errors.Select(e => e.Description))}");
+            }
         }
     }
 }
