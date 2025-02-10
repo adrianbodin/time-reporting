@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Reports;
@@ -31,9 +32,9 @@ public record AddTimeEntryDto()
 [Authorize]
 public class Create : PageModel
 {
-    private readonly AppDbContext _db;
+    private readonly IAppDbContext _db;
 
-    public Create(AppDbContext db)
+    public Create(IAppDbContext db)
     {
         _db = db;
     }
@@ -45,16 +46,17 @@ public class Create : PageModel
 
     public IList<WorkType> WorkTypes { get; set; }
 
-    //todo make this better
     public async Task OnGet([FromQuery] int? hours, [FromQuery] int? minutes)
     {
-        ViewData["Title"] = "Add Time Entry";
-        NewEntry = new AddTimeEntryDto();
-        NewEntry.Date = DateTime.Now;
+        this.SetTitle("New Time Entry");
+        NewEntry = new AddTimeEntryDto
+        {
+            Date = DateTime.Now
+        };
 
         if (hours.HasValue && minutes.HasValue)
         {
-            double totalHours = hours.Value + Math.Round((double)minutes.Value / 30) * 0.5;
+            double totalHours = hours.Value + Math.Ceiling((double)minutes.Value / 30) * 0.5;
             NewEntry.Hours = totalHours;
         }
 

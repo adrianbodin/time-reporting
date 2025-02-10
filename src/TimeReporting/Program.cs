@@ -9,7 +9,7 @@ using TimeReporting.Data;
 using TimeReporting.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<AppDbContext>(opt =>
+builder.Services.AddDbContext<IAppDbContext,AppDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration["PostgreSql:ConnectionString"]));
 
 builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)

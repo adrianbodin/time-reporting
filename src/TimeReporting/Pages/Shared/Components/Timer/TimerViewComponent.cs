@@ -16,9 +16,9 @@ public enum TimerStatus
 
 public class TimerViewComponent : ViewComponent
 {
-    private readonly AppDbContext _db;
+    private readonly IAppDbContext _db;
 
-    public TimerViewComponent(AppDbContext db)
+    public TimerViewComponent(IAppDbContext db)
     {
         _db = db;
     }
@@ -27,16 +27,11 @@ public class TimerViewComponent : ViewComponent
 
     public TimerStatus Status { get; set; }
 
-    public TimeSpan TimerTime { get; set; }
+    public TimeSpan Duration { get; set; }
 
-    public async Task<IViewComponentResult> InvokeAsync(TimeSpan? duration)
+    public async Task<IViewComponentResult> InvokeAsync()
     {
-        TimerTime = TimeSpan.Zero;
-
-        if (duration.HasValue)
-        {
-            TimerTime = duration.Value;
-        }
+        Duration = TimeSpan.Zero;
 
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var timer = await _db.EntryTimers.FirstOrDefaultAsync(et => et.EmployeeId == userId);
@@ -50,12 +45,13 @@ public class TimerViewComponent : ViewComponent
         {
             Status = TimerStatus.Running;
 
-            TimerTime = DateTime.UtcNow - timer.StartTime;
+            Duration = DateTime.UtcNow - timer.StartTime;
 
             return View(this);
         }
 
         Status = TimerStatus.Stopped;
+        Duration = timer.EndTime.Value - timer.StartTime;
         return View(this);
     }
 }

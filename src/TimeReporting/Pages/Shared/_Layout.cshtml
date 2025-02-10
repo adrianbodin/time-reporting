@@ -1,8 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<Employee> SignInManager
-@inject UserManager<Employee> UserManager
-
-@{
+﻿@{
   var headerExists = Context.Request.Headers.ContainsKey("X-Up-Version");
 
   if (!headerExists)

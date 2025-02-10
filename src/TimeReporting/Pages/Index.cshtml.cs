@@ -73,4 +73,19 @@ public class IndexModel : PageModel
 
         return ViewComponent("Timer");
     }
+
+    public async Task<IActionResult> OnGetDiscardTimer()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        var timer = await _dbContext.EntryTimers.FirstOrDefaultAsync(et => et.EmployeeId == userId);
+
+        if (timer is not null)
+        {
+            _dbContext.EntryTimers.Remove(timer);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        return ViewComponent("Timer");
+    }
 }
