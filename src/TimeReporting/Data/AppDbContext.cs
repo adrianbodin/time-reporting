@@ -4,7 +4,7 @@ using TimeReporting.Models;
 
 namespace TimeReporting.Data;
 
-public class AppDbContext : IdentityDbContext<Employee>
+public class AppDbContext : IdentityDbContext<Employee>, IAppDbContext
 {
     public DbSet<Customer> Customers { get; set; }
     public DbSet<TimeEntry> TimeEntries { get; set; }
