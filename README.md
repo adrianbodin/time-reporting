@@ -1,2 +1,3 @@
-# time-reporting
-Fun project were i will test out HTMX to build interactions.
+# Time reporting software
+
+Project built using ASP.NET Core Razor Pages and Unpoly.
