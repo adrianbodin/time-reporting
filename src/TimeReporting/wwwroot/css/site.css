@@ -1,5 +1,13 @@
+/* Base Styles
+-------------------------------------------------- */
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
 }
 
 @media (min-width: 768px) {
@@ -8,37 +16,46 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+/* Focus States
+-------------------------------------------------- */
+.btn:focus, 
+.btn:active:focus, 
+.btn-link.nav-link:focus, 
+.form-control:focus, 
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
+/* Icons & Theme Colors
+-------------------------------------------------- */
 .bi {
-  color: black; /* Default color for light mode */
-}
-
-.up-current{
-  background-color: #ffffff;
-  text-decoration: underline;
-  border-right: 0;
+  color: white; /* Default color for light mode */
 }
 
 @media (prefers-color-scheme: dark) {
   .bi {
-    color: white; /* Icon color for dark mode */
+    color: white;
   }
-
-  .up-current{
+  
+  .up-current {
     background-color: #212529;
   }
 }
+
+/* Navigation Styles
+-------------------------------------------------- */
+.up-current {
+  background-color: #212529;
+  text-decoration: underline;
+  border-right: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  .up-current {
+    background-color: #FFFFFF;
+  }
+}
+
 .up-current::after {
   content: '';
   position: absolute;
@@ -48,68 +65,97 @@ body {
   width: 1px;
 }
 
+/* Clock Component
+-------------------------------------------------- */
 .clock-wrapper {
   display: inline-block;
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 
 .clock {
   border-radius: 50%;
   border: 2px solid #fff;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   position: relative;
 }
 
-.clock:after {
-  content: "";
-  position: absolute;
-  background-color: #fff;
-  top: 8px;
-  left: 48%;
-  height: 25px;
-  width: 2px;
-  border-radius: 2px;
-  transform-origin: 50% 97%;
-  animation: grdAiguille 2s linear infinite;
-}
-
+.clock:after,
 .clock:before {
   content: "";
   position: absolute;
   background-color: #fff;
-  top: 12px;
-  left: 48%;
-  height: 20px;
+  top: 50%;
+  left: 50%;
   width: 2px;
   border-radius: 2px;
-  transform-origin: 50% 94%;
-  animation: ptAiguille 12s linear infinite;
+  transform-origin: center bottom;
 }
 
-@-webkit-keyframes grdAiguille{
-    0%{-webkit-transform:rotate(0deg);}
-    100%{-webkit-transform:rotate(360deg);}
+/* Add light mode styles */
+@media (prefers-color-scheme: light) {
+  .clock {
+    border-color: #212529;
+  }
+
+  .clock:after,
+  .clock:before {
+    background-color: #212529;
+  }
 }
 
-@keyframes grdAiguille{
-    0%{transform:rotate(0deg);}
-    100%{transform:rotate(360deg);}
+.clock:after {
+  height: 17px;
+  margin-top: -17px;
+  animation: grdAiguille 4s linear infinite;
 }
 
-@-webkit-keyframes ptAiguille{
-    0%{-webkit-transform:rotate(0deg);}
-    100%{-webkit-transform:rotate(360deg);}
+.clock:before {
+  height: 12px;
+  margin-top: -12px;
+  animation: ptAiguille 24s linear infinite;
 }
 
-@keyframes ptAiguille{
-    0%{transform:rotate(0deg);}
-    100%{transform:rotate(360deg);}
+/* Clock Animations */
+@keyframes grdAiguille {
+  from { transform: translate(-50%, 0) rotate(0deg); }
+  to { transform: translate(-50%, 0) rotate(360deg); }
 }
 
-/* Timer specific styles */
+@keyframes ptAiguille {
+  from { transform: translate(-50%, 0) rotate(0deg); }
+  to { transform: translate(-50%, 0) rotate(360deg); }
+}
+
+/* Sidebar Layout
+-------------------------------------------------- */
+.sidebar-nav {
+  width: 100%;
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  transition: all 0.3s ease;
+  width: 60px;
+  position: relative;
+}
+
+.sidebar:hover {
+  width: 250px;
+}
+
+/* Timer Component
+-------------------------------------------------- */
+#timer {
+  width: 60px;
+  transition: all 0.3s ease;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 #timer .clock-wrapper {
   flex-shrink: 0;
 }
@@ -118,68 +164,56 @@ body {
   border-radius: 1rem;
 }
 
-.sidebar-nav {
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.sidebar {
-  transition: all 0.3s ease;
-  width: 60px;
-}
-
-.sidebar:hover {
-  width: 250px
-}
-
-#timer{
-  width: 60px;
-  transition: all 0.3s ease;
-  padding: 6px;
-}
-
-.timer-text{
+/* Timer Text States */
+.timer-text {
   display: none;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.sidebar:hover .timer-text{
+.timer-text-collapsed {
   display: inline-block;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.sidebar:hover #timer{
-  width: 250px;
-  transition: all 0.3s ease;
-}
-
-
+/* Menu Text States */
 .menu-text {
   opacity: 0;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
 
-.sidebar:hover .menu-text {
-  opacity: 1;
+/* Sidebar Hover States */
+.sidebar:hover {
+  .timer-text {
+    display: inline-block;
+  }
+  
+  .timer-text-collapsed {
+    display: none;
+  }
+  
+  #timer {
+    width: 250px;
+  }
+  
+  .menu-text {
+    opacity: 1;
+  }
 }
 
+/* Responsive Layouts
+-------------------------------------------------- */
 @media (min-width: 768px) {
   .sidebar + .col-md-3 {
-    width: 60px
+    width: 60px;
+    transition: all 0.3s ease;
   }
   
   .sidebar:hover + .col-md-3 {
-    width: 250px
+    width: 250px;
   }
-}
-
-
-.nav-link {
-  padding-left: 1rem;
-  white-space: nowrap;
 }
 
 @media (max-width: 767.98px) {
@@ -190,4 +224,9 @@ body {
   .menu-text {
     opacity: 1;
   }
+}
+
+.nav-link {
+  padding-left: 1rem;
+  white-space: nowrap;
 }

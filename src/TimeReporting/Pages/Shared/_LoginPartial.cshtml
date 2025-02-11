@@ -16,7 +16,7 @@
           <li class="nav-item fw-bold">
             <a class="nav-link d-flex align-items-center" asp-page="/Reports/Index" up-alias="/Reports/*"
                up-target="main">
-              <i class="bi bi-clock text-primary"></i>
+              <i class="bi bi-clock text-primary ps-1"></i>
               <span class="menu-text ms-2">Time Overview</span>
             </a>
           </li>
@@ -24,14 +24,14 @@
             <a class="nav-link d-flex align-items-center" data-testid="ProjectsLink" asp-page="/Projects/Index"
                up-alias="/Projects/*"
                up-target="main">
-              <i class="bi bi-kanban text-primary"></i>
+              <i class="bi bi-kanban text-primary ps-1"></i>
               <span class="menu-text ms-2">Projects</span>
             </a>
           </li>
           <li class="nav-item fw-bold">
             <a class="nav-link d-flex align-items-center" asp-page="/Customers/Index"
                up-alias="/Customers/*" up-target="main">
-              <i class="bi bi-people text-primary"></i>
+              <i class="bi bi-people text-primary ps-1"></i>
               <span class="menu-text ms-2">Customers</span>
             </a>
           </li>
@@ -47,7 +47,7 @@
             <li class="nav-item fw-bold">
               <a class="nav-link d-flex align-items-center" data-testid="EmployeesLink" asp-page="/Employees/Index"
                  up-alias="/Employees/*" up-target="main">
-                <i class="bi bi-people text-primary"></i>
+                <i class="bi bi-people text-primary ps-1"></i>
                 <span class="menu-text ms-2">Employees</span>
               </a>
             </li>
@@ -55,14 +55,14 @@
           <li class="nav-item fw-bold">
             <a class="nav-link d-flex align-items-center" asp-page="/WorkTypes/Index" up-alias="/WorkTypes/*"
                up-follow title="Manage">
-              <i class="bi bi-wallet text-primary"></i>
+              <i class="bi bi-wallet text-primary ps-1"></i>
               <span class="menu-text ms-2">Work types</span>
             </a>
           </li>
           <li class="nav-item fw-bold">
             <a class="nav-link d-flex align-items-center" asp-page="/Account/Manage/Index"
                data-testid="AccountLink" up-follow up-alias="/Account/*" title="Manage">
-              <i class="bi bi-person text-primary"></i>
+              <i class="bi bi-person text-primary ps-1"></i>
               <span class="menu-text ms-2">Account</span>
             </a>
           </li>
@@ -70,7 +70,7 @@
             <form id="logoutForm" class="form-inline" asp-page="/Account/Logout"
                   asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
               <button id="logout" type="submit" class="nav-link btn btn-link border-0 d-flex align-items-center w-100">
-                <i class="bi bi-door-closed text-primary"></i>
+                <i class="bi bi-door-closed text-primary ps-1"></i>
                 <span class="menu-text ms-2">Sign out</span>
               </button>
             </form>
