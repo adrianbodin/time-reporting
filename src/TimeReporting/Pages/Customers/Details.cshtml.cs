@@ -1,39 +1,45 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 
-namespace TimeReporting
-{
-    public class DetailsModel : PageModel
-    {
-        private readonly AppDbContext _context;
+namespace TimeReporting.Pages.Customers;
 
-        public DetailsModel(AppDbContext context)
+[Authorize]
+public class DetailsModel(IAppDbContext context) : PageModel
+{
+    public Customer Customer { get; set; } = null!;
+
+    public async Task<IActionResult> OnGetAsync(string? id)
+    {
+        this.SetTitle("Customer Details");
+
+        if (id is null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        public Customer Customer { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(string id)
+        try
         {
-            if (id == null)
+            var customer = await context.Customers.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (customer is null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (customer is not null)
-            {
-                Customer = customer;
-
-                return Page();
-            }
-
+            Customer = customer;
+        }
+        catch (Exception e)
+        {
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
             return NotFound();
         }
+
+        return Page();
     }
 }

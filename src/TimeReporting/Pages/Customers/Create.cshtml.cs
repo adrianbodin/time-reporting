@@ -1,18 +1,17 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Customers;
 
-public class CreateModel : PageModel
+[Authorize]
+public class CreateModel(IAppDbContext context) : PageModel
 {
-    private readonly AppDbContext _context;
-
-    public CreateModel(AppDbContext context)
-    {
-        _context = context;
-    }
+    [BindProperty]
+    public Customer Customer { get; set; } = null!;
 
     public IActionResult OnGet()
     {
@@ -20,11 +19,9 @@ public class CreateModel : PageModel
         {
             Id = Guid.NewGuid().ToString()
         };
+
         return Page();
     }
-
-    [BindProperty]
-    public Customer Customer { get; set; } = null!;
 
     public async Task<IActionResult> OnPostAsync()
     {
@@ -35,18 +32,15 @@ public class CreateModel : PageModel
 
         try
         {
-            _context.Customers.Add(Customer);
-            await _context.SaveChangesAsync();
-
-            TempData["Notification-Type"] = NotificationType.Success;
-            TempData["Notification-Message"] = $"The customer {Customer.Name} was added successfully";
+            context.Customers.Add(Customer);
+            await context.SaveChangesAsync();
         }
         catch (Exception e)
         {
-            TempData["Toast-Type"] = NotificationType.Danger;
-            TempData["Toast-Message"] = $"There was an error adding the customer {Customer.Name}";
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
         }
 
+        this.SendNotification(NotificationType.Success, $"The customer {Customer.Name} was added successfully");
         return RedirectToPage("./Index");
     }
 }

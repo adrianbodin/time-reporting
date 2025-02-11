@@ -1,5 +1,3 @@
-using Microsoft.Build.Framework;
-
 namespace TimeReporting.Models;
 
 public class TimeEntry
@@ -23,3 +21,12 @@ public class TimeEntry
     public string WorkTypeId { get; set; }
     public WorkType WorkType { get; set; }
 }
+
+public record ReadTimeEntryDto(string Id,string Project, double Hours, string Description, DateOnly Date, string WorkType);
+
+public record TimeEntryDetailsDto(
+    string ProjectName,
+    double Hours,
+    DateOnly Date,
+    string WorkType
+);

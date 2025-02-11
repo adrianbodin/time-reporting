@@ -3,38 +3,39 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Customers;
 
 [Authorize]
-public class IndexModel : PageModel
+public class IndexModel(IAppDbContext context) : PageModel
 {
-    private readonly AppDbContext _context;
-
-    public IndexModel(AppDbContext context)
-    {
-        _context = context;
-    }
-
     [BindProperty(SupportsGet = true)]
-    public string SearchTerm { get; set; }
+    public string? SearchTerm { get; set; }
 
-    public IList<Customer> Customers { get;set; } = default!;
+    public IEnumerable<Customer> Customers { get;set; } = null!;
 
     public async Task<IActionResult> OnGetAsync()
     {
-        IQueryable<Customer> query = _context.Customers;
+        this.SetTitle("Customers");
+
+        IQueryable<Customer> query = context.Customers;
 
         if (!string.IsNullOrEmpty(SearchTerm))
         {
             query = query.Where(c => c.Name.ToLower().Contains(SearchTerm.ToLower()));
         }
 
-        Customers = await query.ToListAsync();
-
-        this.SetTitle("Customers");
+        try
+        {
+            Customers = await query.ToListAsync();
+        }
+        catch (Exception e)
+        {
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+        }
 
         return Page();
     }

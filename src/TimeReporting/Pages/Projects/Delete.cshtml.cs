@@ -2,54 +2,73 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Projects;
 
-public class DeleteModel : PageModel
+public class DeleteModel(IAppDbContext context) : PageModel
 {
-    private readonly AppDbContext _context;
-
-    public DeleteModel(AppDbContext context)
-    {
-        _context = context;
-    }
-
     [BindProperty]
-    public Project Project { get; set; } = default!;
+    public Project Project { get; set; } = null!;
 
-    public async Task<IActionResult> OnGetAsync(string id)
+    public async Task<IActionResult> OnGetAsync(string? id)
     {
+        this.SetTitle("Delete Project");
+
         if (id == null)
         {
             return NotFound();
         }
 
-        var project = await _context.Projects.FirstOrDefaultAsync(m => m.Id == id);
-
-        if (project is not null)
+        try
         {
-            Project = project;
+            var project = await context.Projects.FirstOrDefaultAsync(m => m.Id == id);
 
-            return Page();
+            if (project is null)
+            {
+                this.SendNotification(NotificationType.Danger, "Project not found.");
+                return NotFound();
+            }
+
+            Project = project;
+        }
+        catch (Exception e)
+        {
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+            return NotFound();
         }
 
-        return NotFound();
+        return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(string id)
+    public async Task<IActionResult> OnPostAsync(string? id)
     {
         if (id == null)
         {
             return NotFound();
         }
 
-        var project = await _context.Projects.FindAsync(id);
-        if (project != null)
+        try
         {
-            Project = project;
-            _context.Projects.Remove(Project);
-            await _context.SaveChangesAsync();
+            var project = await context.Projects.FindAsync(id);
+
+            if (project is null)
+            {
+                this.SendNotification(NotificationType.Danger, "Project not found.");
+                return NotFound();
+            }
+
+            context.Projects.Remove(project);
+            await context.SaveChangesAsync();
+
+            this.SendNotification(NotificationType.Success, $"The project \"{project.Name}\" was removed successfully.");
+        }
+        catch (Exception e)
+        {
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+            return NotFound();
         }
 
         return RedirectToPage("./Index");

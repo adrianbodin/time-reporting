@@ -5,24 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Reports;
 
-
-public record ReadTimeEntryDto(string Id,string Project, double Hours, string Description, DateOnly Date, string WorkType);
-
 [Authorize]
-public class Index : PageModel
+public class Index(IAppDbContext db) : PageModel
 {
-    private readonly AppDbContext _db;
-
-    public Index(AppDbContext db)
-    {
-        _db = db;
-    }
-
     [BindProperty(SupportsGet = true), DataType(DataType.Date)]
     public DateTime SelectedDate { get; set; }
 
@@ -32,15 +23,16 @@ public class Index : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        ViewData["Title"] = "Report";
-        Customers = await _db.Customers.ToListAsync();
+        this.SetTitle("Reports");
+
+        Customers = await db.Customers.ToListAsync();
 
         if (SelectedDate == default)
         {
             SelectedDate = DateTime.Now;
         }
 
-        TimeEntries = await _db.TimeEntries
+        TimeEntries = await db.TimeEntries
             .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
             .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
             .Select(t => new ReadTimeEntryDto(
@@ -53,8 +45,6 @@ public class Index : PageModel
             ))
             .ToListAsync();
 
-        this.SetTitle("Reports");
-
         return Page();
     }
 
@@ -62,15 +52,14 @@ public class Index : PageModel
     {
         try
         {
-            var timeEntry = await _db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
+            var timeEntry = await db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
 
-            _db.TimeEntries.Remove(timeEntry);
-            await _db.SaveChangesAsync();
+            db.TimeEntries.Remove(timeEntry);
+            await db.SaveChangesAsync();
 
-            TempData["Notification-Message"] = "The entry was removed successfully.";
-            TempData["Notification-Type"] = NotificationType.Success;
+            this.SendNotification(NotificationType.Success, "The time entry was removed successfully");
 
-            TimeEntries = await _db.TimeEntries
+            TimeEntries = await db.TimeEntries
                 .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
                 .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
                 .Select(t => new ReadTimeEntryDto(
@@ -87,8 +76,7 @@ public class Index : PageModel
         }
         catch (Exception e)
         {
-            TempData["Notification-Message"] = "An error occurred while removing the entry.";
-            TempData["Notification-Type"] = NotificationType.Danger;
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
 
             return Page();
         }

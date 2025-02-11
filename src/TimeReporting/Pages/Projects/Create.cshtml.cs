@@ -1,44 +1,27 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Projects;
 
-public record AddProjectDto
+public class CreateModel(IAppDbContext context) : PageModel
 {
-    [Required]
-    [MaxLength(100)]
-    public string Name { get; set; }
-
-    [Required]
-    [MaxLength(500)]
-    public string Description { get; set; }
-
-    public string CustomerId { get; set; }
-}
-
-public class CreateModel : PageModel
-{
-    private readonly AppDbContext _context;
-
-    public CreateModel(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    public async Task<IActionResult> OnGet()
-    {
-        Customers = await _context.Customers.ToListAsync();
-        return Page();
-    }
-
     public List<Customer> Customers { get; set; } = null!;
 
     [BindProperty]
     public AddProjectDto Project { get; set; } = null!;
+
+    public async Task<IActionResult> OnGet()
+    {
+        Customers = await context.Customers
+            .AsNoTracking()
+            .ToListAsync();
+
+        return Page();
+    }
 
     public async Task<IActionResult> OnPostAsync()
     {
@@ -57,16 +40,14 @@ public class CreateModel : PageModel
 
         try
         {
-            _context.Projects.Add(project);
-            await _context.SaveChangesAsync();
+            context.Projects.Add(project);
+            await context.SaveChangesAsync();
 
-            TempData["Notification-Message"] = $"Project \"{project.Name}\" created successfully.";
-            TempData["Notification-Type"] = NotificationType.Success;
+            this.SendNotification(NotificationType.Success, $"The project \"{project.Name}\" was created successfully");
         }
         catch (Exception e)
         {
-            TempData["Notification-Message"] = $"An error occurred while creating the project: {e.Message}";
-            TempData["Notification-Type"] = NotificationType.Danger;
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
         }
 
         return RedirectToPage("./Index");

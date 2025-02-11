@@ -1,72 +1,42 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Models;
 
-namespace TimeReporting
+namespace TimeReporting.Pages.Customers;
+
+[Authorize]
+public class EditModel(IAppDbContext context) : PageModel
 {
-    public class EditModel : PageModel
+    [BindProperty]
+    public Customer Customer { get; set; } = null!;
+
+    public async Task<IActionResult> OnGetAsync(string? id)
     {
-        private readonly AppDbContext _context;
-
-        public EditModel(AppDbContext context)
+        if (id is null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public Customer Customer { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(string id)
+        try
         {
-            if (id == null)
+            var customer =  await context.Customers.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (customer is null)
             {
                 return NotFound();
             }
 
-            var customer =  await _context.Customers.FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
             Customer = customer;
-            return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        catch (Exception e)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Customer).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(Customer.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+            return NotFound();
         }
-
-        private bool CustomerExists(string id)
-        {
-            return _context.Customers.Any(e => e.Id == id);
-        }
+        return Page();
     }
 }

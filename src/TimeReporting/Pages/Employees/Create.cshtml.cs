@@ -1,61 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TimeReporting.Extensions;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Employees;
 
-public record AddEmployeeDto
-{
-    [Required]
-    [Display(Name = "Full Name")]
-    public string FullName { get; set; }
-
-    [Required]
-    [EmailAddress]
-    public string Email { get; set; }
-
-    [Required]
-    [DataType(DataType.Password)]
-    public string Password { get; set; }
-
-    [Display(Name = "Confirm Password")]
-    [DataType(DataType.Password)]
-    [Compare(nameof(Password), ErrorMessage = "Passwords don't match.")]
-    public string ConfirmPassword { get; set; }
-
-    [Required]
-    [Phone]
-    [Display(Name = "Phone Number")]
-    public string PhoneNumber { get; set; }
-
-    [Required]
-    [Display(Name = "Job Title")]
-    public string JobTitle { get; set; }
-
-    [Display(Name = "Hire Date")]
-    [DataType(DataType.Date)]
-    public DateOnly HireDate { get; set; }
-}
-
 [Authorize(Roles = "Admin")]
-public class CreateModel : PageModel
+public class CreateModel(UserManager<Employee> userManager) : PageModel
 {
-    private readonly UserManager<Employee> _userManager;
-
-    public CreateModel(UserManager<Employee> userManager)
-    {
-        _userManager = userManager;
-    }
-
     [BindProperty(SupportsGet = true)]
     public AddEmployeeDto Employee { get; set; } = null!;
 
     public IActionResult OnGet()
     {
         Employee.HireDate = DateOnly.FromDateTime(DateTime.Now);
+
         return Page();
     }
 
@@ -78,24 +39,20 @@ public class CreateModel : PageModel
             user.UserName = Employee.Email;
             user.EmailConfirmed = true;
 
-            var result = await _userManager.CreateAsync(user, Employee.Password);
+            var result = await userManager.CreateAsync(user, Employee.Password);
 
             if (!result.Succeeded)
             {
-                TempData["Notification-Type"] = NotificationType.Danger;
-                TempData["Notification-Message"] = "Failed to create user.";
+                this.SendNotification(NotificationType.Danger, "Failed to create user.");
 
                 return Page();
             }
 
-
-            TempData["Notification-Type"] = NotificationType.Success;
-            TempData["Notification-Message"] = $"Employee {user.FullName} created successfully.";
+            this.SendNotification(NotificationType.Success, "The user was created successfully.");
         }
         catch (Exception e)
         {
-            TempData["Notification-Type"] = NotificationType.Danger;
-            TempData["Notification-Message"] = "Failed to create user.";
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
         }
 
         return RedirectToPage("/Employees/Index");

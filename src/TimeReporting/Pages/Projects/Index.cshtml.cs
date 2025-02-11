@@ -9,24 +9,17 @@ using TimeReporting.Models;
 namespace TimeReporting.Pages.Projects;
 
 [Authorize]
-public class IndexModel : PageModel
+public class IndexModel(IAppDbContext context) : PageModel
 {
-    private readonly AppDbContext _context;
-
-    public IndexModel(AppDbContext context)
-    {
-        _context = context;
-    }
-
     [BindProperty(SupportsGet = true)]
-    public string SearchTerm { get; set; }
+    public string? SearchTerm { get; set; }
 
-    public IList<Project> Projects { get;set; } = default!;
+    public IList<Project> Projects { get;set; } = null!;
 
     public async Task<IActionResult> OnGetAsync()
     {
         //todo fix better
-        IQueryable<Project> query = _context.Projects.Include(p => p.Customer).Include(p => p.TimeEntries);
+        IQueryable<Project> query = context.Projects.Include(p => p.Customer).Include(p => p.TimeEntries);
 
         if (!string.IsNullOrEmpty(SearchTerm))
         {

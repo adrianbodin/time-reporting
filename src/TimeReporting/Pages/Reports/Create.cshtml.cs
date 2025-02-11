@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
 
@@ -72,12 +73,6 @@ public class Create : PageModel
         }
 
         var workType = await _db.WorkTypes.FindAsync(NewEntry.WorkTypeId);
-        if (workType == null)
-        {
-            TempData["Toast-Type"] = NotificationType.Danger;
-            TempData["Toast-Message"] = "Invalid work type selected.";
-            return Page();
-        }
 
         var timeEntry = new TimeEntry
         {
@@ -96,13 +91,11 @@ public class Create : PageModel
             _db.TimeEntries.Add(timeEntry);
             await _db.SaveChangesAsync();
 
-            TempData["Notification-Type"] = NotificationType.Success;
-            TempData["Notification-Message"] = "The time entry was added successfully";
+            this.SendNotification(NotificationType.Success, "The time entry was added successfully");
         }
         catch (Exception e)
         {
-            TempData["Toast-Type"] = NotificationType.Danger;
-            TempData["Toast-Message"] = "There was an error adding the new time entry";
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
         }
 
         return RedirectToPage("/Reports/Index", new { SelectedDate = NewEntry.Date.ToString("yyyy-MM-dd") });

@@ -3,34 +3,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Employees;
 
-public record EmployeeDto(string Id, string FullName, string JobTitle, DateTime HireDate);
-
 [Authorize(Roles = "Admin")]
-public class IndexModel : PageModel
+public class IndexModel(IAppDbContext db) : PageModel
 {
-    private readonly AppDbContext _db;
-
-    public IndexModel(AppDbContext db)
-    {
-        _db = db;
-    }
-
-    public IList<EmployeeDto>? Employees { get; set; }
+    public IEnumerable<EmployeeTableDto> Employees { get; set; } = null!;
 
     public async Task<IActionResult> OnGet()
     {
-        Employees = await _db.Users
-            .AsNoTracking()
-            .Select(e => new EmployeeDto(e.Id, e.FullName, e.JobTitle, DateTime.Parse(e.HireDate.ToString())))
-            .ToListAsync();
+        this.SetTitle("All Employees");
 
+        try
+        {
+            var employees = await db.Users
+                .AsNoTracking()
+                .Select(e => new EmployeeTableDto(e.Id, e.FullName, e.JobTitle, DateTime.Parse(e.HireDate.ToString())))
+                .ToListAsync();
 
-        this.SetTitle("Employees");
+            Employees = employees;
+        }
+        catch (Exception e)
+        {
+            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+            return Page();
+        }
 
         return Page();
     }
