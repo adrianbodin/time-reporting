@@ -7,7 +7,7 @@
 
 
 <section class="container mt-3">
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="m-0">Customers</h1>
     <div class="d-flex gap-3">
       <form
@@ -17,7 +17,17 @@
         up-autosubmit
         up-watch-event='input'
         up-watch-delay=500>
-        <input type="text" asp-for="SearchTerm" class="form-control h-100" placeholder="Search...">
+        <div class="input-group">
+          <span class="input-group-text border-end-0">
+            <i class="bi bi-search"></i>
+          </span>
+          <input
+            type="text"
+            asp-for="SearchTerm"
+            class="form-control border-start-0"
+            placeholder="Search customers..."
+            aria-label="Search customers">
+        </div>
       </form>
       <a
         asp-page="Create"
@@ -26,38 +36,79 @@
         up-history="false"
         up-accept-location="/Customers"
         up-on-accepted="up.reload('.customers')"
-        class="btn btn-outline-success btn-lg d-flex justify-content-center align-items-center"><i class="bi bi-plus-lg"></i></a>
+        class="btn btn-primary d-flex align-items-center gap-2">
+        <i class="bi bi-plus-lg"></i>
+        <span>New Customer</span>
+      </a>
     </div>
   </div>
-  <hr>
   <div class="customers">
-  @if(!Model.Customers.Any())
-  {
-    <p>No customers found.</p>
-  }
-  else
-  {
-    <table class="table table-striped table-bordered">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>EIN</th>
-      </tr>
-      </thead>
-      <tbody>
-      @foreach (var customer in Model.Customers)
-      {
-        <tr>
-          <td>@customer.Name</td>
-          <td>
-            <a asp-page="./Edit" asp-route-id="@customer.Id">Edit</a> |
-            <a asp-page="./Details" asp-route-id="@customer.Id">Details</a> |
-          </td>
-        </tr>
-      }
-      </tbody>
-    </table>
-  }
+    @if (!Model.Customers.Any())
+    {
+      <div class="text-center py-5">
+        <i class="bi bi-building display-1 text-muted mb-3"></i>
+        <h3 class="h4 text-muted">No customers found</h3>
+        <p class="text-muted mb-3">Get started by creating your first customer</p>
+        <a
+          asp-page="Create"
+          up-layer="new modal"
+          up-position="right"
+          up-history="false"
+          up-accept-location="/Customers"
+          up-on-accepted="up.reload('.customers')"
+          class="btn btn-primary">
+          <i class="bi bi-plus-lg me-2"></i>Create Customer
+        </a>
+      </div>
+    }
+    else
+    {
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Customer Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="border-top">
+            @foreach (var customer in Model.Customers)
+            {
+              <tr>
+                <td class="ps-0">
+                  <a asp-page="./Details"
+                     up-follow
+                     asp-route-id="@customer.Id"
+                     class="text-decoration-none fw-medium">@customer.Name</a>
+                </td>
+                <td class="text-end pe-0">
+                  <div class="d-flex gap-2 justify-content-end">
+                    <a asp-page="./Edit"
+                       asp-route-id="@customer.Id"
+                       up-layer="new drawer"
+                       up-position="right"
+                       up-accept-location="/Customers"
+                       up-on-accepted="up.reload('.customers')"
+                       up-history="false"
+                       class="btn btn-sm btn-outline-primary"
+                       title="Edit Customer">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                    <a asp-page="./Details"
+                       asp-route-id="@customer.Id"
+                       up-follow
+                       class="btn btn-sm btn-outline-secondary"
+                       title="View Details">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
   </div>
 </section>
 

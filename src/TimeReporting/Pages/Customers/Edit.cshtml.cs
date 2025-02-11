@@ -1,42 +1,74 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Extensions;
+using TimeReporting.Helpers;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.Customers;
 
+public record EditCustomerDto
+{
+    [Required]
+    public string Id { get; set; }
+
+    [Required]
+    public string Name { get; set; }
+}
+
 [Authorize]
-public class EditModel(IAppDbContext context) : PageModel
+public class EditModel(IAppDbContext db) : PageModel
 {
     [BindProperty]
-    public Customer Customer { get; set; } = null!;
+    public EditCustomerDto Customer { get; set; } = null!;
 
-    public async Task<IActionResult> OnGetAsync(string? id)
+    public async Task<IActionResult> OnGet(string id)
     {
-        if (id is null)
-        {
-            return NotFound();
-        }
+        this.SetTitle("Edit Customer");
 
-        try
-        {
-            var customer =  await context.Customers.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (customer is null)
+        var customer = await db.Customers
+            .Where(c => c.Id == id)
+            .Select(c => new EditCustomerDto
             {
-                return NotFound();
-            }
+                Id = c.Id,
+                Name = c.Name
+            })
+            .FirstOrDefaultAsync();
 
-            Customer = customer;
-        }
-        catch (Exception e)
+        if (customer is null)
         {
-            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+            this.SendNotification(NotificationType.Danger, "Customer not found.");
+            return RedirectToPage("./Index");
+        }
+
+        Customer = customer;
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
+            Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+            return Page();
+        }
+
+        var customer = await db.Customers.FindAsync(Customer.Id);
+
+        if (customer is null)
+        {
+            this.SendNotification(NotificationType.Danger, "Customer not found.");
             return NotFound();
         }
-        return Page();
+
+        customer.Name = Customer.Name;
+        await db.SaveChangesAsync();
+
+        this.SendNotification(NotificationType.Success, "The customer was updated successfully");
+
+        return RedirectToPage("./Index");
     }
 }

@@ -11,6 +11,11 @@
   <form method="post" up-target="main">
     <div class="row mb-3">
       <div class="col-6">
+        <label asp-for="Project.Name" class="control-label"></label>
+        <input asp-for="Project.Name" class="form-control"/>
+        <span asp-validation-for="Project.Name" class="text-danger"></span>
+      </div>
+      <div class="col-6">
         <label class="control-label">Customer</label>
         <div class="input-group">
           <select asp-for="Project.CustomerId" class="form-select customer-selection">
@@ -31,11 +36,6 @@
           </a>
         </div>
         <span asp-validation-for="Project.CustomerId" class="text-danger"></span>
-      </div>
-      <div class="col-6">
-        <label asp-for="Project.Name" class="control-label"></label>
-        <input asp-for="Project.Name" class="form-control"/>
-        <span asp-validation-for="Project.Name" class="text-danger"></span>
       </div>
     </div>
     <div class="mb-3">

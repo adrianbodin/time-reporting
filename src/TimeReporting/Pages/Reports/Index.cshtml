@@ -53,7 +53,7 @@
               <th>Project</th>
               <th>Hours</th>
               <th>Work type</th>
-              <th class="text-end">Actions</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -75,6 +75,7 @@
                        asp-route-id="@timeEntry.Id"
                        up-layer="new drawer"
                        up-position="right"
+                       up-history="false"
                        up-accept-location="/Reports"
                        up-on-accepted="up.reload('.entries')"
                        class="btn btn-sm btn-outline-primary">

@@ -64,13 +64,13 @@
     else
     {
       <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
+        <table class="table table-hover">
           <thead>
-          <tr class="text-muted small text-uppercase">
-            <th class="fw-medium ps-0">Project Name</th>
-            <th class="fw-medium">Customer</th>
-            <th class="fw-medium">Total Hours</th>
-            <th class="text-end pe-0">Actions</th>
+          <tr>
+            <th>Project Name</th>
+            <th>Customer</th>
+            <th>Total Hours</th>
+            <th></th>
           </tr>
           </thead>
           <tbody class="border-top">
@@ -79,52 +79,27 @@
             var totalHours = project.TimeEntries.Sum(t => t.Hours);
 
             <tr>
-              <td class="ps-0" style="min-width: 300px;">
-                <div class="d-flex align-items-center">
-                  <div class="bg-primary bg-opacity-10 p-2 rounded-2 me-3">
-                    <i class="bi bi-kanban text-primary"></i>
-                  </div>
-                  <div>
-                    <a asp-page="./Details"
-                       up-follow
-                       asp-route-id="@project.Id"
-                       class="text-decoration-none fw-medium">@project.Name</a>
-                    <div class="small text-muted text-truncate" style="max-width: 200px;">
-                      @project.Description
-                    </div>
-                  </div>
-                </div>
+              <td class="ps-0">
+                <a asp-page="./Details"
+                   up-follow
+                   asp-route-id="@project.Id"
+                   class="text-decoration-none fw-medium">@project.Name</a>
               </td>
               <td>
-                <span class="d-inline-flex align-items-center">
-                  <div class="bg-secondary bg-opacity-10 p-2 rounded-2 me-2">
-                    <i class="bi bi-building text-secondary"></i>
-                  </div>
-                  @project.Customer.Name
-                </span>
+                @project.Customer.Name
               </td>
               <td>
-                <div class="d-flex align-items-center">
-                  <div class="bg-success bg-opacity-10 p-2 rounded-2 me-2">
-                    <i class="bi bi-clock-history text-success"></i>
-                  </div>
-                  <span>@totalHours.ToString("F1")h</span>
-                </div>
+                <span>@totalHours.ToString("F1")h</span>
               </td>
               <td class="text-end pe-0">
                 <div class="d-flex gap-2 justify-content-end">
-                  <a asp-page="/Reports/Create"
-                     asp-route-projectId="@project.Id"
-                     up-layer="new modal"
-                     up-position="right"
-                     class="btn btn-sm btn-success"
-                     title="Log Time">
-                    <i class="bi bi-plus-lg"></i>
-                  </a>
                   <a asp-page="./Edit"
                      asp-route-id="@project.Id"
                      up-layer="new drawer"
                      up-position="right"
+                     up-accept-location="/Projects"
+                     up-on-accepted="up.reload('.projects')"
+                     up-history="false"
                      class="btn btn-sm btn-outline-primary"
                      title="Edit Project">
                     <i class="bi bi-pencil"></i>

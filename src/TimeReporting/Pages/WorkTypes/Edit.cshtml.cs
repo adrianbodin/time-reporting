@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.DotNet.Scaffolding.Shared.T4Templating;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
+using TimeReporting.Extensions;
 using TimeReporting.Models;
 
 namespace TimeReporting.Pages.WorkTypes;
@@ -41,29 +43,22 @@ public class EditModel : PageModel
             return Page();
         }
 
-        _db.Attach(WorkType).State = EntityState.Modified;
+        var workType = await _db.WorkTypes.FindAsync(WorkType.Id);
 
-        try
+        if (workType is null)
         {
-            await _db.SaveChangesAsync();
+            this.SendNotification(NotificationType.Danger, "Work type not found.");
+            return NotFound();
         }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!WorkTypeExists(WorkType.Id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+
+        workType.Name = WorkType.Name;
+        workType.HourlyRate = WorkType.HourlyRate;
+
+        await _db.SaveChangesAsync();
+
+        this.SendNotification(NotificationType.Success, $"The work type \"{workType.Name}\" was updated successfully.");
 
         return RedirectToPage("./Index");
     }
 
-    private bool WorkTypeExists(string id)
-    {
-        return _db.WorkTypes.Any(e => e.Id == id);
-    }
 }

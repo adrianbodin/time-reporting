@@ -4,40 +4,34 @@
 <section>
   <h1>Edit time entry</h1>
   <hr>
-  <form method="post" up-target="main" class="add-entry-form">
-    <label asp-for="Entry.ProjectId" class="form-label">Project</label>
-    <div class="mb-3 input-group">
-      <select asp-for="Entry.ProjectId" class="form-select project-selection">
+  <form method="post">
+    <input type="hidden" asp-for="Entry.Id" />
+    
+    <div class="mb-3">
+      <label asp-for="Entry.ProjectId" class="form-label">Project</label>
+      <select asp-for="Entry.ProjectId" class="form-select">
         @foreach (var project in Model.Projects)
         {
           <option value="@project.Id">@project.Name</option>
         }
       </select>
-      <a
-        class="btn btn-outline-secondary rounded-end"
-        href="/Projects/Create"
-        up-layer="new modal"
-        up-history="auto"
-        up-accept-location="/Projects"
-        up-on-accepted="up.reload('.project-selection')">
-        New
-      </a>
       <span class="text-danger" asp-validation-for="Entry.ProjectId"></span>
     </div>
     <div class="mb-3">
       <label asp-for="Entry.Hours" class="form-label">Hours</label>
-      <input type="number" min="0" step="0.5" asp-for="Entry.Hours" class="form-control"/>
+      <input type="number" min="0.5" step="0.5" asp-for="Entry.Hours" class="form-control"/>
       <span class="text-danger" asp-validation-for="Entry.Hours"></span>
     </div>
     <div class="mb-3">
       <label asp-for="Entry.WorkTypeId" class="form-label">Work type</label>
-      <select asp-for="Entry.WorkTypeId" class="form-select work-type-selection">
+      <select asp-for="Entry.WorkTypeId" class="form-select">
         <option value="">Select a work type</option>
         @foreach (var workType in Model.WorkTypes)
         {
           <option value="@workType.Id">@workType.Name</option>
         }
       </select>
+      <span class="text-danger" asp-validation-for="Entry.WorkTypeId"></span>
     </div>
     <div class="mb-3">
       <label asp-for="Entry.Description" class="form-label">Description</label>
