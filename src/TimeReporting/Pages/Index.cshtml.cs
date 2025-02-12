@@ -19,7 +19,7 @@ public class IndexModel : PageModel
 
     public async Task OnGet()
     {
-        if (!await _dbContext.Users.AnyAsync())
+        if (!await _dbContext.UserRoles.AnyAsync())
         {
             Response.Redirect("/Account/Register");
         }

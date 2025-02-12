@@ -1,16 +1,20 @@
-using System;
 using Finbuckle.Html5Validation;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using TimeReporting.Data;
 using TimeReporting.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration["PostgreSql:ConnectionString"];
+
+if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+{
+    connectionString = Environment.GetEnvironmentVariable("POSTGRESQL_CONNECTION_STRING");
+}
+
 builder.Services.AddDbContext<IAppDbContext,AppDbContext>(opt =>
-    opt.UseNpgsql(builder.Configuration["PostgreSql:ConnectionString"]));
+    opt.UseNpgsql(connectionString));
 
 builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
@@ -21,25 +25,25 @@ builder.Services.AddHtml5Validation();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    using (var scope = app.Services.CreateScope())
-    {
-        var services = scope.ServiceProvider;
-        var context = services.GetRequiredService<AppDbContext>();
-        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Employee>>();
 
-        try
-        {
-            await SeedData.SeedRolesAndAdminUserAsync(context, roleManager, userManager);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error seeding database: {ex.Message}");
-        }
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var services = scope.ServiceProvider;
+    await using var context = services.GetRequiredService<AppDbContext>();
+    await context.Database.EnsureCreatedAsync();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Employee>>();
+
+    try
+    {
+        await SeedData.SeedRolesAndAdminUserAsync(context, roleManager, userManager);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error seeding database: {ex.Message}");
     }
 }
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

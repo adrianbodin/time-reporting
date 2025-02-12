@@ -22,7 +22,7 @@ public class TimeEntry
     public WorkType WorkType { get; set; }
 }
 
-public record ReadTimeEntryDto(string Id,string Project, double Hours, string Description, DateOnly Date, string WorkType, string EmployeeName);
+public record ReadTimeEntryDto(string Id,string Project, double Hours, string Description, DateOnly Date, string WorkType, string EmployeeName, string EmployeeId);
 
 public record TimeEntryDetailsDto(
     string ProjectName,
