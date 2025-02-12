@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using TimeReporting.Models;
 
 namespace TimeReporting.Data;
@@ -13,6 +14,14 @@ public class AppDbContext : IdentityDbContext<Employee>, IAppDbContext
     public DbSet<EntryTimer> EntryTimers { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+        
+        optionsBuilder.ConfigureWarnings(warnings =>
+            warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -66,7 +75,7 @@ public class AppDbContext : IdentityDbContext<Employee>, IAppDbContext
 
         modelBuilder.Entity<Employee>()
             .Property(e => e.PhoneNumber)
-            .HasMaxLength(20);
+            .HasMaxLength(50);
 
         modelBuilder.Entity<Employee>()
             .HasMany(e => e.TimeEntries)
@@ -84,5 +93,18 @@ public class AppDbContext : IdentityDbContext<Employee>, IAppDbContext
 
         modelBuilder.Entity<EntryTimer>()
             .HasKey(t => t.Id);
+
+        SetupSeedDataWithBogus(modelBuilder);
+    }
+
+    private static void SetupSeedDataWithBogus(ModelBuilder modelBuilder)
+    {
+        var databaseSeeder = new DatabaseSeeder();
+
+        modelBuilder.Entity<Employee>().HasData(databaseSeeder.Employees);
+        modelBuilder.Entity<Customer>().HasData(databaseSeeder.Customers);
+        modelBuilder.Entity<Project>().HasData(databaseSeeder.Projects);
+        modelBuilder.Entity<WorkType>().HasData(databaseSeeder.WorkTypes);
+        modelBuilder.Entity<TimeEntry>().HasData(databaseSeeder.TimeEntries);
     }
 }

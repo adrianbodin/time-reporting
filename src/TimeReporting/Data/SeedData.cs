@@ -18,7 +18,7 @@ public static class SeedData
         .AsNoTracking()
         .FirstOrDefaultAsync(r => r.NormalizedName == normalizedAdminRoleName);
 
-    if (existingRole == null)
+    if (existingRole is null)
     {
         var roleResult = await roleManager.CreateAsync(new IdentityRole(adminRoleName));
         if (!roleResult.Succeeded)
@@ -28,7 +28,7 @@ public static class SeedData
         }
     }
 
-    if (context.Database.GetConnectionString()?.Contains("time_reporting_test_db") == true)
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
     {
         const string adminEmail = "admin@example.com";
         const string adminPassword = "Admin123!";

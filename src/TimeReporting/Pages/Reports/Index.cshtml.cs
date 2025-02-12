@@ -32,16 +32,22 @@ public class Index(IAppDbContext db) : PageModel
             SelectedDate = DateTime.Now;
         }
 
-        TimeEntries = await db.TimeEntries
-            .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
-            .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
+        var query = db.TimeEntries.Where(t => t.Date == DateOnly.FromDateTime(SelectedDate));
+
+        if (!User.IsInRole("Admin"))
+        {
+            query = query.Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        }
+
+        TimeEntries = await query
             .Select(t => new ReadTimeEntryDto(
                 t.Id,
                 t.Project.Name,
                 t.Hours,
                 t.Description,
                 t.Date,
-                t.WorkType.Name
+                t.WorkType.Name,
+                t.Employee.FullName
             ))
             .ToListAsync();
 
@@ -68,7 +74,8 @@ public class Index(IAppDbContext db) : PageModel
                     t.Hours,
                     t.Description,
                     t.Date,
-                    t.WorkType.Name
+                    t.WorkType.Name,
+                    t.Employee.FullName
                 ))
                 .ToListAsync();
 

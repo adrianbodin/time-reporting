@@ -12,8 +12,8 @@ using TimeReporting.Data;
 namespace TimeReporting.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250210150041_RemovedJobTitleTable")]
-    partial class RemovedJobTitleTable
+    [Migration("20250212092223_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,8 +225,8 @@ namespace TimeReporting.Data.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
