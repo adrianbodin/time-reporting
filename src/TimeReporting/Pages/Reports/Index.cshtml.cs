@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Extensions;
@@ -17,15 +18,24 @@ public class Index(IAppDbContext db) : PageModel
     [BindProperty(SupportsGet = true), DataType(DataType.Date)]
     public DateTime SelectedDate { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public string SelectedProjectId { get; set; }
+
     public List<ReadTimeEntryDto> TimeEntries { get; set; }
 
-    public List<Customer> Customers { get; set; }
+    public SelectList Projects { get; set; }
 
     public async Task<IActionResult> OnGet()
     {
         this.SetTitle("Reports");
 
-        Customers = await db.Customers.ToListAsync();
+        var projects = await db.TimeEntries
+            .Select(t => t.Project)
+            .Distinct()
+            .OrderBy(p => p)
+            .ToListAsync();
+
+       Projects = new SelectList(projects, "Id", "Name");
 
         if (SelectedDate == default)
         {
@@ -34,12 +44,18 @@ public class Index(IAppDbContext db) : PageModel
 
         var query = db.TimeEntries.Where(t => t.Date == DateOnly.FromDateTime(SelectedDate));
 
+        if (!string.IsNullOrEmpty(SelectedProjectId))
+        {
+            query = query.Where(t => t.Project.Id == SelectedProjectId);
+        }
+
         if (!User.IsInRole("Admin"))
         {
             query = query.Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
 
         TimeEntries = await query
+            .OrderByDescending(t => t.Date)
             .Select(t => new ReadTimeEntryDto(
                 t.Id,
                 t.Project.Name,

@@ -59,4 +59,27 @@ public record EmployeeDetailsDto(
     List<TimeEntryDetailsDto> RecentTimeEntries
 );
 
+public record EditEmployeeDto
+{
+    public string Id { get; set; }
+
+    [Display(Name = "Full Name")]
+    [Required]
+    public string FullName { get; set; }
+
+    [Required]
+    [Display(Name = "Job Title")]
+    public string JobTitle { get; set; }
+
+    [Required]
+    [Phone]
+    [Display(Name = "Phone Number")]
+    public string PhoneNumber { get; set; }
+
+    [Required]
+    [Display(Name = "Hire Date")]
+    [DataType(DataType.Date)]
+    public DateTime HireDate { get; set; }
+};
+
 public record EmployeeTableDto(string Id, string FullName, string JobTitle, DateTime HireDate);

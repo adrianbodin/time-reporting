@@ -29,7 +29,7 @@ body {
 /* Icons & Theme Colors
 -------------------------------------------------- */
 .bi {
-  color: white; /* Default color for light mode */
+  color: #212529; /* Default color for light mode */
 }
 
 @media (prefers-color-scheme: dark) {

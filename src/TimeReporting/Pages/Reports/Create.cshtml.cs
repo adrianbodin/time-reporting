@@ -43,6 +43,9 @@ public class Create : PageModel
     [BindProperty]
     public AddTimeEntryDto NewEntry { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public bool FromTimer { get; set; }
+
     public IList<Project> Projects { get; set; }
 
     public IList<WorkType> WorkTypes { get; set; }
@@ -59,6 +62,7 @@ public class Create : PageModel
         {
             double totalHours = hours.Value + Math.Ceiling((double)minutes.Value / 30) * 0.5;
             NewEntry.Hours = totalHours;
+            FromTimer = true;  // Set this when coming from timer
         }
 
         Projects = await _db.Projects.AsNoTracking().ToListAsync();
@@ -73,12 +77,13 @@ public class Create : PageModel
         }
 
         var workType = await _db.WorkTypes.FindAsync(NewEntry.WorkTypeId);
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
         var timeEntry = new TimeEntry
         {
             Id = Guid.NewGuid().ToString(),
             ProjectId = NewEntry.ProjectId,
-            EmployeeId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
+            EmployeeId = userId,
             Hours = NewEntry.Hours,
             Description = NewEntry.Description,
             Date = DateOnly.FromDateTime(NewEntry.Date),
@@ -89,8 +94,21 @@ public class Create : PageModel
         try
         {
             _db.TimeEntries.Add(timeEntry);
-            await _db.SaveChangesAsync();
 
+            // Only delete timer if we came from the timer
+            if (FromTimer)
+            {
+                var timer = await _db.EntryTimers.FirstOrDefaultAsync(t => 
+                    t.EmployeeId == userId && 
+                    t.EndTime != null);
+
+                if (timer != null)
+                {
+                    _db.EntryTimers.Remove(timer);
+                }
+            }
+
+            await _db.SaveChangesAsync();
             this.SendNotification(NotificationType.Success, "The time entry was added successfully");
         }
         catch (Exception e)

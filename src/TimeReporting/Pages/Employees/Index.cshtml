@@ -17,7 +17,7 @@
       up-accept-location="/Employees"
       up-on-accepted="up.reload('.employees')"
       class="btn btn-primary d-flex align-items-center gap-2">
-      <i class="bi bi-plus-lg"></i>
+      <i class="bi bi-plus-lg text-light"></i>
       <span>New Employee</span>
     </a>
   </div>
@@ -75,6 +75,9 @@
                        asp-route-id="@employee.Id"
                        up-layer="new drawer"
                        up-position="right"
+                       up-accept-location="/Employees"
+                       up-on-accepted="up.reload('.employees')"
+                       up-history="false"
                        class="btn btn-sm btn-outline-primary">
                       <i class="bi bi-pencil"></i>
                       <span class="d-none d-md-inline ms-1">Edit</span>

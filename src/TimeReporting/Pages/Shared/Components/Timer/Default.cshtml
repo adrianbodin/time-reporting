@@ -12,7 +12,7 @@
            up-target="#timer"
            asp-page="/Index"
            asp-page-handler="StartTimer">
-          <i class="bi bi-play-circle m-0 p-0"></i>
+          <i class="bi bi-play-circle m-0 p-0 text-light"></i>
           <span class="timer-text ms-2">
             Start Timer
           </span>
@@ -52,7 +52,7 @@
            asp-page-handler="StopTimer"
            up-target="#timer"
            class="btn btn-danger w-100 rounded-pill">
-          <i class="bi bi-stop-circle"></i>
+          <i class="bi bi-stop-circle text-light"></i>
         </a>
       </div>
     </div>
@@ -84,18 +84,21 @@
           <a asp-page="/Reports/Create"
              asp-route-hours="@Model.Duration.Hours"
              asp-route-minutes="@Model.Duration.Minutes"
+             asp-route-fromTimer="true"
              class="btn btn-success rounded-pill"
              up-layer="new modal"
              up-target="main"
+              up-on-accepted="up.reload('#content')"
+             up-accept-location="/Reports/?*"
              up-history="false">
-            <i class="bi bi-plus-circle"></i>
+            <i class="bi bi-plus-circle text-light"></i>
           </a>
           <a asp-page="/Index"
              asp-page-handler="DiscardTimer"
              up-target="#timer"
              up-confirm="Are you sure you want to discard this timer?"
-             class="btn btn-outline-danger rounded-pill">
-            <i class="bi bi-trash"></i>
+             class="btn btn-danger rounded-pill">
+            <i class="bi bi-trash text-light"></i>
           </a>
         </div>
       </div>
