@@ -7,22 +7,13 @@ namespace TimeReporting.Pages.Projects;
 
 public record ProjectDetailsDto(string Id, string Name, string Description, string Customer, double TotalHours, decimal TotalBilledAmount,List<TimeEntryDto> TimeEntries);
 
-public record TimeEntryDto(string Id, string Employee, double Hours, DateOnly Date, string Description, string WorkType, double HourlyRate);
+public record TimeEntryDto(string Id, string EmployeeId, string Employee, double Hours, DateOnly Date, string Description, string WorkType, double HourlyRate);
 
-public record TableData(List<string> Labels, List<int> Data);
-
-public class DetailsModel : PageModel
+public class DetailsModel(IAppDbContext context) : PageModel
 {
-    private readonly AppDbContext _context;
+    public object TableData { get; set; } = null!;
 
-    public DetailsModel(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    public TableData TableData { get; set; }
-
-    public ProjectDetailsDto Project { get; set; }
+    public ProjectDetailsDto Project { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(string? id)
     {
@@ -31,17 +22,7 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        TableData = new TableData(
-            new List<string>
-            {
-                "Red", "Blue"
-            },
-            new List<int>
-            {
-                2, 5
-            });
-
-        var project = await _context.Projects
+        var project = await context.Projects
             .Where(p => p.Id == id)
             .Select(p => new ProjectDetailsDto(
                 p.Id,
@@ -51,19 +32,36 @@ public class DetailsModel : PageModel
                 p.TimeEntries.Sum(t => t.Hours),
                 p.TimeEntries.Sum(t => (decimal)(t.Hours * t.HourlyRate)),
                 p.TimeEntries.Select(t => new TimeEntryDto(
-                    t.Id,
-                    t.Employee.FullName,
-                    t.Hours,
-                    t.Date,
-                    t.Description,
-                    t.WorkType.Name,
-                    t.HourlyRate)).ToList()))
+                        t.Id,
+                        t.EmployeeId,
+                        t.Employee.FullName,
+                        t.Hours,
+                        t.Date,
+                        t.Description,
+                        t.WorkType.Name,
+                        t.HourlyRate))
+                    .ToList()))
             .FirstOrDefaultAsync();
 
 
         if (project is not null)
         {
             Project = project;
+
+            var employeeHours = Project.TimeEntries
+                .GroupBy(t => new { Id = t.EmployeeId, Name = t.Employee })
+                .Select(g => new { 
+                    Employee = g.Key.Name,
+                    Hours = g.Sum(t => t.Hours)
+                })
+                .OrderBy(x => x.Hours)
+                .ToList();
+
+            TableData = new
+            {
+                Labels = employeeHours.Select(x => x.Employee).ToList(),
+                Data = employeeHours.Select(x => x.Hours).ToList()
+            };
 
             return Page();
         }

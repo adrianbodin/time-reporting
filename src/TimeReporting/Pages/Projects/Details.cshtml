@@ -6,49 +6,61 @@
     Layout = "_Layout";
 }
 
-<div class="container d-flex flex-column gap-4">
-  <section>
-    <div class="card mb-4">
-      <div class="card-body">
-        <h1 class="h4 card-title">@Model.Project.Name @Model.Project.Customer</h1>
-        <p class="card-text">@Model.Project.Description</p>
-        <ul class="list-unstyled">
-          <li><strong>Customer:</strong> @Model.Project.Customer</li>
-          <li><strong>Status:</strong> <span class="badge bg-success">Active</span></li>
-          <li><strong>Total Hours Logged:</strong> @Model.Project.TotalHours</li>
-          <li><strong>Total Billed Amount:</strong> @Model.Project.TotalBilledAmount $</li>
-        </ul>
+<div class="d-flex flex-column gap-4 p-3">
+  <div class="row">
+    <div class="col-8 d-flex flex-column gap-4">
+      <section>
+        <div class="card">
+          <div class="card-body">
+            <h1 class="h4 card-title">@Model.Project.Name @Model.Project.Customer</h1>
+            <p class="card-text">@Model.Project.Description</p>
+            <ul class="list-unstyled">
+              <li><strong>Customer:</strong> @Model.Project.Customer</li>
+              <li><strong>Status:</strong> <span class="badge bg-success">Active</span></li>
+              <li><strong>Total Hours Logged:</strong> @Model.Project.TotalHours</li>
+              <li><strong>Total Billed Amount:</strong> @Model.Project.TotalBilledAmount $</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h3 class="h5 mb-3">Latest time entries</h3>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Employee</th>
+              <th scope="col">Work Type</th>
+              <th scope="col">Hours</th>
+              <th scope="col">Hourly Rate</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var log in Model.Project.TimeEntries)
+            {
+              <tr>
+                <td>@log.Date</td>
+                <td>@log.Employee</td>
+                <td>@log.WorkType</td>
+                <td>@log.Hours</td>
+                <td>@log.HourlyRate $</td>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Hours on project</h2>
+          <hr>
+          <canvas up-data="@Model.TableData.ToJson()" id="test-chart"></canvas>
+        </div>
       </div>
     </div>
-  </section>
-  <section>
-    <h3 class="h5 mb-3">Time Logs</h3>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Employee</th>
-          <th scope="col">Work Type</th>
-          <th scope="col">Hours</th>
-          <th scope="col">Hourly Rate</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var log in Model.Project.TimeEntries)
-        {
-          <tr>
-            <td>@log.Date</td>
-            <td>@log.Employee</td>
-            <td>@log.WorkType</td>
-            <td>@log.Hours</td>
-            <td>@log.HourlyRate $</td>
-          </tr>
-        }
-        </tbody>
-      </table>
-    </div>
-  </section>
-  <canvas up-data="@Model.TableData.ToJson()" id="test-chart"></canvas>
+  </div>
 </div>
 

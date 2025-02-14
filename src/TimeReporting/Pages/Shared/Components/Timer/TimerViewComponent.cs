@@ -20,7 +20,7 @@ public class TimerViewComponent(IAppDbContext db) : ViewComponent
         {
             _ when timer is null => (TimerStatus.NotStarted, TimeSpan.Zero),
             _ when timer.EndTime is null => (TimerStatus.Running, DateTime.UtcNow - timer.StartTime),
-            _ => (TimerStatus.Stopped, timer.EndTime!.Value - timer.StartTime)
+            _ => (TimerStatus.Stopped, timer.EndTime.Value - timer.StartTime)
         };
 
         return View(this);
