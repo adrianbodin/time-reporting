@@ -76,36 +76,24 @@ public class Index(IAppDbContext db) : PageModel
         try
         {
             var timeEntry = await db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
+            if (timeEntry == null)
+            {
+                this.SendNotification(NotificationType.Danger, "Time entry not found");
+                return RedirectToPage();
+            }
 
             db.TimeEntries.Remove(timeEntry);
             await db.SaveChangesAsync();
 
             this.SendNotification(NotificationType.Success, "The time entry was removed successfully");
-
-            TimeEntries = await db.TimeEntries
-                .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate))
-                .Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value)
-                .Select(t => new ReadTimeEntryDto(
-                    t.Id,
-                    t.Project.Name,
-                    t.Hours,
-                    t.Description,
-                    t.Date,
-                    t.WorkType.Name,
-                    t.Employee.FullName,
-                    t.EmployeeId
-                ))
-                .ToListAsync();
-
-            return Page();
+            
+            return RedirectToPage();
         }
         catch (Exception e)
         {
             this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
-
-            return Page();
+            return RedirectToPage();
         }
-
     }
 }
 

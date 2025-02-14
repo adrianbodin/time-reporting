@@ -20,7 +20,7 @@
   </header>
   <div id="content" class="container-fluid">
     <div class="row">
-      <div class="sidebar col-md-3 col-lg-2 p-0 bg-body-tertiary vh-100 position-fixed z-3">
+      <div class="sidebar p-0 bg-body-tertiary vh-100 position-fixed z-3">
         <div class="offcanvas-md offcanvas-end bg-body-tertiary h-100" tabindex="-1" id="sidebarMenu"
              aria-labelledby="sidebarMenuLabel">
           <div class="offcanvas-header">
@@ -32,10 +32,11 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-lg-2"></div>
-      <main role="main" class="col-auto w-100" style="padding-left: 60px" id="main">
-        @RenderBody()
-      </main>
+      <div style="padding-left: 60px">
+        <main role="main" class="w-100" id="main">
+          @RenderBody()
+        </main>
+      </div>
     </div>
   </div>
 }
