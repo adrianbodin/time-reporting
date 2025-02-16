@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,22 +6,9 @@ using TimeReporting.Data;
 using TimeReporting.Extensions;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
+using static TimeReporting.Models.NotificationType;
 
 namespace TimeReporting.Pages.Projects;
-
-public record EditProjectDto
-{
-    [Required]
-    public string Id { get; set; }
-
-    [Required]
-    public string Name { get; set; }
-
-    public string Description { get; set; }
-
-    [Required]
-    public string CustomerId { get; set; }
-}
 
 [Authorize]
 public class EditModel(IAppDbContext db) : PageModel
@@ -34,8 +20,6 @@ public class EditModel(IAppDbContext db) : PageModel
 
     public async Task<IActionResult> OnGet(string id)
     {
-        this.SetTitle("Edit Project");
-
         var project = await db.Projects
             .Where(p => p.Id == id)
             .Select(p => new EditProjectDto
@@ -49,7 +33,7 @@ public class EditModel(IAppDbContext db) : PageModel
 
         if (project is null)
         {
-            this.SendNotification(NotificationType.Danger, "Project not found.");
+            this.SendNotification(Danger, "Project not found.");
             return RedirectToPage("./Index");
         }
 
@@ -72,7 +56,7 @@ public class EditModel(IAppDbContext db) : PageModel
 
         if (project is null)
         {
-            this.SendNotification(NotificationType.Danger, "Project not found.");
+            this.SendNotification(Danger, "Project not found.");
             return NotFound();
         }
 
@@ -81,8 +65,7 @@ public class EditModel(IAppDbContext db) : PageModel
         project.CustomerId = Project.CustomerId;
         await db.SaveChangesAsync();
 
-        this.SendNotification(NotificationType.Success, "The project was updated successfully");
-
+        this.SendNotification(Success, "The project was updated successfully");
         return RedirectToPage("./Index");
     }
 }

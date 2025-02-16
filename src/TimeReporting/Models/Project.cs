@@ -28,3 +28,16 @@ public record AddProjectDto
 
     public string CustomerId { get; set; }
 }
+public record EditProjectDto
+{
+    [Required]
+    public string Id { get; set; }
+
+    [Required]
+    public string Name { get; set; }
+
+    public string Description { get; set; }
+
+    [Required]
+    public string CustomerId { get; set; }
+}

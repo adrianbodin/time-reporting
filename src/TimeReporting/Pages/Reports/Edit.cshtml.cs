@@ -1,36 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TimeReporting.Data;
 using TimeReporting.Extensions;
-using TimeReporting.Helpers;
 using TimeReporting.Models;
+using static TimeReporting.Models.NotificationType;
 
 namespace TimeReporting.Pages.Reports;
-
-public record EditTimeEntryDto
-{
-    [Required]
-    public string Id { get; set; }
-
-    [Required]
-    public string ProjectId { get; set; }
-
-    [Required]
-    [Range(0.5, 24, ErrorMessage = "Hours must be between 0.5 and 24.")]
-    public double Hours { get; set; }
-
-    [Required]
-    public string Description { get; set; }
-
-    [BindProperty(SupportsGet = true), DataType(DataType.Date)]
-    public DateOnly Date { get; set; }
-
-    [Required]
-    public string WorkTypeId { get; set; }
-}
 
 [Authorize]
 public class Edit(IAppDbContext db) : PageModel
@@ -44,9 +21,8 @@ public class Edit(IAppDbContext db) : PageModel
 
     public async Task<IActionResult> OnGet(string id)
     {
-        this.SetTitle("Edit Time Entry");
-
         var entry = await db.TimeEntries
+                .AsNoTracking()
             .Where(te => te.Id == id)
             .Select(t => new EditTimeEntryDto
                 {
@@ -61,11 +37,11 @@ public class Edit(IAppDbContext db) : PageModel
 
         if (entry is null)
         {
-            this.SendNotification(NotificationType.Danger, "Time entry not found.");
+            this.SendNotification(Danger, "Time entry not found.");
             return RedirectToPage("./Index");
         }
 
-
+        Entry = entry;
         Projects = await db.Projects.AsNoTracking().ToListAsync();
         WorkTypes = await db.WorkTypes.AsNoTracking().ToListAsync();
 
@@ -76,30 +52,30 @@ public class Edit(IAppDbContext db) : PageModel
     {
         if (!ModelState.IsValid)
         {
-            // Reload the collections before returning the page
+            Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             Projects = await db.Projects.AsNoTracking().ToListAsync();
             WorkTypes = await db.WorkTypes.AsNoTracking().ToListAsync();
-            
-            Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             return Page();
         }
 
-        var timeEntry = await db.TimeEntries.FindAsync(Entry.Id);
+        var timeEntry = await db.TimeEntries
+            .FirstOrDefaultAsync(t => t.Id == Entry.Id);
 
         if (timeEntry is null)
         {
-            this.SendNotification(NotificationType.Danger, "Time entry not found.");
-            return NotFound();
+            this.SendNotification(Danger, "Time entry not found.");
+            return RedirectToPage("./Index");
         }
 
+        timeEntry.ProjectId = Entry.ProjectId;
         timeEntry.Hours = Entry.Hours;
         timeEntry.Description = Entry.Description;
         timeEntry.Date = Entry.Date;
         timeEntry.WorkTypeId = Entry.WorkTypeId;
+
         await db.SaveChangesAsync();
 
-        this.SendNotification(NotificationType.Success, "The time entry was updated successfully");
-
-        return RedirectToPage("/Reports/Index", new { SelectedDate = Entry.Date.ToString("yyyy-MM-dd") });
+        this.SendNotification(Success, "The time entry was updated successfully");
+        return RedirectToPage("./Index");
     }
 }

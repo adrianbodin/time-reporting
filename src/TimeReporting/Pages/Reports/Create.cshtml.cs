@@ -8,6 +8,7 @@ using TimeReporting.Data;
 using TimeReporting.Extensions;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
+using static TimeReporting.Models.NotificationType;
 
 namespace TimeReporting.Pages.Reports;
 
@@ -77,7 +78,7 @@ public class Create : PageModel
         }
 
         var workType = await _db.WorkTypes.FindAsync(NewEntry.WorkTypeId);
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         var timeEntry = new TimeEntry
         {
@@ -91,31 +92,24 @@ public class Create : PageModel
             HourlyRate = workType.HourlyRate
         };
 
-        try
-        {
-            _db.TimeEntries.Add(timeEntry);
+        _db.TimeEntries.Add(timeEntry);
 
-            // Only delete timer if we came from the timer
-            if (FromTimer)
+        if (FromTimer)
+        {
+            var timer = await _db.EntryTimers.FirstOrDefaultAsync(t =>
+                t.EmployeeId == userId &&
+                t.EndTime != null);
+
+            if (timer != null)
             {
-                var timer = await _db.EntryTimers.FirstOrDefaultAsync(t => 
-                    t.EmployeeId == userId && 
-                    t.EndTime != null);
-
-                if (timer != null)
-                {
-                    _db.EntryTimers.Remove(timer);
-                }
+                _db.EntryTimers.Remove(timer);
             }
-
-            await _db.SaveChangesAsync();
-            this.SendNotification(NotificationType.Success, "The time entry was added successfully");
-        }
-        catch (Exception e)
-        {
-            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
         }
 
-        return RedirectToPage("/Reports/Index", new { SelectedDate = NewEntry.Date.ToString("yyyy-MM-dd") });
+        await _db.SaveChangesAsync();
+
+        this.SendNotification(Success, "The time entry was added successfully");
+        return RedirectToPage("./Index");
     }
+
 }

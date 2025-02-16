@@ -9,6 +9,7 @@ using TimeReporting.Data;
 using TimeReporting.Extensions;
 using TimeReporting.Helpers;
 using TimeReporting.Models;
+using static TimeReporting.Models.NotificationType;
 
 namespace TimeReporting.Pages.Reports;
 
@@ -21,7 +22,7 @@ public class Index(IAppDbContext db) : PageModel
     [BindProperty(SupportsGet = true)]
     public string SelectedProjectId { get; set; }
 
-    public List<ReadTimeEntryDto> TimeEntries { get; set; }
+    public List<ReadTimeEntryDto> TimeEntries { get; set; } = [];
 
     public SelectList Projects { get; set; }
 
@@ -35,7 +36,7 @@ public class Index(IAppDbContext db) : PageModel
             .OrderBy(p => p)
             .ToListAsync();
 
-       Projects = new SelectList(projects, "Id", "Name");
+        Projects = new SelectList(projects, "Id", "Name");
 
         if (SelectedDate == default)
         {
@@ -51,7 +52,7 @@ public class Index(IAppDbContext db) : PageModel
 
         if (!User.IsInRole("Admin"))
         {
-            query = query.Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            query = query.Where(t => t.EmployeeId == User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
         }
 
         TimeEntries = await query
@@ -73,27 +74,18 @@ public class Index(IAppDbContext db) : PageModel
 
     public async Task<IActionResult> OnPostDeleteEntry(string id)
     {
-        try
+        var timeEntry = await db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
+        if (timeEntry is null)
         {
-            var timeEntry = await db.TimeEntries.FirstOrDefaultAsync(t => t.Id == id);
-            if (timeEntry == null)
-            {
-                this.SendNotification(NotificationType.Danger, "Time entry not found");
-                return RedirectToPage();
-            }
-
-            db.TimeEntries.Remove(timeEntry);
-            await db.SaveChangesAsync();
-
-            this.SendNotification(NotificationType.Success, "The time entry was removed successfully");
-            
+            this.SendNotification(Danger, "Time entry not found");
             return RedirectToPage();
         }
-        catch (Exception e)
-        {
-            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
-            return RedirectToPage();
-        }
+
+        db.TimeEntries.Remove(timeEntry);
+        await db.SaveChangesAsync();
+
+        this.SendNotification(Success, "The time entry was removed successfully");
+        return RedirectToPage();
     }
 }
 

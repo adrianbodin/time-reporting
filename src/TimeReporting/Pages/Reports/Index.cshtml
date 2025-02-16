@@ -9,41 +9,41 @@
 <section class="container mt-3">
   <div class="row g-3 align-items-center mb-4">
     <div class="col-12 col-sm-6 col-md-4 col-lg-6">
-    <form method="get" up-target=".entries" up-history="true" up-autosubmit>
-      <div class="row">
-        <div class="col-6">
-          <div class="input-group mb-3">
+      <form method="get" up-target=".entries" up-history="true" up-autosubmit>
+        <div class="row">
+          <div class="col-6">
+            <div class="input-group mb-3">
             <span class="input-group-text">
               <i class="bi bi-calendar3"></i>
             </span>
-            <input
-              data-testid="date-input" 
-              asp-for="SelectedDate" 
-              class="form-control"
-              aria-label="Select date"/>
+              <input
+                data-testid="date-input"
+                asp-for="SelectedDate"
+                class="form-control"
+                aria-label="Select date"/>
+            </div>
           </div>
-        </div>
-        <div class="col-6">
-          <div class="input-group">
+          <div class="col-6">
+            <div class="input-group">
             <span class="input-group-text">
               <i class="bi bi-kanban"></i>
             </span>
-            <select 
-              asp-for="SelectedProjectId" 
-              asp-items="Model.Projects" 
-              class="form-select"
-              aria-label="Select project">
-              <option value="">All Projects</option>
-            </select>
+              <select
+                asp-for="SelectedProjectId"
+                asp-items="Model.Projects"
+                class="form-select"
+                aria-label="Select project">
+                <option value="">All Projects</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
     </div>
     <div class="col-12 col-sm-6 col-md-8 col-lg-6 d-flex justify-content-end">
       <a href="@Url.Page("Create")"
          up-layer="new modal"
-         up-accept-location="/Reports/?*"
+         up-accept-location="/Reports"
          up-history="false"
          up-on-accepted="up.reload('.entries')"
          up-position="right"
@@ -69,84 +69,72 @@
       <div class="table-responsive">
         <table class="table table-hover align-middle">
           <thead>
-            <tr>
-              <th>Project</th>
-              <th>Hours</th>
-              <th>Work type</th>
-              <th>Employee</th>
-              <th>Date</th>
-              <th></th>
-            </tr>
+          <tr>
+            <th>Project</th>
+            <th>Hours</th>
+            <th>Work type</th>
+            <th>Employee</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
           </thead>
           <tbody>
-            @foreach (var timeEntry in Model.TimeEntries)
-            {
-              <tr class="entry-@timeEntry.Id">
-                <td>
-                  <div class="fw-medium">@timeEntry.Project</div>
-                </td>
-                <td>
-                  <span class="badge bg-secondary">@timeEntry.Hours h</span>
-                </td>
-                <td>
-                  <span class="text-muted">@timeEntry.WorkType</span>
-                </td>
-                <td>
-                  @timeEntry.EmployeeName
-                </td>
-                <td>
-                  @timeEntry.Date.ToString("MMMM dd, yyyy")
-                </td>
-                <td>
-                  @if (timeEntry.EmployeeId == User.FindFirstValue(ClaimTypes.NameIdentifier))
-                  {
-                    <div class="d-flex gap-2 justify-content-end">
-                      <a asp-page="Edit"
-                         asp-route-id="@timeEntry.Id"
-                         up-layer="new drawer"
-                         up-position="right"
-                         up-history="false"
-                         up-accept-location="/Reports"
-                         up-on-accepted="up.reload('.entries')"
-                         class="btn btn-sm btn-outline-primary">
-                        <i class="bi bi-pencil"></i>
-                        <span class="d-none d-md-inline ms-1">Edit</span>
-                      </a>
-                      <form
-                        method="post"
-                        asp-page="Index"
-                        asp-page-handler="DeleteEntry"
-                        asp-route-id="@timeEntry.Id"
-                        asp-route-selectedDate="@Model.SelectedDate.ToString("yyyy-MM-dd")"
-                        up-confirm="Are you sure you want to delete this entry?"
-                        up-target=".entries"
-                        class="d-inline">
-                        @Html.AntiForgeryToken()
-                        <button class="btn btn-sm btn-outline-danger" type="submit">
-                          <i class="bi bi-trash"></i>
-                          <span class="d-none d-md-inline ms-1">Delete</span>
-                        </button>
-                      </form>
-                    </div>
-                  }
-                </td>
-              </tr>
-            }
+          @foreach (var timeEntry in Model.TimeEntries)
+          {
+            <tr class="entry-@timeEntry.Id">
+              <td>
+                <div class="fw-medium">@timeEntry.Project</div>
+              </td>
+              <td>
+                <span class="badge bg-secondary">@timeEntry.Hours h</span>
+              </td>
+              <td>
+                <span class="text-muted">@timeEntry.WorkType</span>
+              </td>
+              <td>
+                @timeEntry.EmployeeName
+              </td>
+              <td>
+                @timeEntry.Date.ToString("MMMM dd, yyyy")
+              </td>
+              <td>
+                @if (timeEntry.EmployeeId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                {
+                  <div class="d-flex gap-2 justify-content-end">
+                    <a asp-page="Edit"
+                       asp-route-id="@timeEntry.Id"
+                       up-layer="new drawer"
+                       up-position="right"
+                       up-history="false"
+                       up-accept-location="/Reports"
+                       up-on-accepted="up.reload('.entries')"
+                       class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-pencil"></i>
+                      <span class="d-none d-md-inline ms-1">Edit</span>
+                    </a>
+                    <form
+                      method="post"
+                      asp-page="Index"
+                      asp-page-handler="DeleteEntry"
+                      asp-route-id="@timeEntry.Id"
+                      asp-route-selectedDate="@Model.SelectedDate.ToString("yyyy-MM-dd")"
+                      up-confirm="Are you sure you want to delete this entry?"
+                      up-target=".entries"
+                      class="d-inline">
+                      @Html.AntiForgeryToken()
+                      <button class="btn btn-sm btn-outline-danger" type="submit">
+                        <i class="bi bi-trash"></i>
+                        <span class="d-none d-md-inline ms-1">Delete</span>
+                      </button>
+                    </form>
+                  </div>
+                }
+              </td>
+            </tr>
+          }
           </tbody>
         </table>
       </div>
     }
   </div>
 </section>
-
-@section Scripts {
-  <script>
-    // Initialize any tooltips
-    document.addEventListener('DOMContentLoaded', function() {
-      let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-      tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-      })
-    });
-  </script>
-}

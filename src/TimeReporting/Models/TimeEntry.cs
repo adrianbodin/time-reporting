@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+
 namespace TimeReporting.Models;
 
 public class TimeEntry
@@ -30,3 +33,25 @@ public record TimeEntryDetailsDto(
     DateOnly Date,
     string WorkType
 );
+
+public record EditTimeEntryDto
+{
+    [Required]
+    public string Id { get; set; }
+
+    [Required]
+    public string ProjectId { get; set; }
+
+    [Required]
+    [Range(0.5, 24, ErrorMessage = "Hours must be between 0.5 and 24.")]
+    public double Hours { get; set; }
+
+    [Required]
+    public string Description { get; set; }
+
+    [BindProperty(SupportsGet = true), DataType(DataType.Date)]
+    public DateOnly Date { get; set; }
+
+    [Required]
+    public string WorkTypeId { get; set; }
+}

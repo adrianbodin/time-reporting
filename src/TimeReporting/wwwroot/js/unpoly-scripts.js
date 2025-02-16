@@ -15,6 +15,7 @@ up.compiler('#test-chart', function(element, data) {
     data: {
       labels: data.Labels,
       datasets: [{
+        label: 'Hours',
         data: data.Data,
         borderWidth: 1
       }]
@@ -28,7 +29,5 @@ up.compiler('#test-chart', function(element, data) {
     }
   });
 
-  return function() {
-    chart.destroy();
-  }
+  return () => chart.destroy()
 });
