@@ -1,0 +1,23 @@
+@page
+@model EntreprenadPro.Pages.Kunder.RedigeraModel
+
+@{
+  Layout = "_Layout";
+}
+
+<section>
+  <h2>Edit Customer</h2>
+  <hr/>
+  <form method="post" up-target="main">
+    <input type="hidden" asp-for="Customer.Id"/>
+
+    <div class="mb-3">
+      <label asp-for="Customer.Name" class="form-label">Namn</label>
+      <input asp-for="Customer.Name" class="form-control"/>
+      <span asp-validation-for="Customer.Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Spara</button>
+    @Html.AntiForgeryToken()
+  </form>
+</section>
+

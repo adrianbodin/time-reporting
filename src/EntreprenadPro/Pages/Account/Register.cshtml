@@ -1,0 +1,50 @@
+﻿@page
+@model RegisterModel
+<section class="col-4 mt-5">
+  <div>
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+      <h2>Skapa en administratör för din organisation</h2>
+      <hr/>
+      <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+      <div class="form-floating mb-3">
+        <input asp-for="Input.Email" class="form-control" autocomplete="username" data-testid="email-input"
+               aria-required="true" placeholder="namn@exempel.se"/>
+        <label asp-for="Input.Email">E-post</label>
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+      </div>
+      <div class="form-floating mb-3">
+        <input asp-for="Input.FullName" class="form-control" autocomplete="fullname" data-testid="fullname-input"
+               aria-required="true" placeholder="Exempel Namn"/>
+        <label asp-for="Input.FullName">Fullständigt namn</label>
+        <span asp-validation-for="Input.FullName" class="text-danger"></span>
+      </div>
+      <div class="form-floating mb-3">
+        <input asp-for="Input.JobTitle" class="form-control" autocomplete="fullname" data-testid="fullname-input"
+               aria-required="true" placeholder="Jobbtitel"/>
+        <label asp-for="Input.JobTitle">Jobbtitel</label>
+        <span asp-validation-for="Input.JobTitle" class="text-danger"></span>
+      </div>
+      <div class="form-floating mb-3">
+        <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="phone" data-testid="phone-input"
+               aria-required="true" placeholder="0123456789"/>
+        <label asp-for="Input.PhoneNumber">Telefonnummer</label>
+        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+      </div>
+      <div class="form-floating mb-3">
+        <input asp-for="Input.Password" class="form-control" autocomplete="password" data-testid="password-input"
+               aria-required="true" placeholder="lösenord"/>
+        <label asp-for="Input.Password">Lösenord</label>
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+      </div>
+      <div class="form-floating mb-3">
+        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password"
+               data-testid="confirm-password-input" aria-required="true" placeholder="lösenord"/>
+        <label asp-for="Input.ConfirmPassword">Bekräfta lösenord</label>
+        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+      </div>
+      <button id="registerSubmit" type="submit" data-testid="submit-button" class="w-100 btn btn-lg btn-primary">
+        Registrera
+      </button>
+    </form>
+  </div>
+</section>

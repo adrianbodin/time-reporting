@@ -1,0 +1,146 @@
+@page
+@model EntreprenadPro.Pages.Projects.IndexModel
+
+<section class="container mt-3">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="m-0">Projekt</h1>
+    <div class="d-flex gap-3">
+      <form
+        method="get"
+        role="search"
+        aria-label="Sök i projekt"
+        up-target=".projects"
+        up-history="true"
+        up-autosubmit
+        up-watch-event="input"
+        up-watch-delay="500">
+        <div class="input-group">
+          <span class="input-group-text border-end-0" aria-hidden="true">
+            <i class="bi bi-search" aria-hidden="true"></i>
+          </span>
+          <label for="SearchTerm" class="visually-hidden">Sök projekt</label>
+          <input
+            type="search"
+            asp-for="SearchTerm"
+            class="form-control border-start-0"
+            placeholder="Sök…"
+            aria-label="Sök projekt"
+            aria-controls="projectsTable"
+            inputmode="search">
+        </div>
+      </form>
+      <a
+        href="/Projekt/Skapa"
+        up-layer="new modal"
+        up-position="right"
+        up-history="false"
+        up-accept-location="/Projekt"
+        up-on-accepted="up.reload('.projects')"
+        class="btn btn-primary d-flex align-items-center gap-2"
+        aria-label="Lägg till nytt projekt">
+        <i class="bi bi-plus-lg text-light" aria-hidden="true"></i>
+        <span>Lägg till</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="projects"
+       aria-live="polite"
+       up-on-loading="this.setAttribute('aria-busy','true')"
+       up-on-loaded="this.removeAttribute('aria-busy')">
+    @if (!Model.Projects.Any())
+    {
+      <div class="text-center py-5" role="status" aria-live="polite">
+        <i class="bi bi-kanban display-1 text-muted mb-3" aria-hidden="true"></i>
+        <h3 class="h4 text-muted">Inga projekt hittades</h3>
+        <p class="text-muted mb-3">Börja med att skapa ditt första projekt</p>
+        <a
+          href="/projekt/skapa"
+          up-layer="new modal"
+          up-position="right"
+          up-history="false"
+          up-accept-location="/Projekt"
+          up-on-accepted="up.reload('.projects')"
+          class="btn btn-primary"
+          aria-label="Lägg till nytt projekt">
+          <i class="bi bi-plus-lg me-2" aria-hidden="true"></i>
+          Lägg till
+        </a>
+      </div>
+    }
+    else
+    {
+      <div class="table-responsive"
+           role="region"
+           aria-labelledby="projectsTableCaption"
+           tabindex="0">
+        <table class="table" id="projectsTable">
+          <caption id="projectsTableCaption" class="visually-hidden">
+            Lista över projekt. @Model.Projects.Count projekt.
+          </caption>
+          <thead>
+          <tr>
+            <th scope="col">Namn</th>
+            <th scope="col">Kund</th>
+            <th scope="col">Totala timmar</th>
+            <th scope="col" class="text-end">Åtgärder</th>
+          </tr>
+          </thead>
+          <tbody class="border-top">
+          @foreach (var project in Model.Projects)
+          {
+            var totalHours = project.TimeEntries.Sum(t => t.Hours);
+
+            <tr>
+              <th scope="row" class="ps-0">
+                <a asp-page="Details/Index"
+                   up-follow
+                   up-transition="move-left"
+                   asp-route-id="@project.Id"
+                   class="text-decoration-none fw-medium">
+                  @project.Name
+                </a>
+              </th>
+              <td>
+                @project.Customer?.Name
+              </td>
+              <td>
+                <span aria-label="@totalHours.ToString("F1") timmar">
+                  @totalHours.ToString("F1")<span class="visually-hidden"> timmar</span>h
+                </span>
+              </td>
+              <td class="text-end pe-0">
+                <div class="d-flex gap-2 justify-content-end">
+                  <a asp-page="Edit"
+                     asp-route-id="@project.Id"
+                     up-layer="new drawer"
+                     up-position="right"
+                     up-accept-location="/projekt"
+                     up-on-accepted="up.reload('.projects')"
+                     up-history="false"
+                     class="btn btn-sm btn-outline-primary"
+                     title="Redigera @project.Name"
+                     aria-label="Redigera @project.Name">
+                    <i class="bi bi-pencil" aria-hidden="true"></i>
+                    <span class="visually-hidden">Redigera</span>
+                  </a>
+                  <a asp-page="Details/Index"
+                     asp-route-id="@project.Id"
+                     up-follow
+                     up-transition="move-left"
+                     class="btn btn-sm btn-outline-secondary"
+                     title="Visa detaljer för @project.Name"
+                     aria-label="Visa detaljer för @project.Name">
+                    <i class="bi bi-eye" aria-hidden="true"></i>
+                    <span class="visually-hidden">Visa detaljer</span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</section>

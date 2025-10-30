@@ -1,0 +1,44 @@
+@page
+@using EntreprenadPro.Helpers
+@model EntreprenadPro.Pages.Kunder.SkapaModel
+
+<section class="container">
+  <h2>Ny kund</h2>
+  <hr/>
+  <form method="post" up-submit>
+    <input type="hidden" asp-for="Customer.Id"/>
+
+    <div class="mb-3">
+      <label asp-for="Customer.Type" class="form-label">Typ av kund</label>
+      <select asp-for="Customer.Type" class="form-select" up-switch=".type-dependant"
+              asp-items="@EnumHelper.GetSelectList<CustomerType>()">
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Customer.Name" class="form-label"></label>
+      <input asp-for="Customer.Name" class="form-control" placeholder="Anders Bygg"/>
+      <span asp-validation-for="Customer.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 type-dependant" up-show-for="@CustomerType.Company">
+      <label asp-for="Customer.OrgNumber" class="form-label"></label>
+      <input asp-for="Customer.OrgNumber" class="form-control" placeholder="560356-0793"/>
+      <span asp-validation-for="Customer.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Customer.PhoneNumber" class="form-label"></label>
+      <input asp-for="Customer.PhoneNumber" class="form-control" placeholder="0701234567"/>
+      <span asp-validation-for="Customer.PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Customer.Email" class="form-label"></label>
+      <input asp-for="Customer.Email" class="form-control" placeholder="anders@bygg.se"/>
+      <span asp-validation-for="Customer.Email" class="text-danger"></span>
+    </div>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Skapa</button>
+  </form>
+</section>

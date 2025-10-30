@@ -1,0 +1,81 @@
+@page
+@model EntreprenadPro.Pages.Anstallda.IndexModel
+
+<section class="container mt-3">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="m-0">Anställda</h1>
+    <a
+      href="/Anstallda/Skapa"
+      up-layer="new modal"
+      up-position="right"
+      up-history="false"
+      up-accept-location="/Anstallda"
+      up-on-accepted="up.reload('.employees')"
+      class="btn btn-primary d-flex align-items-center gap-2">
+      <i class="bi bi-plus-lg text-light"></i>
+      <span>Ny anställd</span>
+    </a>
+  </div>
+
+  <div class="employees">
+    @if (!Model.Employees.Any())
+    {
+      <div class="text-center py-5">
+        <i class="bi bi-people display-1 text-muted mb-3"></i>
+        <h3 class="h4 text-muted">Inga anställda hittades</h3>
+        <p class="text-muted mb-3">Börja med att lägga till din första anställd</p>
+        <a
+          href="/Anstallda/Skapa"
+          up-layer="new modal"
+          up-position="right"
+          up-history="false"
+          up-accept-location="/Anstallda"
+          up-on-accepted="up.reload('.employees')"
+          class="btn btn-primary">
+          <i class="bi bi-plus-lg me-2"></i>Lägg till anställd
+        </a>
+      </div>
+    }
+    else
+    {
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+          <tr>
+            <th>Namn</th>
+            <th>Titel</th>
+            <th>Anställningsdatum</th>
+          </tr>
+          </thead>
+          <tbody class="border-top">
+          @foreach (var employee in Model.Employees)
+          {
+            <tr class="clickable-row" role="button" tabindex="0"
+                onclick="window.location='@Url.Page("./Detaljer", new { id = employee.Id })'">
+              <td class="ps-0" style="min-width: 300px;">
+                @employee.FullName
+              </td>
+              <td>
+                @employee.JobTitle
+              </td>
+              <td>
+                @employee.HireDate.ToString("MMM dd, yyyy")
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</section>
+
+<style>
+  .clickable-row {
+    cursor: pointer;
+  }
+
+  .clickable-row:hover {
+    background-color: #f5f5f5;
+  }
+</style>

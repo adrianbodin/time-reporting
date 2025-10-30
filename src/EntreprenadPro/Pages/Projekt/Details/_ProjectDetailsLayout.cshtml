@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+  var projectId =
+    ViewContext?.RouteData?.Values["id"] as string
+    ?? Context?.Request?.Query["id"].ToString();
+
+  var activeLink = ViewData["ActiveLink"] as string ?? "Overview";
+}
+
+
+<div>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link @(activeLink == "Overview" ? "active" : "")"
+         aria-current="@(activeLink == "Overview" ? "page" : null)"
+         asp-page="/Projects/Details/Index"
+         asp-route-id="@projectId"
+         up-follow
+         up-history="false">Översikt</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link @(activeLink == "Analytics" ? "active" : "")"
+         aria-current="@(activeLink == "Analytics" ? "page" : null)"
+         asp-page="/Projects/Details/Analytics"
+         asp-route-id="@projectId"
+         up-follow
+         up-history="false">Tabeller</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link @(activeLink == "Documents" ? "active" : "")"
+         aria-current="@(activeLink == "Documents" ? "page" : null)"
+         asp-page="/Projects/Details/Documents"
+         asp-route-id="@projectId"
+         up-follow
+         up-history="false">Dokument</a>
+    </li>
+  </ul>
+
+  @RenderBody()
+
+</div>
+

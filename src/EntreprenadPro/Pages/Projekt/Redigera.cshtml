@@ -1,0 +1,47 @@
+@page
+@model EntreprenadPro.Pages.Projekt.RedigeraModel
+
+@{
+  Layout = "_Layout";
+}
+
+<section>
+  <h2>Redigera projekt</h2>
+  <hr>
+  <form method="post" up-target="main">
+    <input type="hidden" asp-for="Project.Id"/>
+
+    <div class="mb-3">
+      <label asp-for="Project.Name" class="form-label"></label>
+      <input asp-for="Project.Name" class="form-control"/>
+      <span asp-validation-for="Project.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Project.Description" class="form-label"></label>
+      <textarea asp-for="Project.Description" class="form-control" rows="3"></textarea>
+      <span asp-validation-for="Project.Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Project.CustomerId" class="form-label"></label>
+      <select asp-for="Project.CustomerId" class="form-select">
+        <option value="">Select a Customer</option>
+        @foreach (var customer in Model.Customers)
+        {
+          <option value="@customer.Id">@customer.Name</option>
+        }
+      </select>
+      <span asp-validation-for="Project.CustomerId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Project.Status" class="form-label"></label>
+      <select asp-for="Project.Status" class="form-select" asp-items="Html.GetEnumSelectList<ProjectStatus>()"></select>
+      <span asp-validation-for="Project.Status" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Spara</button>
+    @Html.AntiForgeryToken()
+  </form>
+</section>

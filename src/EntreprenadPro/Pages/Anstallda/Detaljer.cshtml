@@ -1,0 +1,74 @@
+@page "{id}"
+@model EntreprenadPro.Pages.Anstallda.DetaljerModel
+
+<div class="container py-4">
+  <div class="row">
+    <!-- Employee Information Card -->
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Anställningsinformation</h5>
+          <dl class="row">
+            <dt class="col-sm-4">Namn</dt>
+            <dd class="col-sm-8">@Model.Employee.FullName</dd>
+
+            <dt class="col-sm-4">E-post</dt>
+            <dd class="col-sm-8">
+              <a href="mailto:@Model.Employee.Email">@Model.Employee.Email</a>
+            </dd>
+
+            <dt class="col-sm-4">Telefon</dt>
+            <dd class="col-sm-8">
+              <a href="tel:@Model.Employee.PhoneNumber">@Model.Employee.PhoneNumber</a>
+            </dd>
+
+            <dt class="col-sm-4">Anställningsdatum</dt>
+            <dd class="col-sm-8">@(Model.Employee.HireDate?.ToString("yyyy-MM-dd") ?? "Ej angivet")</dd>
+
+            <dt class="col-sm-4">Jobbtitel</dt>
+            <dd class="col-sm-8">@Model.Employee.JobTitle</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Time Entries Card -->
+    <div class="col-md-8 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Senaste tidrapporter</h5>
+          @if (!Model.Employee.RecentTimeEntries.Any())
+          {
+            <p class="text-muted">Inga tidrapporter hittades.</p>
+          }
+          else
+          {
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th>Datum</th>
+                  <th>Projekt</th>
+                  <th>Arbetstyp</th>
+                  <th>Timmar</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var entry in Model.Employee.RecentTimeEntries)
+                {
+                  <tr>
+                    <td>@entry.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@entry.ProjectName</td>
+                    <td>@entry.WorkType</td>
+                    <td>@entry.Hours</td>
+                  </tr>
+                }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+@page
+@model EntreprenadPro.Pages.Projekt.SkapaModel
+
+<section class="container">
+  <h2>Nytt Projekt</h2>
+  <hr>
+  <form method="post" up-submit>
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <label asp-for="Project.Name" class="control-label"></label>
+        <input asp-for="Project.Name" class="form-control" placeholder="Projektets namn" autofocus id="Project_Name"/>
+        <span asp-validation-for="Project.Name" class="text-danger"></span>
+      </div>
+      <div class="col-6">
+        <label asp-for="Project.CustomerId" class="control-label"></label>
+        <div class="input-group">
+          <select asp-for="Project.CustomerId" class="form-select customer-selection" id="Project_CustomerId">
+            <option value="">-- Välj kund --</option>
+            @foreach (var customer in Model.Customers)
+            {
+              <option value="@customer.Id">@customer.Name</option>
+            }
+          </select>
+          <a
+            class="btn btn-outline-secondary rounded-end"
+            href="/Kunder/Skapa"
+            up-layer="new modal"
+            up-history="false"
+            up-accept-location="/Kunder"
+            up-on-accepted="up.reload('.customer-selection')">
+            Ny
+          </a>
+        </div>
+        <span asp-validation-for="Project.CustomerId" class="text-danger"></span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label asp-for="Project.Description" class="control-label"></label>
+      <textarea asp-for="Project.Description" rows="5" cols="100" class="form-control" placeholder="Beskriv projektet"
+                id="Project_Description"></textarea>
+      <span asp-validation-for="Project.Description" class="text-danger"></span>
+    </div>
+    @Html.AntiForgeryToken()
+    <div>
+      <input type="submit" value="Skapa projekt" class="btn btn-primary"/>
+    </div>
+  </form>
+</section>

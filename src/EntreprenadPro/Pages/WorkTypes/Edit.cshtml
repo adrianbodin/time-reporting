@@ -1,0 +1,27 @@
+@page
+@model EntreprenadPro.Pages.WorkTypes.EditModel
+
+@{
+    Layout = "_Layout";
+}
+
+<section>
+  <h2>Edit work type</h2>
+  <hr />
+  <form method="post" up-target="main">
+    <input type="hidden" asp-for="WorkType.Id" />
+    <div class="form-group mb-3">
+      <label asp-for="WorkType.Name" class="form-label"></label>
+      <input asp-for="WorkType.Name" class="form-control"/>
+      <span asp-validation-for="WorkType.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+      <label asp-for="WorkType.HourlyRate" class="form-label"></label>
+      <input asp-for="WorkType.HourlyRate" class="form-control"/>
+      <span asp-validation-for="WorkType.HourlyRate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Save" class="btn btn-primary"/>
+    </div>
+  </form>
+</section>
