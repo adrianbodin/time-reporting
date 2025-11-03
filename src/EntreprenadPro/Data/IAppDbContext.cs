@@ -10,6 +10,7 @@ public interface IAppDbContext
     DbSet<Project> Projects { get; set; }
     DbSet<WorkType> WorkTypes { get; set; }
     DbSet<Employee> Users { get; set; }
+    DbSet<Vehicle> Vehicles { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

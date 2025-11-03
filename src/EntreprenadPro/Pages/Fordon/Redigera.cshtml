@@ -1,0 +1,63 @@
+@page
+@model EntreprenadPro.Pages.Fordon.RedigeraModel
+
+<section>
+  <h2>Redigera fordon</h2>
+  <hr>
+  <form method="post" up-target="main">
+    <input type="hidden" asp-for="Vehicle.Id"/>
+
+    <div class="row mb-3">
+      <div class="col-6">
+        <label asp-for="Vehicle.Type" class="form-label"></label>
+        <select asp-for="Vehicle.Type" class="form-select" asp-items="Html.GetEnumSelectList<VehicleType>()"></select>
+        <span asp-validation-for="Vehicle.Type" class="text-danger"></span>
+      </div>
+      <div class="col-6">
+        <label asp-for="Vehicle.RegistrationNumber" class="form-label"></label>
+        <input asp-for="Vehicle.RegistrationNumber" class="form-control"/>
+        <span asp-validation-for="Vehicle.RegistrationNumber" class="text-danger"></span>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-4">
+        <label asp-for="Vehicle.Make" class="form-label"></label>
+        <input asp-for="Vehicle.Make" class="form-control"/>
+        <span asp-validation-for="Vehicle.Make" class="text-danger"></span>
+      </div>
+      <div class="col-4">
+        <label asp-for="Vehicle.Model" class="form-label"></label>
+        <input asp-for="Vehicle.Model" class="form-control"/>
+        <span asp-validation-for="Vehicle.Model" class="text-danger"></span>
+      </div>
+      <div class="col-4">
+        <label asp-for="Vehicle.Year" class="form-label"></label>
+        <input asp-for="Vehicle.Year" class="form-control"/>
+        <span asp-validation-for="Vehicle.Year" class="text-danger"></span>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-6">
+        <label asp-for="Vehicle.PurchasePrice" class="form-label"></label>
+        <input asp-for="Vehicle.PurchasePrice" class="form-control"/>
+        <span asp-validation-for="Vehicle.PurchasePrice" class="text-danger"></span>
+      </div>
+      <div class="col-6">
+        <label asp-for="Vehicle.PurchaseDate" class="form-label"></label>
+        <input asp-for="Vehicle.PurchaseDate" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control"/>
+        <span asp-validation-for="Vehicle.PurchaseDate" class="text-danger"></span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Vehicle.Note" class="form-label"></label>
+      <textarea asp-for="Vehicle.Note" class="form-control" rows="3"></textarea>
+      <span asp-validation-for="Vehicle.Note" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Spara</button>
+    @Html.AntiForgeryToken()
+  </form>
+</section>

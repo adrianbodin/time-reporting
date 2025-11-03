@@ -15,6 +15,7 @@ public class AppDbContext : IdentityDbContext<Employee>, IAppDbContext
     public DbSet<TimeEntry> TimeEntries { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<WorkType> WorkTypes { get; set; }
+    public DbSet<Vehicle> Vehicles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

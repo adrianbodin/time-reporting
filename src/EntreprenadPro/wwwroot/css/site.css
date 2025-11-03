@@ -18,10 +18,10 @@ body {
 
 /* Focus States
 -------------------------------------------------- */
-.btn:focus, 
-.btn:active:focus, 
-.btn-link.nav-link:focus, 
-.form-control:focus, 
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
 .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -36,7 +36,7 @@ body {
   .bi {
     color: white;
   }
-  
+
   .up-current {
     background-color: #212529;
   }
@@ -120,13 +120,21 @@ body {
 
 /* Clock Animations */
 @keyframes grdAiguille {
-  from { transform: translate(-50%, 0) rotate(0deg); }
-  to { transform: translate(-50%, 0) rotate(360deg); }
+  from {
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, 0) rotate(360deg);
+  }
 }
 
 @keyframes ptAiguille {
-  from { transform: translate(-50%, 0) rotate(0deg); }
-  to { transform: translate(-50%, 0) rotate(360deg); }
+  from {
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, 0) rotate(360deg);
+  }
 }
 
 /* Sidebar Layout
@@ -189,15 +197,15 @@ body {
   .timer-text {
     display: inline-block;
   }
-  
+
   .timer-text-collapsed {
     display: none;
   }
-  
+
   #timer {
     width: 250px;
   }
-  
+
   .menu-text {
     opacity: 1;
   }
@@ -205,22 +213,51 @@ body {
 
 /* Responsive Layouts
 -------------------------------------------------- */
+/* Content wrapper replaces inline padding on md+ to make room for fixed sidebar */
+.content-wrapper {
+  padding-left: 0;
+}
+
 @media (min-width: 768px) {
   .sidebar + .col-md-3 {
     width: 60px;
     transition: all 0.3s ease;
   }
-  
+
   .sidebar:hover + .col-md-3 {
     width: 250px;
+  }
+
+  /* On md+ keep content pushed by collapsed sidebar */
+  .content-wrapper {
+    padding-left: 60px;
+    transition: padding-left 0.3s ease;
+  }
+
+  /* When sidebar expands on hover, push content accordingly */
+  .sidebar:hover ~ .content-wrapper {
+    padding-left: 250px;
+  }
+
+  /* Make sidebar fixed only on md+ to avoid mobile flicker */
+  .sidebar {
+    position: fixed;
+    height: 100vh;
   }
 }
 
 @media (max-width: 767.98px) {
+  /* Prevent hover expansion and 100vh issues on mobile */
   .sidebar {
-    width: 100%
+    width: 100%;
+    position: static !important;
+    height: auto !important;
   }
-  
+
+  .sidebar:hover {
+    width: 100%;
+  }
+
   .menu-text {
     opacity: 1;
   }

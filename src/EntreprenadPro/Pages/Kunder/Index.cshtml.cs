@@ -18,7 +18,7 @@ public class IndexModel(IAppDbContext context) : PageModel
 
     public async Task<IActionResult> OnGetAsync()
     {
-        this.SetTitle("Customers");
+        this.SetTitle("Kunder");
 
         IQueryable<Customer> query = context.Customers;
 
@@ -31,7 +31,7 @@ public class IndexModel(IAppDbContext context) : PageModel
         }
         catch (Exception e)
         {
-            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+            this.SendNotification(NotificationType.Danger, "Det uppstod ett fel, försök igen.");
         }
 
         return Page();

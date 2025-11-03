@@ -1,11 +1,6 @@
 @page
 @model EntreprenadPro.Pages.Kunder.IndexModel
 
-@{
-  Layout = "_Layout";
-}
-
-
 <section class="container mt-3">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="m-0">Kunder</h1>
@@ -45,69 +40,69 @@
   <div class="customers">
     @if (!Model.Customers.Any())
     {
-    <div class="text-center py-5">
-      <i class="bi bi-building display-1 text-muted mb-3"></i>
-      <h3 class="h4 text-muted">Inga kunder hittades</h3>
-      <p class="text-muted mb-3">Starta med att lägga till din första kund</p>
-      <a
-        href="/Kunder/Skapa"
-        up-layer="new modal"
-        up-position="right"
-        up-history="false"
-        up-accept-location="/Kunder"
-        up-on-accepted="up.reload('.customers')"
-        class="btn btn-primary">
-        <i class="bi bi-plus-lg me-2"></i>Ny Kund
-      </a>
-    </div>
+      <div class="text-center py-5">
+        <i class="bi bi-building display-1 text-muted mb-3"></i>
+        <h3 class="h4 text-muted">Inga kunder hittades</h3>
+        <p class="text-muted mb-3">Starta med att lägga till din första kund</p>
+        <a
+          href="/Kunder/Skapa"
+          up-layer="new modal"
+          up-position="right"
+          up-history="false"
+          up-accept-location="/Kunder"
+          up-on-accepted="up.reload('.customers')"
+          class="btn btn-primary">
+          <i class="bi bi-plus-lg me-2"></i>Ny Kund
+        </a>
+      </div>
     }
     else
     {
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>Namn</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody class="border-top">
-        @foreach (var customer in Model.Customers)
-        {
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
           <tr>
-            <td class="ps-0">
-              <a asp-page="./Details"
-                 up-follow
-                 asp-route-id="@customer.Id"
-                 class="text-decoration-none fw-medium">@customer.Name</a>
-            </td>
-            <td class="text-end pe-0">
-              <div class="d-flex gap-2 justify-content-end">
-                <a asp-page="./Edit"
-                   asp-route-id="@customer.Id"
-                   up-layer="new drawer"
-                   up-position="right"
-                   up-accept-location="/Customers"
-                   up-on-accepted="up.reload('.customers')"
-                   up-history="false"
-                   class="btn btn-sm btn-outline-primary"
-                   title="Edit Customer">
-                  <i class="bi bi-pencil"></i>
-                </a>
-                <a asp-page="./Details"
-                   asp-route-id="@customer.Id"
-                   up-follow
-                   class="btn btn-sm btn-outline-secondary"
-                   title="View Details">
-                  <i class="bi bi-eye"></i>
-                </a>
-              </div>
-            </td>
+            <th>Namn</th>
+            <th></th>
           </tr>
-        }
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody class="border-top">
+          @foreach (var customer in Model.Customers)
+          {
+            <tr>
+              <td class="ps-0">
+                <a asp-page="./Details"
+                   up-follow
+                   asp-route-id="@customer.Id"
+                   class="text-decoration-none fw-medium">@customer.Name</a>
+              </td>
+              <td class="text-end pe-0">
+                <div class="d-flex gap-2 justify-content-end">
+                  <a asp-page="./Edit"
+                     asp-route-id="@customer.Id"
+                     up-layer="new drawer"
+                     up-position="right"
+                     up-accept-location="/Customers"
+                     up-on-accepted="up.reload('.customers')"
+                     up-history="false"
+                     class="btn btn-sm btn-outline-primary"
+                     title="Edit Customer">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <a asp-page="./Details"
+                     asp-route-id="@customer.Id"
+                     up-follow
+                     class="btn btn-sm btn-outline-secondary"
+                     title="View Details">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
     }
   </div>
 </section>

@@ -1,0 +1,138 @@
+@page
+@using EntreprenadPro.Helpers
+@model EntreprenadPro.Pages.Fordon.IndexModel
+
+<section class="container mt-3">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="m-0">Fordon</h1>
+    <div class="d-flex gap-3">
+      <form
+        method="get"
+        role="search"
+        aria-label="Sök i fordon"
+        up-target=".vehicles"
+        up-history="true"
+        up-autosubmit
+        up-watch-event="input"
+        up-watch-delay="500">
+        <div class="input-group">
+          <span class="input-group-text border-end-0" aria-hidden="true">
+            <i class="bi bi-search" aria-hidden="true"></i>
+          </span>
+          <label for="SearchTerm" class="visually-hidden">Sök fordon</label>
+          <input
+            type="search"
+            asp-for="SearchTerm"
+            class="form-control border-start-0"
+            placeholder="Sök…"
+            aria-label="Sök fordon"
+            aria-controls="vehiclesTable"
+            inputmode="search">
+        </div>
+      </form>
+      <a
+        href="/Fordon/Skapa"
+        up-layer="new modal"
+        up-position="right"
+        up-history="false"
+        up-accept-location="/Fordon"
+        up-on-accepted="up.reload('.vehicles')"
+        class="btn btn-primary d-flex align-items-center gap-2"
+        aria-label="Lägg till nytt fordon">
+        <i class="bi bi-plus-lg text-light" aria-hidden="true"></i>
+        <span>Lägg till</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="vehicles"
+       aria-live="polite"
+       up-on-loading="this.setAttribute('aria-busy','true')"
+       up-on-loaded="this.removeAttribute('aria-busy')">
+    @if (!Model.Vehicles.Any())
+    {
+      <div class="text-center py-5" role="status" aria-live="polite">
+        <i class="bi bi-truck display-1 text-muted mb-3" aria-hidden="true"></i>
+        <h3 class="h4 text-muted">Inga fordon hittades</h3>
+        <p class="text-muted mb-3">Börja med att skapa ditt första fordon</p>
+        <a
+          href="/Fordon/Skapa"
+          up-layer="new modal"
+          up-position="right"
+          up-history="false"
+          up-accept-location="/Fordon"
+          up-on-accepted="up.reload('.vehicles')"
+          class="btn btn-primary"
+          aria-label="Lägg till nytt fordon">
+          <i class="bi bi-plus-lg me-2" aria-hidden="true"></i>
+          Lägg till
+        </a>
+      </div>
+    }
+    else
+    {
+      <div class="table-responsive"
+           role="region"
+           aria-labelledby="vehiclesTableCaption"
+           tabindex="0">
+        <table class="table" id="vehiclesTable">
+          <caption id="vehiclesTableCaption" class="visually-hidden">
+            Lista över fordon. @Model.Vehicles.Count fordon.
+          </caption>
+          <thead>
+          <tr>
+            <th scope="col">Typ</th>
+            <th scope="col">Reg.nr</th>
+            <th scope="col">Märke</th>
+            <th scope="col">Modell</th>
+            <th scope="col">Årsmodell</th>
+            <th scope="col" class="text-end">Åtgärder</th>
+          </tr>
+          </thead>
+          <tbody class="border-top">
+          @foreach (var vehicle in Model.Vehicles)
+          {
+            <tr>
+              <th scope="row" class="ps-0">
+                @EnumHelper.GetDisplayName(vehicle.Type)
+              </th>
+              <td>@vehicle.RegistrationNumber</td>
+              <td>@vehicle.Make</td>
+              <td>@vehicle.Model</td>
+              <td>@vehicle.Year</td>
+              <td class="text-end pe-0">
+                <div class="d-flex gap-2 justify-content-end">
+                  <a asp-page="Redigera"
+                     asp-route-id="@vehicle.Id"
+                     up-layer="new drawer"
+                     up-position="right"
+                     up-accept-location="/Fordon"
+                     up-on-accepted="up.reload('.vehicles')"
+                     up-history="false"
+                     class="btn btn-sm btn-outline-primary"
+                     title="Redigera"
+                     aria-label="Redigera">
+                    <i class="bi bi-pencil" aria-hidden="true"></i>
+                    <span class="visually-hidden">Redigera</span>
+                  </a>
+                  <a asp-page="Radera"
+                     asp-route-id="@vehicle.Id"
+                     up-layer="new modal"
+                     up-position="center"
+                     up-history="false"
+                     class="btn btn-sm btn-outline-danger"
+                     title="Ta bort"
+                     aria-label="Ta bort">
+                    <i class="bi bi-trash" aria-hidden="true"></i>
+                    <span class="visually-hidden">Ta bort</span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</section>
