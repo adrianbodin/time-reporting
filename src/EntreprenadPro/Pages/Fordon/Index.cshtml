@@ -1,5 +1,4 @@
 @page
-@using EntreprenadPro.Helpers
 @model EntreprenadPro.Pages.Fordon.IndexModel
 
 <section class="container mt-3">
@@ -81,8 +80,7 @@
           </caption>
           <thead>
           <tr>
-            <th scope="col">Typ</th>
-            <th scope="col">Reg.nr</th>
+            <th scope="col">Identifierare</th>
             <th scope="col">Märke</th>
             <th scope="col">Modell</th>
             <th scope="col">Årsmodell</th>
@@ -93,10 +91,14 @@
           @foreach (var vehicle in Model.Vehicles)
           {
             <tr>
-              <th scope="row" class="ps-0">
-                @EnumHelper.GetDisplayName(vehicle.Type)
-              </th>
-              <td>@vehicle.RegistrationNumber</td>
+              @if (vehicle.Type == VehicleType.Car)
+              {
+                <td>@vehicle.RegistrationNumber</td>
+              }
+              else
+              {
+                <td>@vehicle.SerialNumber</td>
+              }
               <td>@vehicle.Make</td>
               <td>@vehicle.Model</td>
               <td>@vehicle.Year</td>

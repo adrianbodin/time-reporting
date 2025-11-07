@@ -28,6 +28,7 @@ public class SkapaModel(IAppDbContext context) : PageModel
             Id = Guid.NewGuid().ToString(),
             Type = Vehicle.Type,
             RegistrationNumber = Vehicle.RegistrationNumber,
+            SerialNumber = Vehicle.SerialNumber,
             Make = Vehicle.Make,
             Model = Vehicle.Model,
             Year = Vehicle.Year,

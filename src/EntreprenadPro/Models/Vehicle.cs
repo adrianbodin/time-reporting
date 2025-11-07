@@ -22,6 +22,10 @@ public class Vehicle
     [MaxLength(10, ErrorMessage = "Registreringsnumret får inte vara längre än 10 tecken")]
     public string? RegistrationNumber { get; set; }
 
+    [Display(Name = "Serienummer")]
+    [MaxLength(50, ErrorMessage = "Serienumret får inte vara längre än 50 tecken")]
+    public string? SerialNumber { get; set; }
+
     [Display(Name = "Märke")] public string? Make { get; set; }
 
     [Display(Name = "Modell")] public string? Model { get; set; }
@@ -47,6 +51,10 @@ public record AddVehicleDto
     [Display(Name = "Registreringsnummer")]
     [MaxLength(10, ErrorMessage = "Registreringsnumret får inte vara längre än 10 tecken")]
     public string? RegistrationNumber { get; set; }
+
+    [Display(Name = "Serienummer")]
+    [MaxLength(50, ErrorMessage = "Serienumret får inte vara längre än 50 tecken")]
+    public string? SerialNumber { get; set; }
 
     [Display(Name = "Märke")] public string? Make { get; set; }
 
@@ -75,6 +83,10 @@ public record EditVehicleDto
     [Display(Name = "Registreringsnummer")]
     [MaxLength(10, ErrorMessage = "Registreringsnumret får inte vara längre än 10 tecken")]
     public string? RegistrationNumber { get; set; }
+
+    [Display(Name = "Serienummer")]
+    [MaxLength(50, ErrorMessage = "Serienumret får inte vara längre än 50 tecken")]
+    public string? SerialNumber { get; set; }
 
     [Display(Name = "Märke")] public string? Make { get; set; }
 
