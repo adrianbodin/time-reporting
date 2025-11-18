@@ -1,0 +1,79 @@
+@page "{id?}"
+@using EntreprenadPro.Helpers
+@model EntreprenadPro.Pages.Kunder.Details.Index
+
+@{
+  Layout = "_Layout";
+}
+
+@if (Model.Customer is null)
+{
+  <section class="mt-4">
+    <div class="alert alert-danger" role="alert">
+      Kunde kunde inte hittas. Försök igen eller gå tillbaka till kundlistan.
+    </div>
+    <a asp-page="/Kunder/Index" class="btn btn-outline-secondary">Tillbaka till kunder</a>
+  </section>
+}
+else
+{
+  <section>
+    <div>
+      <div class="mb-3">
+        <label asp-for="Customer.Id" class="form-label mb-0"></label>
+        <input type="text" class="form-control form-control-lg" disabled asp-for="Customer.Id"/>
+      </div>
+
+      <div class="mb-3">
+        <label asp-for="Customer.Type" class="form-label mb-0"></label>
+        <select asp-for="Customer.Type" disabled class="form-select form-select-lg" up-switch=".type-dependant"
+                asp-items="@EnumHelper.GetSelectList<CustomerType>()">
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label asp-for="Customer.Name" class="form-label mb-0"></label>
+        <input asp-for="Customer.Name" disabled class="form-control form-control-lg" placeholder="Anders Bygg"
+               autofocus/>
+      </div>
+
+      <div class="mb-3 type-dependant" up-show-for="@CustomerType.Company">
+        <label asp-for="Customer.OrgNumber" class="form-label mb-0"></label>
+        <input asp-for="Customer.OrgNumber" disabled class="form-control form-control-lg" placeholder="560356-0793"/>
+      </div>
+
+      <div class="mb-3">
+        <label asp-for="Customer.PhoneNumber" class="form-label mb-0"></label>
+        <input asp-for="Customer.PhoneNumber" disabled class="form-control form-control-lg" placeholder="0701234567"/>
+      </div>
+
+      <div class="mb-3">
+        <label asp-for="Customer.Address" class="form-label mb-0"></label>
+        <input asp-for="Customer.Address" disabled class="form-control form-control-lg" placeholder="Storgatan 1"/>
+      </div>
+
+      <div class="mb-3">
+        <label asp-for="Customer.BillingAddress" class="form-label mb-0"></label>
+        <input asp-for="Customer.BillingAddress" disabled class="form-control form-control-lg"
+               placeholder="Fakturagatan 2"/>
+      </div>
+
+      <div class="mb-3 row">
+        <div class="col-8">
+          <label asp-for="Customer.City" class="form-label mb-0"></label>
+          <input asp-for="Customer.City" disabled class="form-control form-control-lg" placeholder="Stockholm"/>
+        </div>
+
+        <div class="col-4">
+          <label asp-for="Customer.PostalCode" class="form-label mb-0"></label>
+          <input asp-for="Customer.PostalCode" disabled class="form-control form-control-lg" placeholder="123 45"/>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label asp-for="Customer.Email" class="form-label mb-0"></label>
+        <input asp-for="Customer.Email" disabled class="form-control form-control-lg" placeholder="anders@bygg.se"/>
+      </div>
+    </div>
+  </section>
+}

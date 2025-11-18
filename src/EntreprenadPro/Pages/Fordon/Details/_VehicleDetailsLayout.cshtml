@@ -1,0 +1,41 @@
+@{
+  Layout = "_Layout";
+  var identifier =
+    ViewContext?.RouteData?.Values["identifier"] as string
+    ?? Context?.Request?.Query["identifier"].ToString();
+
+  var activeLink = ViewData["ActiveLink"] as string ?? "Overview";
+  var vehicle = ViewData["Vehicle"] as Vehicle;
+}
+
+<div>
+  <div class="py-2">
+    <form class="d-flex align-items-center gap-2" method="get">
+      <select id="vehicle-section"
+              class="form-select form-select-lg"
+              onchange="if (this.value) window.location.href = this.value;">
+        @{
+          var options = new List<(string Key, string Text, string Page)>
+          {
+            ("Overview", "Översikt", "/Fordon/Details/Index"),
+            ("Maintenance", "Underhåll och service", "/Fordon/Details/Maintenance"),
+            ("Documents", "Dokument", "/Fordon/Details/Documents")
+          };
+
+          foreach (var option in options)
+          {
+            var url = Url.Page(option.Page, new { identifier });
+            var selected = option.Key == activeLink ? " selected" : string.Empty;
+            @:<option value="@url" @selected>@option.Text</option>
+          }
+        }
+      </select>
+    </form>
+    <hr>
+  </div>
+
+  <div>
+    @RenderBody()
+  </div>
+
+</div>

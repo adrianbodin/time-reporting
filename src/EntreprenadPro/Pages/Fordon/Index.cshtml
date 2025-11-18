@@ -1,20 +1,20 @@
 @page
 @model EntreprenadPro.Pages.Fordon.IndexModel
 
-<section class="container mt-3">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="m-0">Fordon</h1>
-    <div class="d-flex gap-3">
+<section>
+  <div class="d-flex flex-column flex-md-row justify-content-md-between mb-4">
+    <div class="row g-2">
       <form
         method="get"
+        class="col d-flex"
         role="search"
         aria-label="Sök i fordon"
         up-target=".vehicles"
-        up-history="true"
+        up-history="false"
         up-autosubmit
         up-watch-event="input"
         up-watch-delay="500">
-        <div class="input-group">
+        <div class="input-group flex-grow-1">
           <span class="input-group-text border-end-0" aria-hidden="true">
             <i class="bi bi-search" aria-hidden="true"></i>
           </span>
@@ -22,25 +22,26 @@
           <input
             type="search"
             asp-for="SearchTerm"
-            class="form-control border-start-0"
+            class="form-control form-control-lg border-start-0"
             placeholder="Sök…"
             aria-label="Sök fordon"
-            aria-controls="vehiclesTable"
+            aria-controls="vehiclesCards"
             inputmode="search">
         </div>
       </form>
-      <a
-        href="/Fordon/Skapa"
-        up-layer="new modal"
-        up-position="right"
-        up-history="false"
-        up-accept-location="/Fordon"
-        up-on-accepted="up.reload('.vehicles')"
-        class="btn btn-primary d-flex align-items-center gap-2"
-        aria-label="Lägg till nytt fordon">
-        <i class="bi bi-plus-lg text-light" aria-hidden="true"></i>
-        <span>Lägg till</span>
-      </a>
+      <div class="col-auto d-flex">
+        <a
+          href="/Fordon/Skapa"
+          up-layer="new modal"
+          up-position="right"
+          up-history="false"
+          up-accept-location="/Fordon"
+          up-on-accepted="up.reload('.vehicles')"
+          class="btn btn-primary d-flex align-items-center justify-content-center"
+          aria-label="Lägg till nytt fordon">
+          <i class="bi bi-plus-lg text-light fs-2" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -70,70 +71,28 @@
     }
     else
     {
-      <div class="table-responsive"
-           role="region"
-           aria-labelledby="vehiclesTableCaption"
-           tabindex="0">
-        <table class="table" id="vehiclesTable">
-          <caption id="vehiclesTableCaption" class="visually-hidden">
-            Lista över fordon. @Model.Vehicles.Count fordon.
-          </caption>
-          <thead>
-          <tr>
-            <th scope="col">Identifierare</th>
-            <th scope="col">Märke</th>
-            <th scope="col">Modell</th>
-            <th scope="col">Årsmodell</th>
-            <th scope="col" class="text-end">Åtgärder</th>
-          </tr>
-          </thead>
-          <tbody class="border-top">
-          @foreach (var vehicle in Model.Vehicles)
-          {
-            <tr>
-              @if (vehicle.Type == VehicleType.Car)
-              {
-                <td>@vehicle.RegistrationNumber</td>
-              }
-              else
-              {
-                <td>@vehicle.SerialNumber</td>
-              }
-              <td>@vehicle.Make</td>
-              <td>@vehicle.Model</td>
-              <td>@vehicle.Year</td>
-              <td class="text-end pe-0">
-                <div class="d-flex gap-2 justify-content-end">
-                  <a asp-page="Redigera"
-                     asp-route-id="@vehicle.Id"
-                     up-layer="new drawer"
-                     up-position="right"
-                     up-accept-location="/Fordon"
-                     up-on-accepted="up.reload('.vehicles')"
-                     up-history="false"
-                     class="btn btn-sm btn-outline-primary"
-                     title="Redigera"
-                     aria-label="Redigera">
-                    <i class="bi bi-pencil" aria-hidden="true"></i>
-                    <span class="visually-hidden">Redigera</span>
-                  </a>
-                  <a asp-page="Radera"
-                     asp-route-id="@vehicle.Id"
-                     up-layer="new modal"
-                     up-position="center"
-                     up-history="false"
-                     class="btn btn-sm btn-outline-danger"
-                     title="Ta bort"
-                     aria-label="Ta bort">
-                    <i class="bi bi-trash" aria-hidden="true"></i>
-                    <span class="visually-hidden">Ta bort</span>
-                  </a>
+      <div class="row g-2" id="vehiclesCards" role="region" aria-label="Lista över fordon">
+        @foreach (var vehicle in Model.Vehicles)
+        {
+          <div class="col-12 col-md-6 col-lg-4 bg-white:hover">
+            <a asp-page="/Fordon/Details/Index"
+               asp-route-identifier="@(vehicle.RegistrationNumber ?? vehicle.SerialNumber)"
+               class="text-decoration-none"
+               aria-label="Visa detaljer för @vehicle.Make @vehicle.Model">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title">@vehicle.Make @vehicle.Model</h5>
+                  </div>
+                  <p class="card-text text-muted mb-0">
+                    <strong>@(vehicle.Type == VehicleType.Car ? "Reg.nr:" : "Serienr:")</strong>
+                    @(vehicle.Type == VehicleType.Car ? vehicle.RegistrationNumber : vehicle.SerialNumber)
+                  </p>
                 </div>
-              </td>
-            </tr>
-          }
-          </tbody>
-        </table>
+              </div>
+            </a>
+          </div>
+        }
       </div>
     }
   </div>

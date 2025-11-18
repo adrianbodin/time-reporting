@@ -19,7 +19,8 @@ public class Vehicle
     public VehicleType Type { get; set; }
 
     [Display(Name = "Registreringsnummer")]
-    [MaxLength(10, ErrorMessage = "Registreringsnumret får inte vara längre än 10 tecken")]
+    [RegularExpression("(?i)^(?:[A-HJ-PR-UW-Z]{3}\\d{3}|[A-HJ-PR-UW-Z]{3}\\d{2}[A-HJ-PR-UW-Z])$",
+        ErrorMessage = "Registreringnumret är inte giltigt, exempel på giltigt format är ABC123 eller ABC12D")]
     public string? RegistrationNumber { get; set; }
 
     [Display(Name = "Serienummer")]
@@ -49,7 +50,8 @@ public record AddVehicleDto
     public VehicleType Type { get; set; }
 
     [Display(Name = "Registreringsnummer")]
-    [MaxLength(10, ErrorMessage = "Registreringsnumret får inte vara längre än 10 tecken")]
+    [RegularExpression("(?i)^(?:[A-HJ-PR-UW-Z]{3}\\d{3}|[A-HJ-PR-UW-Z]{3}\\d{2}[A-HJ-PR-UW-Z])$",
+        ErrorMessage = "Registreringnumret är inte giltigt, exempel på giltigt format är ABC123 eller ABC12D")]
     public string? RegistrationNumber { get; set; }
 
     [Display(Name = "Serienummer")]

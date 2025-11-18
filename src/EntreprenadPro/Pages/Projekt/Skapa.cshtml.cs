@@ -40,7 +40,7 @@ public class SkapaModel : PageModel
 
         var project = new Project
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = Project.Id,
             Name = Project.Name,
             Description = Project.Description,
             CustomerId = Project.CustomerId
@@ -50,12 +50,12 @@ public class SkapaModel : PageModel
         {
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
-            this.SendNotification(NotificationType.Success, $"The project \"{project.Name}\" was created successfully");
+            this.SendNotification(NotificationType.Success, $"Projektet \"{project.Name}\" skapades");
             return RedirectToPage("/Projekt/Index");
         }
         catch (Exception)
         {
-            this.SendNotification(NotificationType.Danger, "There was an error, please try again.");
+            this.SendNotification(NotificationType.Danger, "Det blev något fel");
 
             return Page();
         }

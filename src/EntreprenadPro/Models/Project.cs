@@ -4,15 +4,13 @@ namespace EntreprenadPro.Models;
 
 public enum ProjectStatus
 {
-    [Display(Name = "Aktivt")]
-    Active,
-    [Display(Name = "Avslutad")]
-    Completed
+    [Display(Name = "Aktivt")] Active,
+    [Display(Name = "Avslutad")] Completed
 }
 
 public class Project
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
 
     [Required(ErrorMessage = "Du måste ange ett namn")]
     [MaxLength(100)]
@@ -27,19 +25,20 @@ public class Project
     [Required(ErrorMessage = "Du måste ange en kund")]
     [Display(Name = "Kund")]
     public string CustomerId { get; set; }
+
     public Customer Customer { get; set; }
 
-    [Display(Name = "Skapad")]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    [Display(Name = "Skapad")] public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    [Display(Name = "Status")]
-    public ProjectStatus Status { get; set; } = ProjectStatus.Active;
+    [Display(Name = "Status")] public ProjectStatus Status { get; set; } = ProjectStatus.Active;
 
     public ICollection<TimeEntry> TimeEntries { get; set; } = [];
 }
 
 public record AddProjectDto
 {
+    public int Id { get; set; }
+
     [Required(ErrorMessage = "Du måste ange ett namn")]
     [MaxLength(100)]
     [Display(Name = "Namn")]
@@ -54,10 +53,10 @@ public record AddProjectDto
     [Display(Name = "Kund")]
     public string CustomerId { get; set; }
 }
+
 public record EditProjectDto
 {
-    [Required]
-    public string Id { get; set; }
+    [Required] public int Id { get; set; }
 
     [Required(ErrorMessage = "Du måste ange ett namn")]
     [MaxLength(100)]
@@ -69,8 +68,7 @@ public record EditProjectDto
     [Display(Name = "Beskrivning")]
     public string Description { get; set; }
 
-    [Display(Name = "Status")]
-    public ProjectStatus Status { get; set; }
+    [Display(Name = "Status")] public ProjectStatus Status { get; set; }
 
     [Required(ErrorMessage = "Du måste ange en kund")]
     [Display(Name = "Kund")]

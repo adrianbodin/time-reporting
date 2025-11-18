@@ -14,7 +14,7 @@ namespace EntreprenadPro.Pages.Tid;
 
 public class AddTimeEntryDto
 {
-    public string? ProjectId { get; set; }
+    public int? ProjectId { get; set; }
 
     [Required] public TimeEntryType TimeEntryType { get; set; }
 

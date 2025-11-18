@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntreprenadPro.Pages.Projects.Details;
+namespace EntreprenadPro.Pages.Projekt.Details;
 
 public record ProjectDetailsDto(
-    string Id,
+    int Id,
     string Name,
     string Description,
     string Customer,
@@ -33,7 +33,7 @@ public class DetailsModel(IAppDbContext context) : PageModel
 
     public ProjectDetailsDto Project { get; set; } = null!;
 
-    public async Task<IActionResult> OnGetAsync(string? id)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
         if (id is null)
             return NotFound();
@@ -82,7 +82,7 @@ public class DetailsModel(IAppDbContext context) : PageModel
             Data = employeeHours.Select(x => x.Hours).ToList()
         };
 
-        this.SetTitle($"{Project.Name}");
+        this.SetTitle($"{Project.Id} {Project.Name}");
 
         return Page();
     }

@@ -12,7 +12,7 @@ public class RaderaModel(IAppDbContext context) : PageModel
 {
     [BindProperty] public Project Project { get; set; } = null!;
 
-    public async Task<IActionResult> OnGetAsync(string? id)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
         this.SetTitle("Delete Project");
 

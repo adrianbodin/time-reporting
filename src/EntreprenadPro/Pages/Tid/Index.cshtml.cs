@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Security.Claims;
 using EntreprenadPro.Data;
 using EntreprenadPro.Extensions;
@@ -20,7 +21,7 @@ public class Index(IAppDbContext db) : PageModel
     [DataType(DataType.Date)]
     public DateTime SelectedDate { get; set; }
 
-    [BindProperty(SupportsGet = true)] public string SelectedProjectId { get; set; }
+    [BindProperty(SupportsGet = true)] public int SelectedProjectId { get; set; } = 0;
 
     public List<ReadTimeEntryDto> TimeEntries { get; set; } = [];
 
@@ -28,22 +29,22 @@ public class Index(IAppDbContext db) : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        this.SetTitle("Reports");
+        if (SelectedDate.Year == 0001) SelectedDate = DateTime.Now;
 
-        // Build project SelectList from Projects table to avoid null navigation values from TimeEntries
+        this.SetTitle(
+            $"V.{ISOWeek.GetWeekOfYear(SelectedDate)} {SelectedDate.ToString("ddd d MMM yyyy", new CultureInfo("sv-SE"))}");
+
         var projects = await db.Projects
             .OrderBy(p => p.Name)
             .ToListAsync();
 
-        // Provide explicit value/text and selected value to match asp-for binding
         Projects = new SelectList(projects, nameof(Project.Id), nameof(Project.Name), SelectedProjectId);
 
         if (SelectedDate == default) SelectedDate = DateTime.Now;
 
         var query = db.TimeEntries.Where(t => t.Date == DateOnly.FromDateTime(SelectedDate));
 
-        if (!string.IsNullOrEmpty(SelectedProjectId))
-            // Filter using ProjectId to avoid null navigation access
+        if (SelectedProjectId != 0)
             query = query.Where(t => t.ProjectId == SelectedProjectId);
 
         if (!User.IsInRole("Admin"))
@@ -79,6 +80,7 @@ public class Index(IAppDbContext db) : PageModel
         await db.SaveChangesAsync();
 
         this.SendNotification(Success, "The time entry was removed successfully");
+
         return RedirectToPage();
     }
 }

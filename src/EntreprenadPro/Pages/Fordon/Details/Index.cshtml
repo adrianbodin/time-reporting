@@ -1,0 +1,130 @@
+@page "/Fordon/{identifier}"
+@using EntreprenadPro.Helpers
+@model EntreprenadPro.Pages.Fordon.Details.IndexModel
+
+@{
+  Layout = "Details/_VehicleDetailsLayout";
+  ViewData["ActiveLink"] = "Overview";
+}
+
+<section class="container-fluid px-3 px-md-4 py-3 py-md-4">
+  <div class="row g-3 g-md-4">
+    <div class="col-12 col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h5 card-title mb-3">Fordonsinformation</h2>
+          <div class="row g-3">
+            <div class="col-12 col-sm-6">
+              <dl class="row mb-0">
+                <dt class="col-5 col-md-4 text-muted small">Fordonstyp</dt>
+                <dd class="col-7 col-md-8 mb-2">@EnumHelper.GetDisplayName(Model.Vehicle.Type)</dd>
+
+                @if (!string.IsNullOrWhiteSpace(Model.Vehicle.Make))
+                {
+                  <dt class="col-5 col-md-4 text-muted small">Märke</dt>
+                  <dd class="col-7 col-md-8 mb-2">@Model.Vehicle.Make</dd>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.Vehicle.Model))
+                {
+                  <dt class="col-5 col-md-4 text-muted small">Modell</dt>
+                  <dd class="col-7 col-md-8 mb-2">@Model.Vehicle.Model</dd>
+                }
+
+                @if (Model.Vehicle.Year.HasValue)
+                {
+                  <dt class="col-5 col-md-4 text-muted small">Årsmodell</dt>
+                  <dd class="col-7 col-md-8 mb-2">@Model.Vehicle.Year</dd>
+                }
+              </dl>
+            </div>
+
+            <div class="col-12 col-sm-6">
+              <dl class="row mb-0">
+                @if (!string.IsNullOrWhiteSpace(Model.Vehicle.RegistrationNumber))
+                {
+                  <dt class="col-5 col-md-4 text-muted small">Reg.nummer</dt>
+                  <dd class="col-7 col-md-8 mb-2"><strong>@Model.Vehicle.RegistrationNumber</strong></dd>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.Vehicle.SerialNumber))
+                {
+                  <dt class="col-5 col-md-4 text-muted small">Serienummer</dt>
+                  <dd class="col-7 col-md-8 mb-2"><strong>@Model.Vehicle.SerialNumber</strong></dd>
+                }
+
+                @if (Model.Vehicle.PurchasePrice.HasValue)
+                {
+                  <dt class="col-5 col-md-4 text-muted small">Inköpspris</dt>
+                  <dd class="col-7 col-md-8 mb-2">@Model.Vehicle.PurchasePrice.Value.ToString("N0") SEK</dd>
+                }
+
+                @if (Model.Vehicle.PurchaseDate.HasValue)
+                {
+                  <dt class="col-5 col-md-4 text-muted small">Inköpsdatum</dt>
+                  <dd class="col-7 col-md-8 mb-2">@Model.Vehicle.PurchaseDate.Value.ToString("yyyy-MM-dd")</dd>
+                }
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      @if (!string.IsNullOrWhiteSpace(Model.Vehicle.Note))
+      {
+        <div class="card mt-3 mt-md-4">
+          <div class="card-body">
+            <h2 class="h6 card-title mb-2">Anteckningar</h2>
+            <p class="card-text mb-0 text-muted" style="white-space: pre-wrap;">@Model.Vehicle.Note</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h6 card-title mb-3">Snabbinformation</h2>
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex align-items-center">
+              <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3" style="width: 40px; height: 40px;">
+                <i class="bi bi-truck text-primary"></i>
+              </div>
+              <div>
+                <div class="small text-muted">Typ</div>
+                <div class="fw-semibold">@EnumHelper.GetDisplayName(Model.Vehicle.Type)</div>
+              </div>
+            </div>
+
+            @if (Model.Vehicle.Year.HasValue)
+            {
+              <div class="d-flex align-items-center">
+                <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3" style="width: 40px; height: 40px;">
+                  <i class="bi bi-calendar-event text-success"></i>
+                </div>
+                <div>
+                  <div class="small text-muted">År</div>
+                  <div class="fw-semibold">@Model.Vehicle.Year</div>
+                </div>
+              </div>
+            }
+
+            @if (Model.Vehicle.PurchaseDate.HasValue)
+            {
+              <div class="d-flex align-items-center">
+                <div class="bg-info bg-opacity-10 rounded-circle p-2 me-3" style="width: 40px; height: 40px;">
+                  <i class="bi bi-bag-check text-info"></i>
+                </div>
+                <div>
+                  <div class="small text-muted">Inköpt</div>
+                  <div class="fw-semibold">@Model.Vehicle.PurchaseDate.Value.ToString("yyyy-MM-dd")</div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

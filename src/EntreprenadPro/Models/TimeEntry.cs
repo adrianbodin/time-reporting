@@ -16,7 +16,7 @@ public class TimeEntry
 {
     public string Id { get; set; }
 
-    public string? ProjectId { get; set; }
+    public int? ProjectId { get; set; }
     public Project? Project { get; set; }
 
     public string? EmployeeId { get; set; }
@@ -59,7 +59,7 @@ public record EditTimeEntryDto
 {
     [Required] public string Id { get; set; }
 
-    [Required] public string ProjectId { get; set; }
+    [Required] public int? ProjectId { get; set; }
 
     [Required]
     [Range(0.5, 24, ErrorMessage = "Hours must be between 0.5 and 24.")]

@@ -1,65 +1,61 @@
-@page "/projekt/{id:guid}"
+@page "/projekt/{id:int}"
 @using NuGet.Protocol
-@model EntreprenadPro.Pages.Projects.Details.DetailsModel
+@model EntreprenadPro.Pages.Projekt.Details.DetailsModel
 
 @{
   Layout = "Details/_ProjectDetailsLayout";
 }
 
-<section class="d-flex flex-column gap-4 p-3 details-container">
-  <div class="row">
-    <div class="col-8 d-flex flex-column gap-4">
-      <section>
-        <div class="card">
-          <div class="card-body">
-            <h1 class="h4 card-title">@Model.Project.Name @Model.Project.Customer</h1>
-            <p class="card-text">@Model.Project.Description</p>
-            <ul class="list-unstyled">
-              <li><strong>Status:</strong> @Model.Project.Status</li>
-              <li><strong>Kund:</strong> @Model.Project.Customer</li>
-              <li><strong>Totala timmar:</strong> @Model.Project.TotalHours</li>
-              <li><strong>Total fakturerad summa:</strong> @Model.Project.TotalBilledAmount $</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section>
-        <h3 class="h5 mb-3">Senaste tidinmatningar</h3>
-        <div class="table-responsive overflow-auto" style="max-height: 300px">
-          <table class="table table-hover">
-            <thead>
-            <tr class="position-sticky top-0 border-bottom">
-              <th scope="col">Datum</th>
-              <th scope="col">Anställd</th>
-              <th scope="col">Arbetstyp</th>
-              <th scope="col">Timmar</th>
-              <th scope="col">Timpris</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var log in Model.Project.TimeEntries)
-            {
-              <tr>
-                <td>@log.Date</td>
-                <td>@log.Employee</td>
-                <td>@log.WorkType</td>
-                <td>@log.Hours</td>
-                <td>@log.HourlyRate $</td>
-              </tr>
-            }
-            </tbody>
-          </table>
-        </div>
-      </section>
+<div class="d-flex flex-column gap-4">
+  <section>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="h4 card-title">@Model.Project.Name @Model.Project.Customer</h1>
+        <p class="card-text">@Model.Project.Description</p>
+        <ul class="list-unstyled">
+          <li><strong>Status:</strong> @Model.Project.Status</li>
+          <li><strong>Kund:</strong> @Model.Project.Customer</li>
+          <li><strong>Totala timmar:</strong> @Model.Project.TotalHours</li>
+          <li><strong>Total fakturerad summa:</strong> @Model.Project.TotalBilledAmount $</li>
+        </ul>
+      </div>
     </div>
-    <div class="col-4">
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title">Timmar per anställd</h2>
-          <hr>
-          <canvas up-data="@Model.TableData.ToJson()" id="test-chart"></canvas>
-        </div>
+  </section>
+  <section>
+    <h3 class="h5 mb-3">Senaste tidinmatningar</h3>
+    <div class="table-responsive overflow-auto" style="max-height: 300px">
+      <table class="table table-hover">
+        <thead>
+        <tr class="position-sticky top-0 border-bottom">
+          <th scope="col">Datum</th>
+          <th scope="col">Anställd</th>
+          <th scope="col">Arbetstyp</th>
+          <th scope="col">Timmar</th>
+          <th scope="col">Timpris</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var log in Model.Project.TimeEntries)
+        {
+          <tr>
+            <td>@log.Date</td>
+            <td>@log.Employee</td>
+            <td>@log.WorkType</td>
+            <td>@log.Hours</td>
+            <td>@log.HourlyRate $</td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Timmar per anställd</h2>
+        <hr>
+        <canvas up-data="@Model.TableData.ToJson()" id="test-chart"></canvas>
       </div>
     </div>
   </div>
-</section>
+</div>

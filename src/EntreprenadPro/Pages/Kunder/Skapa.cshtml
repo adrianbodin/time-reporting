@@ -2,43 +2,78 @@
 @using EntreprenadPro.Helpers
 @model EntreprenadPro.Pages.Kunder.SkapaModel
 
-<section class="container">
-  <h2>Ny kund</h2>
-  <hr/>
-  <form method="post" up-submit>
+<section>
+  <h1>Ny kund</h1>
+  <hr>
+  <form method="post" up-submit class="needs-validation" novalidate>
     <input type="hidden" asp-for="Customer.Id"/>
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
 
     <div class="mb-3">
-      <label asp-for="Customer.Type" class="form-label">Typ av kund</label>
-      <select asp-for="Customer.Type" class="form-select" up-switch=".type-dependant"
+      <label asp-for="Customer.Type" class="form-label mb-0"></label>
+      <select asp-for="Customer.Type" class="form-select form-select-lg" up-switch=".type-dependant"
               asp-items="@EnumHelper.GetSelectList<CustomerType>()">
       </select>
+      <div class="form-text">Välj om kunden är privatperson eller företag</div>
+      <span asp-validation-for="Customer.Type" class="text-danger d-block mt-1"></span>
     </div>
 
     <div class="mb-3">
-      <label asp-for="Customer.Name" class="form-label"></label>
-      <input asp-for="Customer.Name" class="form-control" placeholder="Anders Bygg"/>
-      <span asp-validation-for="Customer.Name" class="text-danger"></span>
+      <label asp-for="Customer.Name" class="form-label mb-0"></label>
+      <input asp-for="Customer.Name" class="form-control form-control-lg" placeholder="Anders Bygg" autofocus/>
+      <div class="form-text">Ange kundens fullständiga namn</div>
+      <span asp-validation-for="Customer.Name" class="text-danger d-block mt-1"></span>
     </div>
 
     <div class="mb-3 type-dependant" up-show-for="@CustomerType.Company">
-      <label asp-for="Customer.OrgNumber" class="form-label"></label>
-      <input asp-for="Customer.OrgNumber" class="form-control" placeholder="560356-0793"/>
-      <span asp-validation-for="Customer.Name" class="text-danger"></span>
+      <label asp-for="Customer.OrgNumber" class="form-label mb-0"></label>
+      <input asp-for="Customer.OrgNumber" class="form-control form-control-lg" placeholder="560356-0793"/>
+      <div class="form-text">Visas endast för företagskunder</div>
+      <span asp-validation-for="Customer.OrgNumber" class="text-danger d-block mt-1"></span>
     </div>
 
     <div class="mb-3">
-      <label asp-for="Customer.PhoneNumber" class="form-label"></label>
-      <input asp-for="Customer.PhoneNumber" class="form-control" placeholder="0701234567"/>
-      <span asp-validation-for="Customer.PhoneNumber" class="text-danger"></span>
+      <label asp-for="Customer.PhoneNumber" class="form-label mb-0"></label>
+      <input asp-for="Customer.PhoneNumber" class="form-control form-control-lg" placeholder="0701234567"/>
+      <span asp-validation-for="Customer.PhoneNumber" class="text-danger d-block mt-1"></span>
     </div>
 
     <div class="mb-3">
-      <label asp-for="Customer.Email" class="form-label"></label>
-      <input asp-for="Customer.Email" class="form-control" placeholder="anders@bygg.se"/>
-      <span asp-validation-for="Customer.Email" class="text-danger"></span>
+      <label asp-for="Customer.Address" class="form-label mb-0"></label>
+      <input asp-for="Customer.Address" class="form-control form-control-lg" placeholder="Storgatan 1"/>
+      <span asp-validation-for="Customer.Address" class="text-danger d-block mt-1"></span>
     </div>
+
+    <div class="mb-3">
+      <label asp-for="Customer.BillingAddress" class="form-label mb-0"></label>
+      <input asp-for="Customer.BillingAddress" class="form-control form-control-lg" placeholder="Fakturagatan 2"/>
+      <span asp-validation-for="Customer.BillingAddress" class="text-danger d-block mt-1"></span>
+    </div>
+
+    <div class="mb-3 row">
+      <div class="col-8">
+        <label asp-for="Customer.City" class="form-label mb-0"></label>
+        <input asp-for="Customer.City" class="form-control form-control-lg" placeholder="Stockholm"/>
+        <span asp-validation-for="Customer.City" class="text-danger d-block mt-1"></span>
+      </div>
+
+      <div class="col-4">
+        <label asp-for="Customer.PostalCode" class="form-label mb-0"></label>
+        <input asp-for="Customer.PostalCode" class="form-control form-control-lg" placeholder="123 45"/>
+        <span asp-validation-for="Customer.PostalCode" class="text-danger d-block mt-1"></span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Customer.Email" class="form-label mb-0"></label>
+      <input asp-for="Customer.Email" class="form-control form-control-lg" placeholder="anders@bygg.se"/>
+      <span asp-validation-for="Customer.Email" class="text-danger d-block mt-1"></span>
+    </div>
+
     @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Skapa</button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+      <a href="/Kunder" class="btn btn-outline-secondary btn-lg flex-fill">Avbryt</a>
+      <input type="submit" value="Skapa kund" class="btn btn-primary btn-lg flex-fill"/>
+    </div>
   </form>
 </section>

@@ -9,18 +9,18 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace EntreprenadPro.Data.Migrations
+namespace EntreprenadPro.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251022183751_MorePropertiesForProjects")]
-    partial class MorePropertiesForProjects
+    [Migration("20251118194432_AddedPropertiesToCustomer")]
+    partial class AddedPropertiesToCustomer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -30,9 +30,44 @@ namespace EntreprenadPro.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("BillingAddress")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("City")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("OrgNumber")
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)");
+
+                    b.Property<string>("PostalCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -42,52 +77,72 @@ namespace EntreprenadPro.Data.Migrations
                         new
                         {
                             Id = "8286d046-9740-a3e4-95cf-ff46699c73c4",
-                            Name = "Morissette LLC"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 214, DateTimeKind.Utc).AddTicks(8624),
+                            Name = "Morissette LLC",
+                            Type = 0
                         },
                         new
                         {
                             Id = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
-                            Name = "Feil, Renner and Borer"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(4101),
+                            Name = "Feil, Renner and Borer",
+                            Type = 0
                         },
                         new
                         {
                             Id = "a905569d-db07-3ae3-63a0-322750a4a3bd",
-                            Name = "Steuber Group"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(4500),
+                            Name = "Steuber Group",
+                            Type = 0
                         },
                         new
                         {
                             Id = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
-                            Name = "Krajcik - Schaden"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(4637),
+                            Name = "Krajcik - Schaden",
+                            Type = 0
                         },
                         new
                         {
                             Id = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
-                            Name = "Boyer, Schulist and Fritsch"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(4941),
+                            Name = "Boyer, Schulist and Fritsch",
+                            Type = 0
                         },
                         new
                         {
                             Id = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
-                            Name = "Rau - Spencer"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(5066),
+                            Name = "Rau - Spencer",
+                            Type = 0
                         },
                         new
                         {
                             Id = "f604634b-6295-68e1-ff41-99ea1fb201b0",
-                            Name = "Harvey, Streich and Bailey"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(5215),
+                            Name = "Harvey, Streich and Bailey",
+                            Type = 0
                         },
                         new
                         {
                             Id = "09442776-8478-34e0-e6aa-335b933599ad",
-                            Name = "Wilkinson Group"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(5376),
+                            Name = "Wilkinson Group",
+                            Type = 0
                         },
                         new
                         {
                             Id = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
-                            Name = "Mayer - Waelchi"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(5474),
+                            Name = "Mayer - Waelchi",
+                            Type = 0
                         },
                         new
                         {
                             Id = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
-                            Name = "Dietrich Group"
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 215, DateTimeKind.Utc).AddTicks(5604),
+                            Name = "Dietrich Group",
+                            Type = 0
                         });
                 });
 
@@ -177,12 +232,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Nick_Purdy@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Nick Purdy",
-                            HireDate = new DateOnly(2020, 11, 20),
+                            HireDate = new DateOnly(2020, 12, 17),
                             JobTitle = "IT-Technician",
                             LockoutEnabled = true,
                             NormalizedEmail = "NICK_PURDY@GMAIL.COM",
                             NormalizedUserName = "NICK_PURDY@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "(660) 798-8055 x29634",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "92b1fd07-7dcd-4b94-6bd9-bd0380b1f24f",
@@ -197,12 +252,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Kim73@yahoo.com",
                             EmailConfirmed = true,
                             FullName = "Kim Renner",
-                            HireDate = new DateOnly(2017, 9, 12),
+                            HireDate = new DateOnly(2017, 10, 9),
                             JobTitle = "IT-Technician",
                             LockoutEnabled = true,
                             NormalizedEmail = "KIM73@YAHOO.COM",
                             NormalizedUserName = "KIM73@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "(791) 903-8676",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "582236b0-6743-9b61-aa64-9fd9f78f1a58",
@@ -217,12 +272,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Laurence.Rosenbaum@yahoo.com",
                             EmailConfirmed = true,
                             FullName = "Laurence Rosenbaum",
-                            HireDate = new DateOnly(2024, 10, 31),
+                            HireDate = new DateOnly(2024, 11, 27),
                             JobTitle = "Software Engineer",
                             LockoutEnabled = true,
                             NormalizedEmail = "LAURENCE.ROSENBAUM@YAHOO.COM",
                             NormalizedUserName = "LAURENCE.ROSENBAUM@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "525.406.8548",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "9a908ce3-fcb3-c748-c585-c3fac11fa4b4",
@@ -237,12 +292,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Nellie.Schaden@hotmail.com",
                             EmailConfirmed = true,
                             FullName = "Nellie Schaden",
-                            HireDate = new DateOnly(2020, 3, 28),
+                            HireDate = new DateOnly(2020, 4, 24),
                             JobTitle = "Software Engineer",
                             LockoutEnabled = true,
                             NormalizedEmail = "NELLIE.SCHADEN@HOTMAIL.COM",
                             NormalizedUserName = "NELLIE.SCHADEN@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-790-609-3102",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "ff6f8e8a-a045-284e-296f-db91e36450d8",
@@ -257,12 +312,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Ann_Schulist18@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Ann Schulist",
-                            HireDate = new DateOnly(2018, 10, 8),
+                            HireDate = new DateOnly(2018, 11, 4),
                             JobTitle = "Administrator",
                             LockoutEnabled = true,
                             NormalizedEmail = "ANN_SCHULIST18@GMAIL.COM",
                             NormalizedUserName = "ANN_SCHULIST18@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-231-839-1717",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "f4598d88-0428-fcaa-fcdd-2a55bdcc82f5",
@@ -277,12 +332,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Kelvin12@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Kelvin Spencer",
-                            HireDate = new DateOnly(2025, 3, 24),
+                            HireDate = new DateOnly(2025, 4, 20),
                             JobTitle = "Manager",
                             LockoutEnabled = true,
                             NormalizedEmail = "KELVIN12@GMAIL.COM",
                             NormalizedUserName = "KELVIN12@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "907-517-0043",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "f1e858e7-0c43-26be-efa9-211ec5ea4d92",
@@ -297,12 +352,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Regina47@yahoo.com",
                             EmailConfirmed = true,
                             FullName = "Regina Streich",
-                            HireDate = new DateOnly(2023, 11, 13),
+                            HireDate = new DateOnly(2023, 12, 10),
                             JobTitle = "Administrator",
                             LockoutEnabled = true,
                             NormalizedEmail = "REGINA47@YAHOO.COM",
                             NormalizedUserName = "REGINA47@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "(721) 810-0815 x986",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "4855252d-5535-5f45-607e-dc59cac8768f",
@@ -317,12 +372,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Tommie_Trantow@hotmail.com",
                             EmailConfirmed = true,
                             FullName = "Tommie Trantow",
-                            HireDate = new DateOnly(2018, 8, 24),
+                            HireDate = new DateOnly(2018, 9, 20),
                             JobTitle = "Manager",
                             LockoutEnabled = true,
                             NormalizedEmail = "TOMMIE_TRANTOW@HOTMAIL.COM",
                             NormalizedUserName = "TOMMIE_TRANTOW@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "655.314.1687 x4696",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "6aec3d17-017a-a069-fc13-6b1f6eb1ba8f",
@@ -337,12 +392,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Bobbie58@yahoo.com",
                             EmailConfirmed = true,
                             FullName = "Bobbie Waelchi",
-                            HireDate = new DateOnly(2017, 3, 11),
+                            HireDate = new DateOnly(2017, 4, 7),
                             JobTitle = "Administrator",
                             LockoutEnabled = true,
                             NormalizedEmail = "BOBBIE58@YAHOO.COM",
                             NormalizedUserName = "BOBBIE58@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-692-871-4580",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "011e0967-8256-bf8c-ae8e-e197a7fbe612",
@@ -357,12 +412,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Earl_White67@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Earl White",
-                            HireDate = new DateOnly(2025, 10, 6),
+                            HireDate = new DateOnly(2025, 11, 2),
                             JobTitle = "Manager",
                             LockoutEnabled = true,
                             NormalizedEmail = "EARL_WHITE67@GMAIL.COM",
                             NormalizedUserName = "EARL_WHITE67@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-932-211-3106",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "ae59ad97-6c77-8269-eb6e-19ae055ab222",
@@ -377,12 +432,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Carroll_Wolf77@yahoo.com",
                             EmailConfirmed = true,
                             FullName = "Carroll Wolf",
-                            HireDate = new DateOnly(2020, 8, 4),
+                            HireDate = new DateOnly(2020, 8, 31),
                             JobTitle = "IT-Support",
                             LockoutEnabled = true,
                             NormalizedEmail = "CARROLL_WOLF77@YAHOO.COM",
                             NormalizedUserName = "CARROLL_WOLF77@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-372-442-1822 x97457",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "87d5e6ca-cfb0-064a-d763-cdd119735a6e",
@@ -397,12 +452,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Vera87@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Vera Abbott",
-                            HireDate = new DateOnly(2015, 11, 25),
+                            HireDate = new DateOnly(2015, 12, 22),
                             JobTitle = "IT-Technician",
                             LockoutEnabled = true,
                             NormalizedEmail = "VERA87@GMAIL.COM",
                             NormalizedUserName = "VERA87@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-612-682-9537 x7096",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "4a2a76bf-9fbf-f146-90b3-fba46965a93a",
@@ -417,12 +472,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Jose57@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Jose Barrows",
-                            HireDate = new DateOnly(2023, 8, 23),
+                            HireDate = new DateOnly(2023, 9, 19),
                             JobTitle = "Designer",
                             LockoutEnabled = true,
                             NormalizedEmail = "JOSE57@GMAIL.COM",
                             NormalizedUserName = "JOSE57@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-685-931-3725",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "6363864b-8a7b-a9ae-b8dd-13d55f1fe504",
@@ -437,12 +492,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Kayla.Bednar53@yahoo.com",
                             EmailConfirmed = true,
                             FullName = "Kayla Bednar",
-                            HireDate = new DateOnly(2022, 11, 13),
+                            HireDate = new DateOnly(2022, 12, 10),
                             JobTitle = "Manager",
                             LockoutEnabled = true,
                             NormalizedEmail = "KAYLA.BEDNAR53@YAHOO.COM",
                             NormalizedUserName = "KAYLA.BEDNAR53@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "335.936.9792",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "74d09312-1b35-440b-269f-8ec7c7472a51",
@@ -457,12 +512,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Theodore.Boehm@yahoo.com",
                             EmailConfirmed = true,
                             FullName = "Theodore Boehm",
-                            HireDate = new DateOnly(2024, 6, 4),
+                            HireDate = new DateOnly(2024, 7, 1),
                             JobTitle = "Software Engineer",
                             LockoutEnabled = true,
                             NormalizedEmail = "THEODORE.BOEHM@YAHOO.COM",
                             NormalizedUserName = "THEODORE.BOEHM@YAHOO.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "(343) 738-4469 x4087",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "0ae97d76-6057-68b8-673a-23578eeb1495",
@@ -477,12 +532,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Tasha_Brown26@hotmail.com",
                             EmailConfirmed = true,
                             FullName = "Tasha Brown",
-                            HireDate = new DateOnly(2021, 12, 23),
+                            HireDate = new DateOnly(2022, 1, 19),
                             JobTitle = "Software Engineer",
                             LockoutEnabled = true,
                             NormalizedEmail = "TASHA_BROWN26@HOTMAIL.COM",
                             NormalizedUserName = "TASHA_BROWN26@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "273.724.2200 x71203",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "67dbab8a-a101-a579-648c-a8d6b8e6548f",
@@ -497,12 +552,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Casey.Collins46@hotmail.com",
                             EmailConfirmed = true,
                             FullName = "Casey Collins",
-                            HireDate = new DateOnly(2017, 7, 17),
+                            HireDate = new DateOnly(2017, 8, 13),
                             JobTitle = "Software Engineer",
                             LockoutEnabled = true,
                             NormalizedEmail = "CASEY.COLLINS46@HOTMAIL.COM",
                             NormalizedUserName = "CASEY.COLLINS46@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "(945) 341-9265 x481",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "381a513f-eb9a-b110-e971-4c751b33e71d",
@@ -517,12 +572,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Randy32@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Randy Cruickshank",
-                            HireDate = new DateOnly(2016, 7, 28),
+                            HireDate = new DateOnly(2016, 8, 24),
                             JobTitle = "Administrator",
                             LockoutEnabled = true,
                             NormalizedEmail = "RANDY32@GMAIL.COM",
                             NormalizedUserName = "RANDY32@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "1-615-849-5964 x137",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "a36b9497-323c-bcce-30bd-d52a0ce105e2",
@@ -537,12 +592,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Krista_Dicki74@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Krista Dicki",
-                            HireDate = new DateOnly(2022, 5, 4),
+                            HireDate = new DateOnly(2022, 5, 31),
                             JobTitle = "IT-Support",
                             LockoutEnabled = true,
                             NormalizedEmail = "KRISTA_DICKI74@GMAIL.COM",
                             NormalizedUserName = "KRISTA_DICKI74@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "542-957-3570",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "3bcce089-cc99-2607-4b65-de7669fa6ba7",
@@ -557,12 +612,12 @@ namespace EntreprenadPro.Data.Migrations
                             Email = "Tyler.Erdman@hotmail.com",
                             EmailConfirmed = true,
                             FullName = "Tyler Erdman",
-                            HireDate = new DateOnly(2019, 7, 15),
+                            HireDate = new DateOnly(2019, 8, 11),
                             JobTitle = "Administrator",
                             LockoutEnabled = true,
                             NormalizedEmail = "TYLER.ERDMAN@HOTMAIL.COM",
                             NormalizedUserName = "TYLER.ERDMAN@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHDQDpatZxxsSlNT1tkXZ2U22m7DQeW2xHsBvpUVBBfdyEGHQ7CGVd3Eka9KVPWdrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHmMQNkrn2H1DfTEXcFEZ9i9kVLkGJzl+jd+pjfrn93XozroZmMGKM1hhOzDHLalgg==",
                             PhoneNumber = "(373) 646-6507",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "68a5f935-5e44-9edf-2c6b-1063fc00bb15",
@@ -571,37 +626,13 @@ namespace EntreprenadPro.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EntreprenadPro.Models.EntryTimer", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("TimeEntryId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("TimeEntryId");
-
-                    b.ToTable("EntryTimers");
-                });
-
             modelBuilder.Entity("EntreprenadPro.Models.Project", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -632,182 +663,182 @@ namespace EntreprenadPro.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8286d046-9740-a3e4-95cf-ff46699c73c4",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 414, DateTimeKind.Utc).AddTicks(1401),
-                            CustomerId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
-                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            Name = "Gorgeous Rubber Chicken",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2231),
-                            CustomerId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            Name = "Handcrafted Concrete Fish",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "a905569d-db07-3ae3-63a0-322750a4a3bd",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2429),
-                            CustomerId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
-                            Description = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            Name = "Rustic Fresh Cheese",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2483),
+                            Id = -731960101,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 224, DateTimeKind.Utc).AddTicks(9619),
                             CustomerId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
-                            Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            Name = "Awesome Granite Cheese",
+                            Description = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                            Name = "Practical Soft Tuna",
                             Status = 0
                         },
                         new
                         {
-                            Id = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2532),
-                            CustomerId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
-                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            Name = "Tasty Wooden Bacon",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2576),
-                            CustomerId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
-                            Description = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            Name = "Fantastic Metal Pizza",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "f604634b-6295-68e1-ff41-99ea1fb201b0",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2712),
-                            CustomerId = "09442776-8478-34e0-e6aa-335b933599ad",
-                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            Name = "Licensed Plastic Pizza",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "09442776-8478-34e0-e6aa-335b933599ad",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2762),
+                            Id = -1288389735,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(691),
                             CustomerId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
-                            Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            Name = "Intelligent Frozen Salad",
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            Name = "Rustic Frozen Computer",
                             Status = 0
                         },
                         new
                         {
-                            Id = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2806),
-                            CustomerId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
-                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            Name = "Generic Rubber Sausages",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2849),
-                            CustomerId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
-                            Description = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            Name = "Ergonomic Concrete Sausages",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "420371f9-ea23-96de-9ce3-00aeeec060a2",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2894),
+                            Id = -1844884905,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(856),
                             CustomerId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            Name = "Sleek Soft Chips",
+                            Description = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                            Name = "Refined Concrete Towels",
                             Status = 0
                         },
                         new
                         {
-                            Id = "56433424-0c06-62de-834b-9a1e6143f89f",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2938),
-                            CustomerId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            Id = 1893652757,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(907),
+                            CustomerId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                            Name = "Awesome Cotton Chair",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 1337157586,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(955),
+                            CustomerId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             Description = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            Name = "Unbranded Cotton Chair",
+                            Name = "Gorgeous Rubber Shoes",
                             Status = 0
                         },
                         new
                         {
-                            Id = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(2984),
+                            Id = 780793488,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1000),
+                            CustomerId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                            Name = "Tasty Fresh Salad",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 224298318,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1117),
+                            CustomerId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                            Name = "Handcrafted Steel Pants",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = -332196852,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1164),
+                            CustomerId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            Description = "The Football Is Good For Training And Recreational Purposes",
+                            Name = "Fantastic Concrete Bacon",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = -888626487,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1207),
+                            CustomerId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            Description = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                            Name = "Ergonomic Granite Ball",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = -1445121657,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1251),
+                            CustomerId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                            Name = "Handmade Metal Fish",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = -2001551291,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1294),
+                            CustomerId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            Description = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                            Name = "Practical Fresh Mouse",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 1736986371,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1335),
+                            CustomerId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                            Name = "Rustic Wooden Soap",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 1180556736,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1376),
+                            CustomerId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            Description = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                            Name = "Refined Plastic Car",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 624061566,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1460),
+                            CustomerId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                            Name = "Awesome Rubber Hat",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 67631932,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1502),
+                            CustomerId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                            Name = "Gorgeous Soft Chips",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = -488863238,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1542),
+                            CustomerId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            Description = "The Football Is Good For Training And Recreational Purposes",
+                            Name = "Tasty Frozen Table",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = -1045358408,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1582),
                             CustomerId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             Description = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            Name = "Incredible Steel Chair",
+                            Name = "Handcrafted Concrete Salad",
                             Status = 0
                         },
                         new
                         {
-                            Id = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(3114),
-                            CustomerId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
-                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            Name = "Handmade Metal Car",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(3155),
-                            CustomerId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            Name = "Rustic Plastic Car",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "a24141d3-9394-90dc-1fed-01e130515792",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(3196),
+                            Id = -1601722507,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1623),
                             CustomerId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            Name = "Awesome Frozen Computer",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(3237),
-                            CustomerId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
-                            Description = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            Name = "Small Granite Keyboard",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "c9c1c82a-d75b-27da-eebd-34c31858868b",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(3279),
-                            CustomerId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             Description = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            Name = "Practical Wooden Keyboard",
+                            Name = "Incredible Cotton Gloves",
                             Status = 0
                         },
                         new
                         {
-                            Id = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(3319),
-                            CustomerId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
-                            Description = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            Name = "Refined Soft Mouse",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
-                            CreatedAt = new DateTime(2025, 10, 22, 18, 37, 50, 415, DateTimeKind.Utc).AddTicks(3396),
+                            Id = 2136749619,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1665),
                             CustomerId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                            Name = "Small Rubber Cheese",
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 1580319985,
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 226, DateTimeKind.Utc).AddTicks(1707),
+                            CustomerId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             Description = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            Name = "Gorgeous Cotton Bike",
+                            Name = "Handmade Fresh Bike",
                             Status = 0
                         });
                 });
@@ -816,6 +847,9 @@ namespace EntreprenadPro.Data.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
@@ -826,7 +860,6 @@ namespace EntreprenadPro.Data.Migrations
                         .HasColumnType("character varying(500)");
 
                     b.Property<string>("EmployeeId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<double>("HourlyRate")
@@ -836,12 +869,13 @@ namespace EntreprenadPro.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("double precision");
 
-                    b.Property<string>("ProjectId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
 
                     b.Property<string>("WorkTypeId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -858,3303 +892,3941 @@ namespace EntreprenadPro.Data.Migrations
                         new
                         {
                             Id = "8286d046-9740-a3e4-95cf-ff46699c73c4",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 231, DateTimeKind.Utc).AddTicks(4454),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Explicabo neque eum quibusdam ipsum autem nemo qui rerum iste.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 122.0,
                             Hours = 6.0,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(4133),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Laboriosam sit minus eveniet vel et molestiae aspernatur eligendi molestiae.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 148.0,
                             Hours = 1.0,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "a905569d-db07-3ae3-63a0-322750a4a3bd",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(4498),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Qui et vitae asperiores blanditiis excepturi unde autem dolores exercitationem.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 74.0,
                             Hours = 4.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(4589),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Eum libero et sunt aspernatur quis dolorem et corporis nam.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 101.0,
                             Hours = 7.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(4670),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Architecto quo dolor consectetur quod incidunt repellendus non odit aperiam.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 127.0,
                             Hours = 2.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(4754),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Voluptatem consequatur magni quis eum explicabo ea sed repudiandae ea.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 53.0,
                             Hours = 5.5,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "f604634b-6295-68e1-ff41-99ea1fb201b0",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(4975),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Error quia deleniti iure doloremque tenetur accusantium deleniti porro est.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 80.0,
                             Hours = 0.5,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "09442776-8478-34e0-e6aa-335b933599ad",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5056),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Consequatur nisi eum atque tempore vel facilis possimus cupiditate eos.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 106.0,
                             Hours = 3.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
-                            Date = new DateOnly(2025, 10, 20),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5131),
+                            Date = new DateOnly(2025, 11, 16),
                             Description = "Illo excepturi dolor culpa ipsam tempore voluptatem aperiam sit molestias.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 133.0,
                             Hours = 6.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5204),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Corporis soluta cupiditate soluta a provident rerum nemo dolores debitis.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 58.0,
                             Hours = 1.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "420371f9-ea23-96de-9ce3-00aeeec060a2",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5321),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Unde pariatur officiis omnis animi reprehenderit quas qui earum dolore.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 85.0,
                             Hours = 5.0,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "56433424-0c06-62de-834b-9a1e6143f89f",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5394),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Autem sit modi debitis et magnam quia eos maxime et.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 112.0,
                             Hours = 8.0,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5472),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Eaque consectetur sunt aut necessitatibus aut quod eos omnis maiores.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 138.0,
                             Hours = 3.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5543),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Veniam ea et quasi provident ut commodi esse ex ex.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 64.0,
                             Hours = 6.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5616),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Non non enim ipsum quia eum voluptatibus est neque est.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 90.0,
                             Hours = 1.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "a24141d3-9394-90dc-1fed-01e130515792",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5730),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Est optio dolorum ut illum est animi delectus delectus explicabo.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 117.0,
                             Hours = 4.5,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5802),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Sit et ut consequatur praesentium unde modi et est laudantium.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 144.0,
                             Hours = 7.5,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "c9c1c82a-d75b-27da-eebd-34c31858868b",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5873),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Voluptatem aperiam voluptatem laudantium aut velit voluptas occaecati in fugiat.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 69.0,
                             Hours = 2.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(5946),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Molestias sed libero natus maxime enim praesentium autem eum sed.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 96.0,
                             Hours = 5.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6057),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Facere quis sit distinctio reprehenderit magni beatae quasi amet sunt.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 122.0,
                             Hours = 0.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "038011ac-3c05-89d9-a3f7-011573e34d81",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6129),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Alias ut consequatur possimus aperiam doloribus cumque ut asperiores earum.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 149.0,
                             Hours = 4.0,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "16c0d5d8-5ee9-55d8-8a5f-9b86e666e57d",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6199),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Dolore impedit porro vero cum pariatur voluptatem fuga quibusdam nemo.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 75.0,
                             Hours = 7.0,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "29ff9803-80cc-20d8-71c7-35f75aea7d7a",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6268),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Quos debitis et tenetur voluptatem impedit itaque ut id cum.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 101.0,
                             Hours = 2.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "3c3f5b2f-a2b0-ecd7-5830-ce68ce6d1477",
-                            Date = new DateOnly(2025, 10, 20),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6339),
+                            Date = new DateOnly(2025, 11, 16),
                             Description = "Id quae esse ab sapiente similique iste quia velit quae.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 128.0,
                             Hours = 5.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "4f7f1f5a-c493-b7d7-4098-68d841f1ac73",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6449),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Voluptatibus eius voluptas voluptatem id molestiae dolor qui numquam esse.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 53.0,
                             Hours = 8.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "63bee286-e676-83d6-2700-0249b5744470",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6517),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Tempora iure fugit dolore magnam quis quibusdam qui voluptatem repellendus.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 80.0,
                             Hours = 3.5,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "76fea5b1-085a-4ed6-0e69-9cba29f8db6c",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6588),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Rem iste laudantium ut saepe ratione esse consequatur dolorem sequi.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 107.0,
                             Hours = 6.5,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "893e69dd-2a3d-1ad5-f5d1-352b9c7c7369",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6658),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Porro est vel dignissimos sed consequatur eaque minima harum cupiditate.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 133.0,
                             Hours = 1.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "9c7e2c08-4b21-e5d4-dc39-cf9c10ff0b66",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6765),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Sapiente saepe neque ut dolor et expedita iste iusto saepe.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 59.0,
                             Hours = 4.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "afbdef34-6d04-b1d4-c3a2-690c8483a262",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6835),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Quia veritatis excepturi rerum qui qui ad fugiat et voluptatem.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 85.0,
                             Hours = 7.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "c3fdb25f-8fe8-7cd3-aa0a-037df7063a5f",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6904),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Qui incidunt eos id laudantium officia saepe aut quae harum.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 112.0,
                             Hours = 3.0,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "d63d768b-b1cb-48d3-9173-9cee6b8ad25c",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(6976),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Cumque in non quo odit ducimus sint iure at alias.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 139.0,
                             Hours = 6.0,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "e97c39b6-d3af-13d2-79db-365fdf0d6a58",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7045),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Rerum similique natus recusandae facere nemo dolores distinctio expedita quis.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 64.0,
                             Hours = 1.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "fcbcfce2-f592-dfd2-6043-d0d053910155",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7138),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Consectetur id voluptates aperiam qui dolorem facere itaque laudantium quod.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 91.0,
                             Hours = 4.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "10fcc00e-1776-abd1-47ac-6a40c6149951",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7207),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Iusto et quaerat magni eaque accusantium autem numquam ut odit.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 117.0,
                             Hours = 7.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "233b8339-3959-76d1-2e14-03b13a98314e",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7274),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Soluta architecto est tempora soluta rerum asperiores quos architecto voluptatum.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 144.0,
                             Hours = 2.5,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "367b4665-5a3c-42d0-157c-9d22ae1bc84b",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7343),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Molestiae dolore a voluptas quia maxime laborum voluptas debitis nulla.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 70.0,
                             Hours = 5.5,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "49bb0990-7c20-0dcf-fce5-3793219f6047",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7500),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Ipsum esse nemo nihil delectus id incidunt ipsa nobis numquam.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 96.0,
                             Hours = 0.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "5cfbcdbc-9e03-d9cf-e34d-d1039522f844",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7569),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Esse qui expedita cupiditate est laudantium at voluptatem quos qui.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 123.0,
                             Hours = 3.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "703a90e7-c0e7-a4ce-cab6-6a7409a68f41",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7639),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Distinctio facere consequatur dolorum aliquam quia rem mollitia exercitationem tenetur.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 149.0,
                             Hours = 6.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "837a5313-e2ca-70ce-b21e-04e57c29273d",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7708),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Et et ex porro eveniet sit sunt officiis aut quia.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 75.0,
                             Hours = 2.0,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "96ba173e-04ae-3bcd-9986-9e56f0adbf3a",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7777),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Voluptatem sunt nihil illum ut ipsa quo ratione et eligendi.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 102.0,
                             Hours = 5.0,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "a9f9da6a-2691-07cd-80ef-37c764305736",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7902),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Qui quaerat illo repudiandae sit et sit nihil quo veritatis.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 128.0,
                             Hours = 8.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "bc399d95-4875-d2cc-6757-d137d7b4ee33",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(7973),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Facilis molestiae ea perferendis dolorem voluptas hic cumque sint et.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 54.0,
                             Hours = 3.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "d07961c1-6958-9ecc-4ebf-6ba84b378630",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8041),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Necessitatibus mollitia facere aut totam fuga similique reiciendis quia et.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 80.0,
                             Hours = 6.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "e3b824ec-8b3b-69cb-3528-0519bfbb1e2c",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8109),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Dolores voluptas aut quia fugit atque consectetur magnam consequuntur ipsum.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 107.0,
                             Hours = 1.5,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "f6f8e718-ad1f-35ca-1c90-9e8a323eb529",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8217),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Vel recusandae qui nemo possimus nisi consequatur non recusandae ut.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 134.0,
                             Hours = 4.5,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "0938aa43-cf02-00ca-03f8-38faa6c24d26",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8287),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Fuga aut et ea in sed molestiae aut id voluptates.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 59.0,
                             Hours = 7.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "1d786e6f-f1e6-ccc9-eb61-d26b1a45e522",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8356),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Accusamus ad voluptatem quas ipsa veritatis ab vitae perspiciatis ad.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 86.0,
                             Hours = 2.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "30b7319a-13c9-97c9-d2c9-6cdc8ec97c1f",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8425),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Fugit dignissimos et animi nobis et libero ea ut facilis.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 112.0,
                             Hours = 5.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "43f7f4c6-35ad-63c8-b932-054d014d141b",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8496),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Ea laborum pariatur optio voluptas dolor quis harum sequi perferendis.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 139.0,
                             Hours = 0.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "5637b8f1-5790-2ec8-a09a-9fbe75d0ac18",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8614),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Id dolor velit quibusdam ut rerum et voluptates a eum.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 65.0,
                             Hours = 4.0,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "69767b1d-7874-fac7-8702-392ee9544415",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8684),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Pariatur hic unde saepe et et non amet voluptas facere.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 91.0,
                             Hours = 7.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "7db63e48-9a57-c5c7-6e6b-d39f5cd7db11",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8753),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Explicabo sed eveniet asperiores quaerat ea ratione laudantium sunt quia.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 118.0,
                             Hours = 2.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "90f60174-bc3b-91c6-55d3-6c10d05b730e",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8822),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Nisi quis dolore sunt ut modi voluptas id autem quos.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 145.0,
                             Hours = 5.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "a335c59f-de1e-5cc5-3c3b-068144de0b0b",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(8933),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Officia blanditiis mollitia amet perspiciatis vitae iure perferendis sit eos.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 70.0,
                             Hours = 8.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "b67588cb-0001-28c5-24a4-a0f1b762a207",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9004),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Fugiat fuga rerum quis amet earum consequatur nostrum maiores incidunt.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 97.0,
                             Hours = 3.5,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "c9b54bf7-22e5-f3c4-0b0c-3a622be53a04",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9073),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Beatae autem exercitationem eum eum et fuga similique autem animi.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 123.0,
                             Hours = 6.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "ddf50f22-44c8-bfc4-f275-d3d39f69d200",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9141),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Quia sapiente facilis atque voluptatum distinctio et nulla mollitia ut.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 150.0,
                             Hours = 1.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "f034d24e-65ac-8ac3-d9dd-6d4412ec69fd",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9209),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Similique magni asperiores culpa sed occaecati et sed ea laboriosam.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 76.0,
                             Hours = 4.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "03749579-878f-56c3-c045-07b5867001fa",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9317),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Vel corporis nisi cum omnis vel atque qui quia impedit.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 102.0,
                             Hours = 7.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "16b459a5-a973-21c2-a7ae-a025faf399f6",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9387),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Inventore rem eligendi omnis ea labore aut tempore perferendis architecto.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 129.0,
                             Hours = 3.0,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "2af31cd0-cb56-edc2-8e16-3a966d7731f3",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9457),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Corporis rerum ipsa officiis quae aspernatur est hic illum dignissimos.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 54.0,
                             Hours = 6.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "3d33dffc-ed3a-b8c1-757e-d407e1fac8ef",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9524),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Unde consequatur reprehenderit aut est a nisi modi fuga vel.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 81.0,
                             Hours = 1.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "5073a227-0f1d-84c1-5de7-6e78557e60ec",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9634),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Autem reiciendis quod quasi sit illum sapiente et molestiae sit.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 108.0,
                             Hours = 4.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "63b26653-3101-4fc0-444f-07e8c901f8e9",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9704),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Ipsa ratione sunt dolorem reiciendis cum culpa omnis ut omnis.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 134.0,
                             Hours = 7.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "76f2297e-53e4-1bbf-2bb7-a1593c858fe5",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9773),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Quis ipsam odio ut dolorum ut sed illo ipsa et.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 60.0,
                             Hours = 2.5,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "8a32ecaa-74c7-e6bf-1220-3bcab00827e2",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9842),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Provident atque temporibus commodi voluptatem in qui voluptas nulla nostrum.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 86.0,
                             Hours = 5.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "9d71b0d5-96ab-b2be-f988-d53b248cbfdf",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 234, DateTimeKind.Utc).AddTicks(9912),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Omnis et eos laudantium et quaerat odio id et distinctio.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 113.0,
                             Hours = 0.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "b0b17301-b88e-7dbe-e0f1-6eac970f56db",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Voluptatem qui corrupti natus unde sed inventore aut blanditiis doloremque.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 140.0,
                             Hours = 3.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "c3f1362c-da72-49bd-c759-081c0b93eed8",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(75),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Ut doloribus quo expedita consectetur reiciendis soluta nesciunt voluptatem in.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 65.0,
                             Hours = 6.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "d631f958-fc55-14bd-aec1-a28d7f1686d4",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(144),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Excepturi nesciunt amet possimus quo quo ullam iusto et assumenda.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 92.0,
                             Hours = 2.0,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "ea70bd83-1e39-e0bc-962a-3cfef29a1ed1",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(212),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Possimus voluptas sed at deleniti optio sint impedit officiis eos.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 118.0,
                             Hours = 5.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "fdb080af-401c-abbc-7d92-d56f661db5ce",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(362),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Alias et rerum tenetur quia iste ut maiores cum molestias.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 145.0,
                             Hours = 8.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "10f043da-6200-77bb-64fa-6fe0daa14dca",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(435),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Dolore libero ut ab voluptas esse nesciunt voluptatem atque officiis.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 71.0,
                             Hours = 3.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "232f0706-83e3-42ba-4b63-09504d25e5c7",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(505),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Quos quo qui ratione voluptate ad omnis ut quis et.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 97.0,
                             Hours = 6.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "366fca31-a5c6-0eba-32cb-a3c1c1a87cc4",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(574),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Quod consequatur recusandae dolore ab dolores qui vel explicabo laborum.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 124.0,
                             Hours = 1.5,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "4aaf8d5d-c7aa-d9b9-1934-3c32352c14c0",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(643),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Maiores quia veniam nisi eligendi asperiores sit sunt eveniet voluptatibus.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 150.0,
                             Hours = 4.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "5dee5088-e98d-a5b9-009c-d6a3a8afacbd",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(816),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Incidunt nisi harum dignissimos laboriosam vero quidem consequatur nihil aliquid.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 76.0,
                             Hours = 7.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "702e14b4-0b71-70b8-e704-70131c3343b9",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(885),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Voluptatum excepturi voluptatibus ut voluptatibus porro aliquam facilis molestias quisquam.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 103.0,
                             Hours = 2.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "836ed7e0-2d54-3cb8-ce6d-098490b6dbb6",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(954),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Quisquam soluta sit quidem fuga in debitis et ipsam sunt.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 129.0,
                             Hours = 5.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "97ae9a0b-4f38-07b7-b6d5-a3f5043a73b3",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1024),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Delectus pariatur soluta id ut iusto dolores adipisci quia praesentium.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 55.0,
                             Hours = 1.0,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "aaed5e37-711b-d3b7-9d3d-3d6677bd0baf",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1130),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Non sit doloremque fugiat voluptates exercitationem fugit rem molestiae eum.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 81.0,
                             Hours = 4.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "bd2d2162-92ff-9eb6-84a6-d7d7eb41a2ac",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1199),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Blanditiis amet vel recusandae omnis sequi minus placeat minus velit.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 108.0,
                             Hours = 7.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "d06de48e-b4e2-6ab5-6b0e-70475fc43aa9",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1268),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Cumque ex qui doloremque velit perferendis ex accusantium sed similique.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 135.0,
                             Hours = 2.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "e3aca8b9-d6c6-35b5-5276-0ab8d248d2a5",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1336),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Rerum non beatae consequuntur voluptas officiis aut ullam nisi itaque.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 60.0,
                             Hours = 5.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "f7ec6be5-f8a9-01b4-39df-a42946cb69a2",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1405),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Consectetur optio molestiae tempora atque minus deserunt in ratione nemo.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 87.0,
                             Hours = 0.5,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "0a2c2e10-1a8c-ccb4-2047-3e9aba4f019e",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1511),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Iusto et est quia consequuntur deserunt numquam at tenetur cum.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 113.0,
                             Hours = 3.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "1d6bf13c-3c70-98b3-07b0-d70a2dd2999b",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1580),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Nobis aperiam quia nihil assumenda qui fugiat magni possimus ipsa.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 140.0,
                             Hours = 6.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "30abb567-5e53-63b3-ef18-717ba1563098",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1647),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Non sed rem occaecati velit enim qui voluptate error velit.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 66.0,
                             Hours = 1.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "43eb7893-8037-2fb2-d680-0bec15d9c894",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1717),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Quia quis qui et illo ipsum quasi soluta consequatur dolor.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 92.0,
                             Hours = 4.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "572b3bbe-a11a-fab2-bde9-a55d885d6091",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1827),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Quam ut ipsum porro cumque aperiam eligendi a quia voluptatem.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 119.0,
                             Hours = 7.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "6a6affea-c3fe-c6b1-a451-3ecefce0f88e",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1897),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Nam impedit occaecati vel nisi saepe enim ut reiciendis occaecati.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 145.0,
                             Hours = 3.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "7daac215-e5e1-91b1-8bb9-d83e70648f8a",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(1966),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Voluptates debitis accusamus repudiandae maiores facere non excepturi repellendus necessitatibus.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 71.0,
                             Hours = 6.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "90ea8541-07c5-5db0-7222-72afe3e72787",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2035),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Sequi quae eius aut et laborum omnis repellendus officia quaerat.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 98.0,
                             Hours = 1.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "a429486c-29a8-28af-598a-0c20576bbf83",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2104),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "In numquam similique aut enim rem ipsum veritatis qui et.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 124.0,
                             Hours = 4.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "b7690c98-4b8c-f4af-40f3-a591cbee5680",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2212),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Facilis eum sint quia repudiandae sit temporibus laboriosam sed repellat.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 50.0,
                             Hours = 7.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "caa9cfc3-6d6f-bfae-285b-3f013f72ee7d",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2281),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Necessitatibus iste ut corporis iste consectetur voluptate et consequatur consequatur.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 76.0,
                             Hours = 2.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "dde892ef-8f52-8bae-0fc3-d972b2f58679",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2432),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Dolores est et ea sed ab doloremque saepe vel id.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 103.0,
                             Hours = 5.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "f028561a-b036-56ad-f62c-72e326791d76",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2502),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Eum saepe delectus et nulla voluptates est dolorem et odit.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 130.0,
                             Hours = 0.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "04681946-d219-22ad-dd94-0c549afdb573",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2619),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Et veritatis ipsam animi corrupti assumenda ut dignissimos nihil voluptatum.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 55.0,
                             Hours = 3.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "17a8dc72-f4fd-edac-c4fc-a6c50d804d6f",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2692),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Officiis incidunt nam optio magni et necessitatibus quisquam tempora voluptas.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 82.0,
                             Hours = 6.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "2ae7a09d-16e0-b9ac-ab65-40358104e56c",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2761),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Sed in perferendis autem est corrupti molestias repellat aperiam non.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 109.0,
                             Hours = 2.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "3d2763c9-38c4-84ab-92cd-d9a6f5877c68",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2830),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Commodi similique commodi saepe esse aliquid consequuntur enim quo culpa.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 135.0,
                             Hours = 5.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "506726f4-5aa7-50aa-7935-7317680b1465",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(2899),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Est id quo doloribus veritatis non maxime unde facilis hic.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 61.0,
                             Hours = 8.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "64a6e920-7c8b-1baa-619e-0d88dc8eac62",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3133),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "At et veritatis sunt nihil quasi consequatur dolorem ducimus voluptatem.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 87.0,
                             Hours = 3.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "77e6ad4b-9e6e-e7a9-4806-a7f95012435e",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3203),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Aspernatur architecto velit amet ut non maiores aut aliquam est.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 114.0,
                             Hours = 6.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "8a267077-bf51-b2a9-2f6f-4069c395db5b",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3272),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Nisi et omnis veniam doloribus temporibus id vel inventore inventore.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 141.0,
                             Hours = 1.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "9d6533a2-e135-7ea8-16d7-dada37197358",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3341),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Officia velit aut eum harum est modi et et molestiae.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 66.0,
                             Hours = 4.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "b1a5f7ce-0318-49a8-fd3f-744bab9c0a54",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3492),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Fugiat qui praesentium deleniti ad molestias nulla non libero quibusdam.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 93.0,
                             Hours = 7.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "c4e5baf9-25fc-15a7-e4a8-0ebc1e20a251",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3562),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Vitae facere consequatur culpa sint consequatur laudantium quia voluptatum dolorem.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 119.0,
                             Hours = 2.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "d7257d25-47df-e0a7-cb10-a72c92a33a4d",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3630),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Voluptas et nesciunt cum error tempora vitae atque veniam sed.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 146.0,
                             Hours = 5.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "ea644050-69c3-aca6-b278-419d0627d24a",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3699),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Sunt sunt molestias est quia dicta nihil possimus dicta et.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 72.0,
                             Hours = 1.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "fda4047c-8ba6-77a5-9ae1-db0e7aaa6947",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3824),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Illum quaerat vero officiis pariatur rerum quia aperiam saepe ad.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 98.0,
                             Hours = 4.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "11e4c7a7-ad8a-43a5-8149-757fed2e0143",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3894),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Veritatis molestiae quia ut quos aut earum enim optio rerum.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 125.0,
                             Hours = 7.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "24238ad3-ce6d-0ea4-68b2-0ef061b19940",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(3963),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Nemo mollitia iste quasi dolores libero natus officia quas aut.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 50.0,
                             Hours = 2.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "37634efe-f051-daa4-4f1a-a860d535303d",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4031),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Omnis voluptas et dolorem omnis non sit et nemo vel.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 77.0,
                             Hours = 5.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "4aa3112a-1234-a5a3-3682-42d148b8c839",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4099),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Quibusdam recusandae aliquam voluptatem nihil iure et eos fugit placeat.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 104.0,
                             Hours = 0.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "5de2d455-3417-71a3-1deb-db42bc3c6036",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4208),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Ipsa aut id commodi et dolore quam esse sint sed.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 130.0,
                             Hours = 3.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "71229881-56fb-3ca2-0453-75b330bff732",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4277),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Quis enim tenetur praesentium impedit odit ipsa eligendi est corrupti.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 56.0,
                             Hours = 6.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "84625bac-78de-08a2-ebbb-0f23a3438f2f",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4345),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Provident odio corporis natus aliquid delectus distinctio ut non vero.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 82.0,
                             Hours = 1.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "97a21ed8-9ac2-d3a1-d324-a99417c6272c",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4415),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Dolor laborum et expedita asperiores dolorem minima et suscipit tempora.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 109.0,
                             Hours = 4.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "aae1e103-bca5-9fa1-ba8c-42058b4abf28",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4483),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Accusantium dolor alias facere quidem nobis eveniet occaecati eos mollitia.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 136.0,
                             Hours = 8.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "be21a52f-dd89-6aa0-a1f4-dc76fecd5625",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4591),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Enim hic aliquid at minima perspiciatis occaecati quibusdam rerum delectus.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 61.0,
                             Hours = 3.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "d161685b-ff6c-369f-885d-76e77251ee22",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4660),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Sint sed cumque hic molestiae ea eos architecto facere suscipit.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 88.0,
                             Hours = 6.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "e4a02b86-2150-019f-6fc5-1057e6d5861e",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4728),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Omnis quis ab ab similique voluptatem possimus aliquid iste nihil.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 114.0,
                             Hours = 1.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "f7e0efb2-4333-cd9e-562e-a9c859581d1b",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4796),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Consequatur blanditiis in ratione non quia vel fuga commodi architecto.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 141.0,
                             Hours = 4.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "0a20b2dd-6516-989e-3d96-4339cddcb517",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4904),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Magnam fuga placeat et at voluptatibus repellat ut dolorem dignissimos.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 67.0,
                             Hours = 7.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "1e5f7509-87fa-649d-24fe-ddaa415f4d14",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(4973),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Dolores autem aspernatur nisi dolores nulla et dolor aut consequatur.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 93.0,
                             Hours = 2.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "319f3834-a9dd-2f9d-0c67-771ab5e3e411",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5042),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Quod sapiente ducimus odio eos nihil ut blanditiis omnis dolor.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 120.0,
                             Hours = 5.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "44dffc60-cbc1-fb9c-f3cf-108b28667c0d",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5110),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Maiores magni quibusdam ut repellendus error vero qui qui unde.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 146.0,
                             Hours = 0.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "571fbf8b-eca4-c69c-da37-aafc9cea140a",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5178),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Incidunt ullam ratione quidem molestiae nihil voluptatum consequatur iure sint.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 72.0,
                             Hours = 3.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "6a5e82b7-0e88-929b-c1a0-446d106dac07",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5294),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Voluptatum totam dolores minus quasi veniam explicabo veniam adipisci quis.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 99.0,
                             Hours = 7.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "7e9e46e2-306b-5d9a-a808-dede83f14303",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5363),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Est rerum nulla fugiat quo qui porro natus repellat expedita.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 125.0,
                             Hours = 2.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "91de090e-524f-299a-8f71-774ef774db00",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5431),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Ut consequatur adipisci non ex alias suscipit quo aut accusantium.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 51.0,
                             Hours = 5.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "a41dcc39-7432-f499-76d9-11bf6bf873fc",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5499),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Numquam reiciendis perspiciatis doloremque repellat eos tenetur aut est qui.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 77.0,
                             Hours = 8.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "b75d9065-9616-c099-5d41-ab30de7b0af9",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5606),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Praesentium ratione saepe consequuntur rerum quisquam sunt iure esse voluptas.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 104.0,
                             Hours = 3.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "cb9d5390-b8f9-8b98-45aa-44a152ffa2f6",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5674),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Nihil ipsam et modi quis culpa adipisci nam eius dolores.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 131.0,
                             Hours = 6.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "dedc16bc-dadc-5798-2c12-de11c6823af2",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5743),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Hic atque deserunt quia non odio vel earum accusantium quas.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 56.0,
                             Hours = 1.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "f11cd9e7-fbc0-2297-137a-78823906d1ef",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5812),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Adipisci et earum quam sunt ullam et numquam fugiat officiis.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 83.0,
                             Hours = 4.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "045c9d13-1da3-ee97-fae3-12f3ad8969ec",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5880),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Odio qui nostrum occaecati numquam neque illo quos quidem et.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 109.0,
                             Hours = 7.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "179c603e-3f87-b996-e14b-ab64210d01e8",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(5975),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Nobis doloribus rerum et vero voluptatem tempore assumenda dignissimos est.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 136.0,
                             Hours = 2.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "2bdb236a-616a-8595-c8b4-45d5949099e5",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6044),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Non nesciunt doloribus quo et aut nostrum quae dolore reiciendis.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 62.0,
                             Hours = 5.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "3e1be795-834e-5095-af1c-df45081430e1",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6112),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Quia voluptas laboriosam vel ratione quod voluptates quia illo ut.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 88.0,
                             Hours = 1.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "515baac1-a531-1c94-9684-79b67c97c8de",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6179),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Nihil dolores est voluptates temporibus animi provident mollitia vero porro.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 115.0,
                             Hours = 4.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "649a6ded-c715-e794-7eed-1227f01b60db",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6365),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Libero nam eaque aut et praesentium voluptatem officiis nam dicta.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 141.0,
                             Hours = 7.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "77da3018-e9f8-b393-6555-ac98639ef7d7",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6436),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Repudiandae quo iure odit architecto voluptatem assumenda voluptatem totam blanditiis.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 67.0,
                             Hours = 2.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "8b1af444-0adc-7e93-4cbd-4609d7228fd4",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6506),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Nesciunt consequatur id sed porro dolor reprehenderit molestiae ad dolorem.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 94.0,
                             Hours = 5.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "9e59b76f-2cbf-4a92-3326-e0794ba527d1",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6576),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Ea quia dicta corporis ea eaque aut cumque beatae adipisci.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 120.0,
                             Hours = 0.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "b1997a9b-4ea2-1592-1a8e-79eabe29becd",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6683),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Est nisi iusto in alias eveniet et reiciendis rerum error.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 147.0,
                             Hours = 3.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "c4d93ec6-7086-e191-01f6-135b32ad56ca",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6754),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Saepe excepturi repellendus et est possimus dolore aliquam est recusandae.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 73.0,
                             Hours = 6.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "d81901f2-9269-ac91-e85f-adcca630eec6",
-                            Date = new DateOnly(2025, 10, 20),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6824),
+                            Date = new DateOnly(2025, 11, 16),
                             Description = "Eos soluta dolores mollitia nostrum et accusamus provident dolores corporis.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 99.0,
                             Hours = 1.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "eb58c41d-b44d-7890-cfc7-473c19b486c3",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6891),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Eum pariatur atque optio recusandae deleniti corrupti consequatur ullam tempore.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 126.0,
                             Hours = 4.5,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "fe988849-d630-438f-b730-e0ad8d371dc0",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 235, DateTimeKind.Utc).AddTicks(6960),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Et sit fugiat autem in laboriosam odit vitae odit ipsa.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 51.0,
                             Hours = 8.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "11d84b74-f814-0f8f-9e98-7a1e01bbb5bc",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(4448),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Officiis amet sit necessitatibus eius velit est ea repudiandae velit.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 78.0,
                             Hours = 3.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "24170ea0-19f7-da8e-8500-148f743e4db9",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(4868),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Quia ex provident doloribus eos inventore ut quidem porro omnis.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 105.0,
                             Hours = 6.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "3857d1cb-3bdb-a68e-6c69-ad00e8c2e4b6",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(5056),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Consequatur cupiditate aut dicta quas sint delectus repudiandae cupiditate ratione.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 131.0,
                             Hours = 1.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "4b9795f7-5dbe-718d-53d1-47705c457cb2",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(5235),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Laborum eligendi incidunt amet voluptatem omnis qui amet voluptas sint.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 57.0,
                             Hours = 4.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "5ed65822-7fa1-3d8d-3a39-e1e1cfc914af",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(5411),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Vero et culpa veniam autem quidem quia laudantium dolores rerum.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 83.0,
                             Hours = 7.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "71161b4e-a185-088c-21a2-7b52434cabab",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(5567),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Aut aperiam non vel iusto dolores dolorem quod itaque aliquam.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 110.0,
                             Hours = 2.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "8456df79-c368-d48c-080a-14c3b7d043a8",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(5729),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Ut sed minima deleniti beatae ex dignissimos sit maxime fuga.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 137.0,
                             Hours = 5.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "9896a2a5-e54c-9f8b-f073-ae332a53dba5",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(5897),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Deserunt quis et in quisquam numquam veritatis exercitationem unde asperiores.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 62.0,
                             Hours = 0.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "abd565d0-072f-6b8a-d7db-48a49ed773a1",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(6055),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Quo ut reiciendis cum commodi architecto nobis similique ex commodi.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 89.0,
                             Hours = 3.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "be1528fc-2813-368a-be43-e215125a0a9e",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(6230),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Vitae impedit voluptas est aut recusandae corporis nulla nesciunt minus.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 115.0,
                             Hours = 7.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "d155ec27-4af6-0289-a5ac-7b8686dea29b",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(6383),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Voluptas debitis tempore accusamus et quibusdam et quia delectus aut.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 142.0,
                             Hours = 2.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "e494af53-6cda-cd89-8c14-15f7f9613a97",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(6539),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Sunt quae voluptatem ut exercitationem expedita perspiciatis in assumenda rem.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 68.0,
                             Hours = 5.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "f8d4727e-8ebd-9988-737c-af676de5d194",
-                            Date = new DateOnly(2025, 10, 20),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(6698),
+                            Date = new DateOnly(2025, 11, 16),
                             Description = "Qui numquam quis et itaque sint neque tempore in voluptas.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 94.0,
                             Hours = 8.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "0b1436aa-b0a1-6488-5ae5-49d8e1686990",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(6864),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Et eum quisquam dolorem culpa autem dolor hic vel non.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 121.0,
                             Hours = 3.0,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "1e53f9d6-d284-3087-414d-e24954ec018d",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(7019),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Enim omnis quasi voluptatem modi ut in tempora amet in.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 147.0,
                             Hours = 6.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "3193bc01-f467-fb87-29b5-7cbac86f988a",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(7169),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Iste quisquam quam ea et explicabo voluptatem quas asperiores rerum.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 73.0,
                             Hours = 1.5,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "45d37f2d-154b-c786-101e-162a3cf33086",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(7321),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Et saepe assumenda praesentium excepturi tenetur rerum dolor quibusdam ipsam.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 100.0,
                             Hours = 4.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "58124358-372e-9285-f786-b09baf76c883",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(7472),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Quae veritatis sed iste sequi vel quaerat illo id nobis.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 126.0,
                             Hours = 7.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "6b520684-5912-5e85-deef-490c23fa6080",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(7639),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Nostrum incidunt totam expedita quibusdam tempore aut sit voluptate illo.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 52.0,
                             Hours = 2.5,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "7e92c9af-7bf5-2984-c557-e37d977df77c",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(7790),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Sed in illum facere odio provident et est numquam nihil.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 78.0,
                             Hours = 6.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "91d28ddb-9dd9-f584-acbf-7dee0a018f79",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(7942),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Dolor similique dolorem pariatur vitae reprehenderit sed rerum sit autem.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 105.0,
                             Hours = 1.0,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "a5115006-bfbc-c083-9328-165e7e852775",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(8094),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Accusantium id sint hic est magnam id nesciunt dolorem neque.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 132.0,
                             Hours = 4.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "b8511332-e1a0-8c83-7a90-b0cff208be72",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(8264),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Enim et et quae quis aut ea iusto et provident.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 57.0,
                             Hours = 7.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "cb91d75d-0383-5782-61f8-4a40658c566f",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(8429),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Sint architecto numquam ratione perferendis aut reiciendis quo iusto ut.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 84.0,
                             Hours = 2.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "ded09a89-2467-2382-4961-e4b1d90fee6b",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(8581),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Voluptas et error et expedita fugiat mollitia doloribus labore enim.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 110.0,
                             Hours = 5.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "f1105db4-464a-ee81-30c9-7d214d938568",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(8735),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Aut velit repudiandae laboriosam ullam eligendi eius ut quae rerum.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 137.0,
                             Hours = 0.5,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "055020e0-682d-ba81-1732-1792c1161d65",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(8887),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Aliquam culpa voluptatem odio earum omnis quo ut pariatur aut.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 63.0,
                             Hours = 3.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "188fe40b-8a11-8580-fe9a-b103349ab561",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9050),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Et placeat laborum sed qui velit blanditiis illum expedita autem.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 89.0,
                             Hours = 6.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "2bcfa737-acf4-517f-e502-4b74a81d4d5e",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9200),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Maxime et sapiente quidem tempora enim architecto explicabo laudantium maxime.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 116.0,
                             Hours = 1.5,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "3e0f6a62-ced8-1c7f-cc6b-e4e51ca1e45a",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9351),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Doloribus sunt enim minus officiis magni optio quis ut fugit.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 142.0,
                             Hours = 4.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "524f2e8e-f0bb-e87e-b3d3-7e558f247c57",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9419),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Ut quaerat distinctio eum sint doloribus ipsam facilis architecto atque.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 68.0,
                             Hours = 8.0,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "658ef1b9-129f-b37e-9a3b-18c603a81454",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9487),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Deleniti molestiae aut non nesciunt pariatur recusandae et debitis at.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 95.0,
                             Hours = 3.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "78ceb4e5-3382-7f7d-82a4-b237772bab50",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9588),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Est mollitia ea accusantium et impedit iste velit nobis modi.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 121.0,
                             Hours = 6.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "8b0e7710-5566-4a7d-690c-4ba8eaaf434d",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9657),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Ut voluptas impedit consequuntur dignissimos similique quia voluptatum corrupti deserunt.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 148.0,
                             Hours = 1.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "9e4d3b3c-7749-167c-5074-e5195e32db4a",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9742),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Numquam recusandae inventore modi dicta molestiae autem facere exercitationem sapiente.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 73.0,
                             Hours = 4.0,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "b28dfe67-992c-e17c-37dd-7f89d2b67246",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9809),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Laudantium aut voluptate voluptatem minus nostrum velit accusantium aspernatur sit.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 100.0,
                             Hours = 7.5,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "c5cdc193-bb10-ad7b-1e45-19fa45390a43",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9886),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Impedit enim possimus quam autem voluptatem aperiam corporis et cumque.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 127.0,
                             Hours = 2.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "d80c85bf-ddf3-787a-05ae-b26bb9bda23f",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 252, DateTimeKind.Utc).AddTicks(9952),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Tenetur odio odit sint sit aut et culpa impedit quasi.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 52.0,
                             Hours = 5.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "eb4c48ea-ffd7-447a-ec16-4cdc2d403a3c",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(18),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Velit est blanditiis et distinctio accusamus enim vero sint odio.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 79.0,
                             Hours = 0.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "fe8c0b16-21ba-0f79-d37e-e64ca0c4d139",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(85),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Dignissimos omnis aut quo corporis qui necessitatibus magni voluptatem consequatur.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 105.0,
                             Hours = 3.5,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "12cccf41-429e-db79-bbe7-7fbd14476935",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(160),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Est hic sequi consequatur rerum officia excepturi voluptate consequuntur dolor.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 132.0,
                             Hours = 7.0,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "250b926d-6481-a678-a24f-192e88cb0132",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(226),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Recusandae sed quas voluptates officia ducimus magni nobis non perspiciatis.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 58.0,
                             Hours = 2.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "384b5598-8665-7278-89b7-b39ffc4e982f",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(293),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Dolor quis at consequatur ut nemo placeat sapiente id repudiandae.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 84.0,
                             Hours = 5.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "4b8b18c4-a848-3d77-7020-4d106fd2302b",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(360),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Nihil blanditiis sed odit debitis dolorem quis labore perspiciatis veniam.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 111.0,
                             Hours = 8.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "5fcadcef-ca2c-0977-5788-e680e356c828",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(426),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Libero fuga omnis sed occaecati accusantium doloribus excepturi ut et.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 137.0,
                             Hours = 3.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "720a9f1b-ec0f-d476-3ef1-80f157d95f24",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(504),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Repudiandae autem ut ullam neque rerum est temporibus sequi voluptatem.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 63.0,
                             Hours = 6.5,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "854a6246-0ef2-a075-2559-1a62ca5df721",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(572),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Neque sapiente magnam in aut maxime tempora et a reprehenderit.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 90.0,
                             Hours = 1.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "98892672-30d6-6b75-0cc1-b4d33ee08f1e",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(639),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Voluptate magni animi dolores ducimus est pariatur nisi voluptas omnis.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 116.0,
                             Hours = 4.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "abc9e99d-51b9-3774-f42a-4d43b264271a",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(707),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Et ullam hic mollitia explicabo totam totam et similique magni.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 143.0,
                             Hours = 7.5,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "bf09acc9-739d-0274-db92-e7b425e7be17",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(782),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Eveniet totam ullam eligendi id voluptas dicta saepe autem et.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 69.0,
                             Hours = 2.5,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "d2496ff4-9580-ce73-c2fa-8125996b5614",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(850),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Qui quidem est temporibus vel amet impedit ipsum dolor accusamus.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 95.0,
                             Hours = 6.0,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "e5883320-b764-9973-a963-1b960deeee10",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(917),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Iure aut repellat necessitatibus voluptatem quae voluptas ducimus maiores labore.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 122.0,
                             Hours = 1.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "f8c8f64b-d947-6572-90cb-b4078072850d",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(984),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Harum reiciendis ut maiores nam et rerum est temporibus est.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 148.0,
                             Hours = 4.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "0b08b977-fb2b-3072-7733-4e77f4f51d09",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1051),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Debitis ratione optio dicta nemo voluptas error repellat mollitia reiciendis.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 74.0,
                             Hours = 7.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "1f477da2-1d0e-fc71-5e9c-e8e86879b506",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1126),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Quia ipsam quae sit hic fuga amet ad in nisi.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 101.0,
                             Hours = 2.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "328740ce-3ff2-c770-4504-8259dbfc4c03",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1192),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Consequatur atque qui veniam mollitia atque aut omnis quia quo.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 127.0,
                             Hours = 5.5,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "45c703f9-60d5-9370-2d6d-1bca4f80e4ff",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1260),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Laborum et maxime vel labore nisi nihil eum aut vitae.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 53.0,
                             Hours = 0.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "5806c725-82b8-5e6f-14d5-b53ac3037cfc",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1327),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Vero qui explicabo voluptatum aut sed quae aut illum qui.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 79.0,
                             Hours = 3.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "6c468a51-a49c-2a6f-fb3d-4fab378714f9",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1404),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Odit doloribus dignissimos in cupiditate veritatis nam vel fuga qui.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 106.0,
                             Hours = 6.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "7f864d7c-c67f-f56e-e2a6-e81caa0aabf5",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1471),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Aliquid nesciunt autem tempore dolorem molestiae veniam expedita molestiae consectetur.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 133.0,
                             Hours = 1.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "92c610a8-e863-c16e-c90e-828d1e8e43f2",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1538),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Mollitia voluptas qui est consequatur repellendus ut recusandae ut natus.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 58.0,
                             Hours = 5.0,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "a505d4d3-0a46-8c6d-b076-1cfe9211dbee",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1605),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Voluptas dolores quos accusamus qui facilis cupiditate quia eaque non.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 85.0,
                             Hours = 8.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "b84597ff-2c2a-586d-97df-b66e059572eb",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1671),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Dicta nam voluptas delectus aspernatur quas qui atque nulla ullam.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 111.0,
                             Hours = 3.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "cc855a2a-4e0d-236c-7e47-4fdf79180ae8",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1748),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Sit fugiat consectetur et quod commodi omnis omnis est libero.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 138.0,
                             Hours = 6.0,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "dfc41e56-6ff1-ef6c-66b0-e950ed9ca2e4",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1815),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "In alias ut neque eum modi eum eaque blanditiis eaque.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 64.0,
                             Hours = 1.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "f204e181-91d4-ba6b-4d18-83c1601f39e1",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1881),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Qui quia necessitatibus voluptatem accusantium vitae alias ipsam quaerat voluptate.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 90.0,
                             Hours = 4.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "0544a4ad-b3b7-866a-3480-1d32d4a3d1de",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(1949),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Et nisi labore ea libero earum dolorum officia et omnis.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 117.0,
                             Hours = 7.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "188367d8-d59b-516a-1be9-b6a2482669da",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2027),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Enim excepturi officia blanditiis enim et labore et accusamus ratione.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 143.0,
                             Hours = 2.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "2cc32b04-f77e-1d69-0251-5013bbaa01d7",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2094),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Iste soluta itaque iste a distinctio eos qui cum excepturi.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 69.0,
                             Hours = 5.5,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "3f03ee2f-1962-e869-e9b9-ea842f2e98d3",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2163),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Aut pariatur quis et animi occaecati deleniti quam deleniti aut.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 96.0,
                             Hours = 0.5,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "5243b15b-3b45-b468-d022-84f5a3b130d0",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2230),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Ab sit quidem facere et vel aspernatur eligendi quis magnam.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 122.0,
                             Hours = 3.5,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "65827586-5d29-7f68-b78a-1d651635c8cd",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2297),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Exercitationem amet maiores pariatur rerum labore quisquam ut explicabo dolorum.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 149.0,
                             Hours = 7.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "79c238b2-7e0c-4b67-9ff2-b7d68ab85fc9",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2467),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Ut ex suscipit rerum non aut laboriosam dolore eveniet doloribus.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 74.0,
                             Hours = 2.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "8c02fbdd-a0f0-1667-865b-5147fe3cf7c6",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2534),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Repellendus cupiditate nobis quae ipsum sapiente a cupiditate nihil ea.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 101.0,
                             Hours = 5.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "9f41bf09-c2d3-e266-6dc3-ebb872bf8fc3",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2602),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Doloremque eligendi aperiam qui vel qui in et molestias qui.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 128.0,
                             Hours = 8.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "b2818234-e4b7-ad65-542c-8429e54326bf",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2670),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Ad eos eum et praesentium soluta velit architecto ipsam aspernatur.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 53.0,
                             Hours = 3.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "c5c14560-069a-7965-3b94-1e9959c6bebc",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2751),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Occaecati doloremque minus laboriosam aut ut illum aliquid sed totam.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 80.0,
                             Hours = 6.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "d900088b-287d-4464-22fc-b80acd4a56b8",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2819),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Voluptas sed vitae iusto maxime in iusto et molestiae quo.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 106.0,
                             Hours = 1.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "ec40ccb7-4a61-1064-0965-517b40cdeeb5",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2886),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Aut quis et sed iure quaerat inventore et qui quia.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 133.0,
                             Hours = 4.5,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "ff808fe2-6c44-db63-f0cd-ebecb45185b2",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(2954),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Aliquam ut dolor harum doloremque sed cum dolor sed in.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 59.0,
                             Hours = 7.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "12c0520e-8d28-a763-d835-855c28d41dae",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3027),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Quas impedit magni minus tempore reiciendis exercitationem blanditiis laboriosam rerum.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 85.0,
                             Hours = 2.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "25ff163a-af0b-7262-bf9e-1fcd9b58b5ab",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3103),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Placeat debitis deleniti eum voluptatem quo repudiandae minus ratione enim.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 112.0,
                             Hours = 6.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "393fd965-d1ef-3e62-a606-b83e0fdb4ca8",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3170),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Asperiores quae eum molestiae sapiente optio sed aut hic soluta.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 138.0,
                             Hours = 1.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "4c7f9c91-f3d2-0961-8d6f-52af835fe4a4",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3238),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Labore numquam dolor accusantium id iste sequi quis possimus ab.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 64.0,
                             Hours = 4.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "5fbe5fbc-15b6-d560-74d7-ec20f6e27ca1",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3305),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Atque eum non quia dolore quam est natus natus quam.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 91.0,
                             Hours = 7.0,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "72fe23e8-3799-a060-5b3f-86906a66139d",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3371),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Qui omnis debitis modi necessitatibus minima reprehenderit quo consequatur temporibus.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 117.0,
                             Hours = 2.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "853ee613-597d-6c5f-42a8-1f01dee9ab9a",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3450),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Aut quisquam tempora voluptatem provident eos perferendis fugit quia nesciunt.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 144.0,
                             Hours = 5.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "997da93f-7b60-375f-2910-b972516d4397",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3517),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Eius necessitatibus in esse quia repellat harum reprehenderit reiciendis non.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 69.0,
                             Hours = 0.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "acbd6d6a-9c43-035e-1178-53e3c5f0db93",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3584),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Laudantium inventore et sint qui vero magnam nam repellendus eveniet.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 96.0,
                             Hours = 3.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "bffd3096-be27-ce5e-f8e1-ed5339747290",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3652),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Impedit incidunt enim laborum laudantium porro officiis earum officia ut.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 123.0,
                             Hours = 6.5,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "d23df3c1-e00a-9a5d-df49-86c4adf70a8d",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3732),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Tenetur in dolorum quo odit in quos eius qui quidem.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 149.0,
                             Hours = 1.5,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "e67cb6ed-02ee-655d-c6b1-2035207ba289",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3820),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Sed similique ut consequatur placeat iusto aut dolores velit consequatur.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 75.0,
                             Hours = 5.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "f9bc7a18-24d1-315c-ad1a-baa694fe3986",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(3910),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Ducimus id voluptatem et reprehenderit exercitationem qui est consequatur autem.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 101.0,
                             Hours = 8.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "0cfc3d44-46b5-fc5c-9482-54170882d182",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4003),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Eligendi et libero consequatur aperiam sequi aliquid quae consequatur maxime.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 128.0,
                             Hours = 3.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "1f3b006f-6898-c85b-7beb-ed877b06697f",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4102),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Itaque architecto sit aut soluta perferendis ut quia et aut.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 54.0,
                             Hours = 6.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "327bc49b-8a7c-935a-6253-87f8ef89007c",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4171),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Sit et consequatur sed quia officiis officia animi quam deleniti.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 80.0,
                             Hours = 1.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "46bb87c6-ab5f-5f5a-4abb-2169630d9878",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4238),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Molestiae velit porro ullam delectus id non debitis tempora pariatur.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 107.0,
                             Hours = 4.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "59fa4af2-cd42-2a59-3124-badad6903075",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4306),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Tempore culpa et qui est mollitia eum voluptatem doloremque eius.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 134.0,
                             Hours = 7.5,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "6c3a0e1d-ef26-f659-188c-544a4a14c872",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4375),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Sint placeat esse dolores magnam blanditiis ducimus molestiae quo officia.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 59.0,
                             Hours = 2.5,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "7f7ad149-1109-c158-fff4-eebbbe975f6e",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4454),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Neque sint voluptas deserunt saepe ipsam et nihil rerum a.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 86.0,
                             Hours = 5.5,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "92ba9474-33ed-8d58-e65d-882c311bf76b",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4522),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Voluptate dicta fugit eligendi sed quia est voluptatibus ducimus voluptas.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 112.0,
                             Hours = 0.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "a6f957a0-55d0-5857-cdc5-219da59e8f67",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4590),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Et quaerat laudantium temporibus sit aperiam nemo quaerat aliquam optio.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 139.0,
                             Hours = 4.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "b9391bcb-77b4-2457-b42e-bb0e19222664",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4656),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Eveniet molestiae vel rerum dolorem saepe molestiae provident inventore et.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 65.0,
                             Hours = 7.0,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "cc79def7-9997-ef56-9b96-557e8ca5be61",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4736),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Ratione mollitia neque maiores totam facere unde consequatur et iusto.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 91.0,
                             Hours = 2.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "dfb8a123-ba7b-bb55-83fe-efef0029565d",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4803),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Reprehenderit voluptas excepturi vitae aut laborum dolorem dicta libero aut.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 118.0,
                             Hours = 5.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "f3f8654e-dc5e-8655-6a67-886074aced5a",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4871),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Quidem recusandae eos sit facere rem repellendus commodi voluptatum quia.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 144.0,
                             Hours = 8.0,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "0638287a-fe42-5254-51cf-22d1e8308557",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(4940),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Aut aut non minima qui sit ea quidem minima perspiciatis.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 70.0,
                             Hours = 3.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "1977eba5-2025-1d54-3837-bc425bb31d53",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5007),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Consequuntur enim natus autem ipsa consectetur accusantium repudiandae dicta repudiandae.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 97.0,
                             Hours = 6.5,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "2cb7aed1-4208-e953-1fa0-56b2cf37b550",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5082),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Quis odio voluptates voluptatum nobis ab facilis consectetur necessitatibus minima.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 123.0,
                             Hours = 1.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "3ff772fc-64ec-b453-0608-ef2343ba4c4c",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5149),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Et est quaerat sunt voluptas repudiandae voluptatem totam optio est.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 150.0,
                             Hours = 4.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "53363528-86cf-8052-ed70-8994b63ee449",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5217),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Eos omnis est tempore ut est rerum maxime et sit.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 75.0,
                             Hours = 7.5,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "6676f853-a8b3-4b52-d4d9-23052ac17c46",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5285),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Odit rerum a assumenda laborum harum quas sit nemo iure.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 102.0,
                             Hours = 2.5,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9"
                         },
                         new
                         {
                             Id = "79b6bc7f-c996-1751-bc41-bc759e451342",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5368),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Aliquid fugit nemo et aliquam quos quia exercitationem aut possimus.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 129.0,
                             Hours = 6.0,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "8cf67faa-eb7a-e250-a3aa-56e611c8ab3f",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5436),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Mollitia quis expedita delectus eveniet aliquid quod sunt sint consequuntur.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 54.0,
                             Hours = 1.0,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "9f3542d6-0d5d-ae50-8a12-f057854c433c",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5504),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Nulla blanditiis consequatur veritatis perspiciatis non commodi pariatur quisquam dolores.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 81.0,
                             Hours = 4.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "b3750601-2f41-794f-717a-8ac8f9cfda38",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5571),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Sunt fuga ex neque amet quasi voluptatibus quia non et.",
                             EmployeeId = "09442776-8478-34e0-e6aa-335b933599ad",
                             HourlyRate = 107.0,
                             Hours = 7.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6"
                         },
                         new
                         {
                             Id = "c6b5c92d-5124-454f-58e3-23396c537235",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5638),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Suscipit autem nihil quaerat eum non animi in suscipit ut.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 134.0,
                             Hours = 2.0,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "d9f48c58-7308-104e-3f4b-bda9e0d60a31",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5717),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Culpa sapiente illo ea rem temporibus modi cum eos id.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 60.0,
                             Hours = 5.5,
-                            ProjectId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
+                            ProjectId = 1180556736,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "ec344f84-95eb-dc4e-26b3-571a545aa22e",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5785),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Dolorem magni ea blanditiis fugit est voluptas tenetur rerum aut.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 86.0,
                             Hours = 0.5,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "007413af-b7ce-a74d-0d1c-f18bc7de392b",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5853),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Quasi ullam facere omnis possimus molestias praesentium incidunt placeat nisi.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 113.0,
                             Hours = 3.5,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "8286d046-9740-a3e4-95cf-ff46699c73c4"
                         },
                         new
                         {
                             Id = "13b3d6db-d8b2-734d-f484-8afc3b61d127",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5921),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Ipsam totam aut et ea consequatur beatae quas iste quo.",
                             EmployeeId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
                             HourlyRate = 139.0,
                             Hours = 6.5,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "26f39906-fa95-3e4c-dced-246cafe56924",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(5997),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Natus quidem qui placeat quae incidunt cumque dolor ea beatae.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 65.0,
                             Hours = 1.5,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "39335d32-1c79-0a4c-c355-bedd23680021",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6065),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Aut aut et pariatur est sunt voluptatem inventore dolorem ducimus.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 92.0,
                             Hours = 5.0,
-                            ProjectId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
+                            ProjectId = 67631932,
+                            Type = 0,
                             WorkTypeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1"
                         },
                         new
                         {
                             Id = "4c73205d-3e5c-d54b-aabd-584e96ec981d",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6132),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Ab aut voluptatem rerum sit hic itaque suscipit ut illum.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 118.0,
                             Hours = 8.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "60b2e389-6040-a14a-9126-f1bf0a6f301a",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6200),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Exercitationem qui et ipsa aut consequatur natus est omnis amet.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 145.0,
                             Hours = 3.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "73f2a6b5-8223-6c4a-788e-8b307ef3c716",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6267),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Perspiciatis ipsam pariatur qui et libero dolor rerum culpa iste.",
                             EmployeeId = "56433424-0c06-62de-834b-9a1e6143f89f",
                             HourlyRate = 70.0,
                             Hours = 6.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "86326ae0-a407-3849-5ff6-25a0f1765f13",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6344),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Temporibus atque velit labore quaerat non quibusdam neque iure molestiae.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 97.0,
                             Hours = 1.0,
-                            ProjectId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
+                            ProjectId = 1337157586,
+                            Type = 0,
                             WorkTypeId = "a905569d-db07-3ae3-63a0-322750a4a3bd"
                         },
                         new
                         {
                             Id = "99712d0c-c5ea-0349-465f-bf1165faf710",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6410),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Aperiam et unde laboriosam et iure esse odio consectetur exercitationem.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 124.0,
                             Hours = 4.5,
-                            ProjectId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
+                            ProjectId = -1045358408,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "acb1f037-e7cd-cf48-2dc7-5882d97d8f0c",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6478),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Minima qui eveniet iusto unde dolore eaque porro repellat nam.",
                             EmployeeId = "b68104fe-b577-5bdb-0755-9a52a4d5ee8e",
                             HourlyRate = 150.0,
                             Hours = 7.5,
-                            ProjectId = "2fc3adcd-c83f-cbdf-b57a-663d7a3cc8a6",
+                            ProjectId = -1445121657,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "c0f1b463-09b1-9a48-152f-f2f34c012609",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6545),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Cupiditate doloribus dolore provident consectetur odit expedita doloribus aut aperiam.",
                             EmployeeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7",
                             HourlyRate = 76.0,
                             Hours = 2.5,
-                            ProjectId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
+                            ProjectId = -1288389735,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "d330778e-2b94-6647-fc98-8c63c084be06",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6621),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Assumenda nesciunt mollitia harum fugiat delectus ad ut est ea.",
                             EmployeeId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
                             HourlyRate = 102.0,
                             Hours = 5.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba"
                         },
                         new
                         {
                             Id = "e6703aba-4d78-3147-e300-25d434085602",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6688),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Perferendis voluptas rerum qui voluptatum dolorem saepe perspiciatis esse est.",
                             EmployeeId = "95c69371-b924-6fe3-7c38-98b7dd200bc1",
                             HourlyRate = 129.0,
                             Hours = 0.5,
-                            ProjectId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
+                            ProjectId = 224298318,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "f9b0fee5-6f5b-fd46-ca69-bf45a78bedff",
-                            Date = new DateOnly(2025, 10, 29),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6755),
+                            Date = new DateOnly(2025, 11, 25),
                             Description = "Quaerat dolores exercitationem eum sed nobis sint qui eius qui.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 55.0,
                             Hours = 4.0,
-                            ProjectId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
+                            ProjectId = 2136749619,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "0df0c111-913f-c845-b1d1-59b61b0f85fb",
-                            Date = new DateOnly(2025, 10, 21),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6823),
+                            Date = new DateOnly(2025, 11, 17),
                             Description = "Quas nam facilis molestiae omnis unde dolores explicabo accusantium excepturi.",
                             EmployeeId = "dc018b55-f93e-f2da-d526-ce348bdc1e87",
                             HourlyRate = 81.0,
                             Hours = 7.0,
-                            ProjectId = "56433424-0c06-62de-834b-9a1e6143f89f",
+                            ProjectId = 1736986371,
+                            Type = 0,
                             WorkTypeId = "cf85ddf4-1ece-d1e2-3171-650938abd2b7"
                         },
                         new
                         {
                             Id = "202f843c-b322-9445-9839-f3278f921df8",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6890),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Placeat fugiat asperiores voluptatem voluptate voluptate facere quis eum debitis.",
                             EmployeeId = "f604634b-6295-68e1-ff41-99ea1fb201b0",
                             HourlyRate = 108.0,
                             Hours = 2.0,
-                            ProjectId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
+                            ProjectId = 1893652757,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "336f4768-d406-5f44-7fa2-8c970216b4f5",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(6966),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "Asperiores alias nisi quia ab ut autem est quidem dolore.",
                             EmployeeId = "a24141d3-9394-90dc-1fed-01e130515792",
                             HourlyRate = 134.0,
                             Hours = 5.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "46af0b93-f6e9-2b44-660a-260876994cf1",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7034),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Et ipsum eligendi eius eligendi consequuntur asperiores molestiae odio et.",
                             EmployeeId = "bc4519c8-fdeb-06e2-4a08-cc98c4273aba",
                             HourlyRate = 60.0,
                             Hours = 8.0,
-                            ProjectId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
+                            ProjectId = -888626487,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "59eecebf-18cd-f643-4e72-c079ea1de4ee",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7103),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Corrupti laboriosam ipsa voluptatem suscipit maiores laborum sed dolore maiores.",
                             EmployeeId = "6982f750-2dea-2ddd-6ab4-338fd5c7909c",
                             HourlyRate = 87.0,
                             Hours = 3.5,
-                            ProjectId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
+                            ProjectId = -731960101,
+                            Type = 0,
                             WorkTypeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3"
                         },
                         new
                         {
                             Id = "6d2e91ea-3ab0-c243-35db-5aea5ea07ceb",
-                            Date = new DateOnly(2025, 10, 27),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7169),
+                            Date = new DateOnly(2025, 11, 23),
                             Description = "Minus excepturi reprehenderit esse reiciendis nulla incidunt voluptatum ab ex.",
                             EmployeeId = "8286d046-9740-a3e4-95cf-ff46699c73c4",
                             HourlyRate = 113.0,
                             Hours = 6.5,
-                            ProjectId = "7cc2ba7c-4fcd-f9dd-511c-cd00494a2798",
+                            ProjectId = 624061566,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "806e5516-5c93-8d42-1c43-f35ad12413e7",
-                            Date = new DateOnly(2025, 10, 28),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7244),
+                            Date = new DateOnly(2025, 11, 24),
                             Description = "Reiciendis soluta quod excepturi dolorum nihil at facere vero est.",
                             EmployeeId = "1c84eaa2-a65c-ffdf-ce12-cccc06b931a9",
                             HourlyRate = 140.0,
                             Hours = 1.5,
-                            ProjectId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
+                            ProjectId = 780793488,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "93ad1841-7e77-5942-03ac-8dcb45a7abe4",
-                            Date = new DateOnly(2025, 10, 20),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7312),
+                            Date = new DateOnly(2025, 11, 16),
                             Description = "Modi pariatur sunt laborum ut error rem doloremque distinctio explicabo.",
                             EmployeeId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
                             HourlyRate = 65.0,
                             Hours = 4.5,
-                            ProjectId = "c9c1c82a-d75b-27da-eebd-34c31858868b",
+                            ProjectId = -1601722507,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "a6eddb6d-a05a-2441-ea14-273cb92b43e0",
-                            Date = new DateOnly(2025, 10, 22),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7380),
+                            Date = new DateOnly(2025, 11, 18),
                             Description = "Totam sit odio impedit voluptates nihil sunt nemo totam laudantium.",
                             EmployeeId = "e2c4a01f-40b1-9de1-18d9-ff7aab2e6ab3",
                             HourlyRate = 92.0,
                             Hours = 7.5,
-                            ProjectId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
+                            ProjectId = -2001551291,
+                            Type = 0,
                             WorkTypeId = "f604634b-6295-68e1-ff41-99ea1fb201b0"
                         },
                         new
                         {
                             Id = "b92d9e98-c23e-f040-d17c-c1ad2caedadd",
-                            Date = new DateOnly(2025, 10, 23),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7448),
+                            Date = new DateOnly(2025, 11, 19),
                             Description = "Quo amet temporibus consequatur omnis veniam quo culpa enim fugiat.",
                             EmployeeId = "8f027ea7-71b0-c4dc-3884-6771bccebf95",
                             HourlyRate = 119.0,
                             Hours = 3.0,
-                            ProjectId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
+                            ProjectId = -1844884905,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "cd6d62c4-e321-bb40-b8e5-5a1ea03272da",
-                            Date = new DateOnly(2025, 10, 24),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7522),
+                            Date = new DateOnly(2025, 11, 20),
                             Description = "A ex eos et adipisci qui sit vero beatae sed.",
                             EmployeeId = "a905569d-db07-3ae3-63a0-322750a4a3bd",
                             HourlyRate = 145.0,
                             Hours = 6.0,
-                            ProjectId = "a24141d3-9394-90dc-1fed-01e130515792",
+                            ProjectId = -488863238,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "e0ac25ef-0505-873f-9f4d-f48e14b60ad6",
-                            Date = new DateOnly(2025, 10, 25),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7590),
+                            Date = new DateOnly(2025, 11, 21),
                             Description = "Sed cupiditate corrupti alias quo alias hic dolores rerum sunt.",
                             EmployeeId = "420371f9-ea23-96de-9ce3-00aeeec060a2",
                             HourlyRate = 71.0,
                             Hours = 1.0,
-                            ProjectId = "09442776-8478-34e0-e6aa-335b933599ad",
+                            ProjectId = -332196852,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         },
                         new
                         {
                             Id = "f3ece81b-27e8-523f-87b5-8eff8739a1d3",
-                            Date = new DateOnly(2025, 10, 26),
+                            CreatedAt = new DateTime(2025, 11, 18, 19, 44, 31, 253, DateTimeKind.Utc).AddTicks(7659),
+                            Date = new DateOnly(2025, 11, 22),
                             Description = "Ducimus eligendi quo aut deleniti et similique velit est earum.",
                             EmployeeId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
                             HourlyRate = 98.0,
                             Hours = 4.0,
-                            ProjectId = "ef404e81-1b22-bed9-bc8e-68a5ff5fb584",
+                            ProjectId = 1580319985,
+                            Type = 0,
                             WorkTypeId = "09442776-8478-34e0-e6aa-335b933599ad"
                         });
+                });
+
+            modelBuilder.Entity("EntreprenadPro.Models.Vehicle", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Make")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("PurchaseDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("PurchasePrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("RegistrationNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SerialNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Year")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("EntreprenadPro.Models.WorkType", b =>
@@ -4372,23 +5044,6 @@ namespace EntreprenadPro.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EntreprenadPro.Models.EntryTimer", b =>
-                {
-                    b.HasOne("EntreprenadPro.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EntreprenadPro.Models.TimeEntry", "TimeEntry")
-                        .WithMany()
-                        .HasForeignKey("TimeEntryId");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("TimeEntry");
-                });
-
             modelBuilder.Entity("EntreprenadPro.Models.Project", b =>
                 {
                     b.HasOne("EntreprenadPro.Models.Customer", "Customer")
@@ -4404,21 +5059,15 @@ namespace EntreprenadPro.Data.Migrations
                 {
                     b.HasOne("EntreprenadPro.Models.Employee", "Employee")
                         .WithMany("TimeEntries")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("EntreprenadPro.Models.Project", "Project")
                         .WithMany("TimeEntries")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("EntreprenadPro.Models.WorkType", "WorkType")
                         .WithMany("TimeEntries")
-                        .HasForeignKey("WorkTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WorkTypeId");
 
                     b.Navigation("Employee");
 

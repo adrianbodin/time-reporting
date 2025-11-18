@@ -16,7 +16,7 @@ public class RedigeraModel(IAppDbContext db) : PageModel
 
     public IList<Customer> Customers { get; set; } = null!;
 
-    public async Task<IActionResult> OnGet(string id)
+    public async Task<IActionResult> OnGet(int id)
     {
         var project = await db.Projects
             .Where(p => p.Id == id)
