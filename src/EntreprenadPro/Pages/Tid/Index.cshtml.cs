@@ -60,7 +60,8 @@ public class Index(IAppDbContext db) : PageModel
                 t.Date,
                 t.WorkType!.Name,
                 t.Employee.FullName,
-                t.EmployeeId
+                t.EmployeeId,
+                t.Type
             ))
             .ToListAsync();
 

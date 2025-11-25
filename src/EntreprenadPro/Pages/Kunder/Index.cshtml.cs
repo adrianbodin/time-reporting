@@ -36,4 +36,9 @@ public class IndexModel(IAppDbContext context) : PageModel
 
         return Page();
     }
+
+    public IActionResult OnGetHtmx()
+    {
+        return Content("<h1>Welcome HTMX</h1>", "text/html");
+    }
 }

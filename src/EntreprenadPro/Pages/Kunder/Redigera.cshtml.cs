@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using EntreprenadPro.Data;
 using EntreprenadPro.Extensions;
 using EntreprenadPro.Helpers;
@@ -10,29 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntreprenadPro.Pages.Kunder;
 
-public record EditCustomerDto
-{
-    [Required] public string Id { get; set; }
-
-    [Required] public string Name { get; set; }
-}
-
 [Authorize]
 public class RedigeraModel(IAppDbContext db) : PageModel
 {
-    [BindProperty] public EditCustomerDto Customer { get; set; } = null!;
+    [BindProperty] public Customer Customer { get; set; } = null!;
 
     public async Task<IActionResult> OnGet(string id)
     {
-        this.SetTitle("Edit Customer");
-
         var customer = await db.Customers
             .Where(c => c.Id == id)
-            .Select(c => new EditCustomerDto
-            {
-                Id = c.Id,
-                Name = c.Name
-            })
             .FirstOrDefaultAsync();
 
         if (customer is null)
@@ -41,6 +26,7 @@ public class RedigeraModel(IAppDbContext db) : PageModel
             return RedirectToPage("./Index");
         }
 
+        this.SetTitle($"Redigera kunden: {customer.Name}");
         Customer = customer;
         return Page();
     }
@@ -57,14 +43,14 @@ public class RedigeraModel(IAppDbContext db) : PageModel
 
         if (customer is null)
         {
-            this.SendNotification(NotificationType.Danger, "Customer not found.");
+            this.SendNotification(NotificationType.Danger, "Kunden kunde inte hittas.");
             return NotFound();
         }
 
         customer.Name = Customer.Name;
         await db.SaveChangesAsync();
 
-        this.SendNotification(NotificationType.Success, "The customer was updated successfully");
+        this.SendNotification(NotificationType.Success, "Kunden har uppdaterats.");
 
         return RedirectToPage("./Index");
     }

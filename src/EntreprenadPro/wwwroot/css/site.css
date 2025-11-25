@@ -268,4 +268,7 @@ body {
   white-space: nowrap;
 }
 
+input[readonly], input[readonly]:focus, select[readonly], select[readonly]:focus, textarea[readonly], textarea[readonly]:focus {
+  background-color: var(--bs-gray-800);
+}
 

@@ -12,7 +12,7 @@ namespace EntreprenadPro.Pages.Kunder.Details;
 [Authorize]
 public class Index(IAppDbContext context) : PageModel
 {
-    public Customer Customer { get; private set; } = null!;
+    [BindProperty] public Customer Customer { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(string? id)
     {

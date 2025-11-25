@@ -46,7 +46,8 @@ public record ReadTimeEntryDto(
     DateOnly Date,
     string WorkType,
     string EmployeeName,
-    string EmployeeId);
+    string EmployeeId,
+    TimeEntryType Type);
 
 public record TimeEntryDetailsDto(
     string ProjectName,

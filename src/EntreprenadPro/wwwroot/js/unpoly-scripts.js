@@ -1,15 +1,15 @@
 up.log.enable();
-up.compiler('.toast', function(element) {
-  setTimeout(function() {
+up.compiler('.toast', function (element) {
+  setTimeout(function () {
     element.remove();
   }, 5000);
 });
 
-up.on('up:location:changed', function() {
+up.on('up:location:changed', function () {
   console.log('playwright:continue');
 });
 
-up.compiler('#test-chart', function(element, data) {
+up.compiler('#test-chart', function (element, data) {
   const chart = new Chart(element, {
     type: 'bar',
     data: {
