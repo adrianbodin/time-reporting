@@ -1,40 +1,39 @@
-﻿@{
-  var headerExists = Context.Request.Headers.ContainsKey("X-Up-Version");
-
-  if (!headerExists)
-  {
-    Layout = "_RootLayout";
-  }
-}
+﻿<!DOCTYPE html>
+<html lang="sv-SE">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@ViewData["Title"]</title>
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="~/@(nameof(EntreprenadPro)).styles.css"/>
+</head>
+<body id="body">
 @if (User.Identity is { IsAuthenticated: true })
 {
-  <div id="content" class="container-fluid position-relative">
-    <button class="btn nav-link px-3 text-dark position-absolute top-0 end-0 mt-2 me-1 d-md-none" type="button"
-            data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <i class="bi bi-list h1"></i>
-    </button>
-    <div class="row">
-      <div class="sidebar p-0 bg-body-tertiary vh-100 position-fixed z-3">
-        <div class="offcanvas-md offcanvas-end bg-body-tertiary h-100" tabindex="-1" id="sidebarMenu"
-             aria-labelledby="sidebarMenuLabel">
-          <div class="offcanvas-header">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
-                    aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body d-md-flex flex-column pt-lg-3">
-            @await Html.PartialAsync("_LoginPartial")
-          </div>
-        </div>
-      </div>
-      <main role="main" class="pt-2" id="main">
-        <div class="container">
-          <h1>@ViewData["Title"]</h1>
-          @RenderBody()
-        </div>
-      </main>
-    </div>
-  </div>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/Tid">Tid</a></li>
+        <li><a href="/Projekt">Projekt</a></li>
+        <li><a href="/Kunder">Kunder</a></li>
+        <li><a href="/Fordon">Fordon</a></li>
+        @if (User.IsInRole("Admin"))
+        {
+          <li><a href="/Anstallda">Anstallda</a></li>
+        }
+        <li><a href="/Worktypes">Arbetstyper</a></li>
+        <li><a href="/Account/Manage">Mitt Konto</a></li>
+        <li>
+          <form id="logoutForm" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+            <button id="logout" type="submit">Logga ut</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    @RenderBody()
+  </main>
 }
 else
 {
@@ -42,7 +41,9 @@ else
     @RenderBody()
   </main>
 }
-
+@await RenderSectionAsync("Scripts", false)
+</body>
+</html>
 
 @{
   var notificationMessage = TempData["Notification-Message"];
@@ -50,7 +51,7 @@ else
 }
 @if (notificationMessage != null && notificationStatus != null)
 {
-  <div id="toast" up-flashes class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+  <div id="toast" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
     <div id="liveToast" class="toast show w-100 text-bg-@notificationStatus" role="alert" aria-live="assertive"
          aria-atomic="true" data-bs-delay="5000">
       <div class="d-flex">

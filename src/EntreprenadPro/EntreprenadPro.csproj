@@ -58,6 +58,11 @@
         <_ContentIncludedByDefault Remove="Pages\Konto\Utlaast.cshtml"/>
         <_ContentIncludedByDefault Remove="Pages\Konto\_Statusmeddelande.cshtml"/>
         <_ContentIncludedByDefault Remove="Pages\Konto\_ViewImports.cshtml"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-ajax.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-core.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-persist.min.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\bootstrap-auto-dark-mode.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\unpoly-scripts.js"/>
     </ItemGroup>
 
 </Project>

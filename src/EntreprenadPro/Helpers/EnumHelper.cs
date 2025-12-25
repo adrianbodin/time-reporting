@@ -18,10 +18,10 @@ public static class EnumHelper
     {
         return Enum.GetValues(typeof(TEnum))
             .Cast<TEnum>()
-            .Select(e => new SelectListItem
-            {
-                Text = GetDisplayName(e),
-                Value = e.ToString()
-            });
+                .Select(e => new SelectListItem
+                {
+                    Text = GetDisplayName(e),
+                    Value = e.ToString()
+                });
     }
 }

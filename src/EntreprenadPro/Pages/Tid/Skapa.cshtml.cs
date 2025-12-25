@@ -28,7 +28,7 @@ public class AddTimeEntryDto
     [DataType(DataType.Date)]
     public DateTime Date { get; set; }
 
-    [Required] public string? WorkTypeId { get; set; }
+    public string? WorkTypeId { get; set; }
 }
 
 [Authorize]
@@ -42,7 +42,7 @@ public class Skapa(IAppDbContext db) : PageModel
 
     public async Task OnGet([FromQuery] int? hours, [FromQuery] int? minutes)
     {
-        this.SetTitle("New Time Entry");
+        this.SetTitle("Registrera ny tid");
         NewEntry = new AddTimeEntryDto
         {
             Date = DateTime.Now
@@ -68,7 +68,7 @@ public class Skapa(IAppDbContext db) : PageModel
             Description = NewEntry.Description,
             Date = DateOnly.FromDateTime(NewEntry.Date),
             WorkTypeId = NewEntry.WorkTypeId,
-            HourlyRate = workType.HourlyRate,
+            HourlyRate = workType?.HourlyRate ?? 0,
             Type = NewEntry.TimeEntryType
         };
 
