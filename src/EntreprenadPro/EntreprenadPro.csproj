@@ -8,61 +8,64 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="35.6.5"/>
-        <PackageReference Include="Finbuckle.Html5Validation" Version="9.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0">
+        <PackageReference Include="Bogus" Version="35.6.5" />
+        <PackageReference Include="coverlet.collector" Version="6.0.4">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Finbuckle.Html5Validation" Version="9.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.0-rc.1.25458.5"/>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0-rc.2"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="Pages\Shared\Components\Timer\Default.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\AterstaellLosenord.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\AterstaellLosenordBekreftelse.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\AtkomstNekad.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\BekraftaEpost.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\BekraftaEpostandring.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\ExternInloggning.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\GlomtLosenord.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\GlomtLosenordBekreftelse.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\AktiveraAutentiserare.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\AndraLosenord.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\AterstaellAutentiserare.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\Epost.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\GenereraAterstallningskoder.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\Inaktivera2fa.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\Index.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\LaddaNerPersonuppgifter.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\RaderaPersonuppgifter.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\StaellInLosenord.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\VisaAterstallningskoder.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_HanteraMeny.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_Layout.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_Statusmeddelande.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_ViewImports.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaIn.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaInMed2fa.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaInMedAterstallningskod.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaUt.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Registrera.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\RegistreraBekreftelse.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\SkickaOmEpostbekraftelse.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\Utlaast.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\_Statusmeddelande.cshtml"/>
-        <_ContentIncludedByDefault Remove="Pages\Konto\_ViewImports.cshtml"/>
-        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-ajax.min.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-core.min.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-persist.min.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\js\bootstrap-auto-dark-mode.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\js\unpoly-scripts.js"/>
+        <_ContentIncludedByDefault Remove="Pages\Shared\Components\Timer\Default.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\AterstaellLosenord.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\AterstaellLosenordBekreftelse.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\AtkomstNekad.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\BekraftaEpost.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\BekraftaEpostandring.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\ExternInloggning.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\GlomtLosenord.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\GlomtLosenordBekreftelse.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\AktiveraAutentiserare.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\AndraLosenord.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\AterstaellAutentiserare.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\Epost.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\GenereraAterstallningskoder.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\Inaktivera2fa.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\LaddaNerPersonuppgifter.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\RaderaPersonuppgifter.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\StaellInLosenord.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\VisaAterstallningskoder.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_HanteraMeny.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_Layout.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_Statusmeddelande.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Hantera\_ViewImports.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaIn.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaInMed2fa.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaInMedAterstallningskod.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\LoggaUt.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Registrera.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\RegistreraBekreftelse.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\SkickaOmEpostbekraftelse.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\Utlaast.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\_Statusmeddelande.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Konto\_ViewImports.cshtml" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-ajax.min.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-core.min.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\alpine-persist.min.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\bootstrap-auto-dark-mode.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\js\unpoly-scripts.js" />
     </ItemGroup>
 
 </Project>

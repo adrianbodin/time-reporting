@@ -1,13 +1,16 @@
 section {
-  display: flex;
-  justify-content: center;
-
-  & > form {
-    border-color: var(--clr-border);
-    background-color: var(--clr-bg-secondary);
     display: grid;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-xl);
-    border-radius: var(--spacing-lg);
-  }
+    place-items: center;
+    min-height: 100vh;
+
+    & > form {
+        border-color: var(--clr-border);
+        background-color: var(--clr-bg-secondary);
+        display: grid;
+        width: 100%;
+        max-width: 600px;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-xl);
+        border-radius: var(--spacing-lg);
+    }
 }

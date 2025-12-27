@@ -42,6 +42,16 @@
   box-sizing: border-box;
 }
 
+input,
+textarea,
+select, button {
+    font: inherit; /* Use the same font as the parent */
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+}
+
 html {
   font-size: var(--text-base);
 }
@@ -49,6 +59,7 @@ html {
 body {
   font-size: var(--text-base);
   line-height: 1.6;
+  min-height: 100dvh;
   background-color: var(--clr-bg-primary);
   color: var(--clr-text-primary);
 }
@@ -135,4 +146,63 @@ body {
       gap: var(--spacing-lg);
     }
   }
+}
+
+.wrapper {
+    width: min(100%, clamp(16rem, 90vw, 72rem));
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+input, textarea, select {
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--spacing-xs);
+    border: 1px solid var(--clr-border);
+    font-size: var(--text-md);
+    font-family: inherit;
+    line-height: 1.4;
+    background-color: var(--clr-bg-primary);
+    color: var(--clr-text-primary);
+    accent-color: var(--clr-brand);
+
+    &:focus {
+        outline: 3px solid var(--clr-brand);
+        border: 1px solid var(--clr-brand);
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--clr-bg-primary) inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: var(--clr-text-primary) !important;
+}
+
+label {
+    font-size: var(--text-md);
+}
+
+.form-group {
+    display: grid;
+
+    &:has(input[type="checkbox"]){
+        display: flex;  
+        gap: 1ch;
+    }
+}
+
+button {
+    background-color: var(--clr-brand);
+    border-radius: var(--spacing-xs);
+    cursor: pointer;
+    border: 1px solid var(--clr-brand);
+
+    &:focus {
+        outline: 3px solid var(--clr-border);
+        border: 1px solid var(--clr-border);
+    }
 }

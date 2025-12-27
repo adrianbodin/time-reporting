@@ -6,15 +6,15 @@ using EntreprenadPro.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration["PostgreSql:ConnectionString"];
+var connectionString = builder.Configuration["Sqlite:ConnectionString"];
 
 if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
 {
-    connectionString = Environment.GetEnvironmentVariable("POSTGRESQL_CONNECTION_STRING");
+    connectionString = Environment.GetEnvironmentVariable("SQLITE_CONNECTION_STRING");
 }
 
 builder.Services.AddDbContext<IAppDbContext,AppDbContext>(opt =>
-    opt.UseNpgsql(connectionString));
+    opt.UseSqlite(connectionString));
 
 builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
