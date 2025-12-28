@@ -1,19 +1,17 @@
 ﻿@page
 @model RegisterModel
-<section class="col-4 mt-5">
-  <div>
+<section>
     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
       <h2>Skapa en administratör för din organisation</h2>
       <hr/>
-      <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-      <div class="form-floating mb-3">
+      <div class="form-group">
         <input asp-for="Input.Email" class="form-control" autocomplete="username" data-testid="email-input"
                aria-required="true" placeholder="namn@exempel.se"/>
         <label asp-for="Input.Email">E-post</label>
         <span asp-validation-for="Input.Email" class="text-danger"></span>
       </div>
-      <div class="form-floating mb-3">
-        <input asp-for="Input.FullName" class="form-control" autocomplete="fullname" data-testid="fullname-input"
+      <div class="form-group">
+        <input asp-for="Input.FullName" autocomplete="fullname""
                aria-required="true" placeholder="Exempel Namn"/>
         <label asp-for="Input.FullName">Fullständigt namn</label>
         <span asp-validation-for="Input.FullName" class="text-danger"></span>
@@ -46,5 +44,4 @@
         Registrera
       </button>
     </form>
-  </div>
 </section>
