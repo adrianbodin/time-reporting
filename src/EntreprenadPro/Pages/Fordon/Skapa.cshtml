@@ -2,71 +2,56 @@
 @using EntreprenadPro.Helpers
 @model EntreprenadPro.Pages.Fordon.SkapaModel
 
-<section class="container">
+<section class="wrapper">
   <h2>Nytt fordon</h2>
   <hr>
-  <form method="post" up-submit>
-    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-    <div class="mb-3">
-      <label asp-for="Vehicle.Type" class="form-label">Typ av fordon</label>
-      <select asp-for="Vehicle.Type" class="form-select" up-switch=".type-dependant"
-              asp-items="@EnumHelper.GetSelectList<VehicleType>()">
+  <form method="post" class="form">
+    <div class="form-group">
+      <label asp-for="Vehicle.Type">Typ av fordon</label>
+      <select asp-for="Vehicle.Type" asp-items="@EnumHelper.GetSelectList<VehicleType>()">
       </select>
     </div>
-
-    <div class="mb-3 type-dependant" up-hide-for="@VehicleType.Car">
-      <label asp-for="Vehicle.SerialNumber" class="control-label"></label>
-      <input asp-for="Vehicle.SerialNumber" class="form-control" placeholder="1234567890"/>
-      <span asp-validation-for="Vehicle.SerialNumber" class="text-danger"></span>
+    <div class="form-group">
+      <label asp-for="Vehicle.SerialNumber"></label>
+      <input asp-for="Vehicle.SerialNumber" placeholder="1234567890"/>
+      <span asp-validation-for="Vehicle.SerialNumber"></span>
     </div>
-
-    <div class="mb-3 type-dependant" up-show-for="@VehicleType.Car">
-      <label asp-for="Vehicle.RegistrationNumber" class="control-label"></label>
-      <input asp-for="Vehicle.RegistrationNumber" class="form-control" placeholder="ABC123"/>
-      <span asp-validation-for="Vehicle.RegistrationNumber" class="text-danger"></span>
+    <div class="form-group">
+      <label asp-for="Vehicle.RegistrationNumber"></label>
+      <input asp-for="Vehicle.RegistrationNumber" placeholder="ABC123"/>
+      <span asp-validation-for="Vehicle.RegistrationNumber"></span>
     </div>
-
-    <div class="row mb-3">
-      <div class="col-4">
-        <label asp-for="Vehicle.Make" class="control-label"></label>
-        <input asp-for="Vehicle.Make" class="form-control" placeholder="Volvo"/>
-        <span asp-validation-for="Vehicle.Make" class="text-danger"></span>
-      </div>
-      <div class="col-4">
-        <label asp-for="Vehicle.Model" class="control-label"></label>
-        <input asp-for="Vehicle.Model" class="form-control" placeholder="FH16"/>
-        <span asp-validation-for="Vehicle.Model" class="text-danger"></span>
-      </div>
-      <div class="col-4">
-        <label asp-for="Vehicle.Year" class="control-label"></label>
-        <input asp-for="Vehicle.Year" class="form-control"/>
-        <span asp-validation-for="Vehicle.Year" class="text-danger"></span>
-      </div>
+    <div class="form-group">
+      <label asp-for="Vehicle.Make"></label>
+      <input asp-for="Vehicle.Make" placeholder="Volvo"/>
+      <span asp-validation-for="Vehicle.Make"></span>
     </div>
-
-    <div class="row mb-3">
-      <div class="col-6">
-        <label asp-for="Vehicle.PurchasePrice" class="control-label"></label>
-        <input asp-for="Vehicle.PurchasePrice" class="form-control"/>
-        <span asp-validation-for="Vehicle.PurchasePrice" class="text-danger"></span>
-      </div>
-      <div class="col-6">
-        <label asp-for="Vehicle.PurchaseDate" class="control-label"></label>
-        <input asp-for="Vehicle.PurchaseDate" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control"/>
-        <span asp-validation-for="Vehicle.PurchaseDate" class="text-danger"></span>
-      </div>
+    <div class="form-group">
+      <label asp-for="Vehicle.Model"></label>
+      <input asp-for="Vehicle.Model" placeholder="FH16"/>
+      <span asp-validation-for="Vehicle.Model"></span>
     </div>
-
-    <div class="mb-3">
-      <label asp-for="Vehicle.Note" class="control-label"></label>
-      <textarea asp-for="Vehicle.Note" rows="4" class="form-control" placeholder="Anteckningar"></textarea>
-      <span asp-validation-for="Vehicle.Note" class="text-danger"></span>
+    <div class="form-group">
+      <label asp-for="Vehicle.Year"></label>
+      <input asp-for="Vehicle.Year" placeholder="2016"/>
+      <span asp-validation-for="Vehicle.Year"></span>
     </div>
-
+    <div class="form-group">
+      <label asp-for="Vehicle.PurchasePrice"></label>
+      <input asp-for="Vehicle.PurchasePrice"/>
+      <span asp-validation-for="Vehicle.PurchasePrice"></span>
+    </div>
+    <div class="form-group">
+      <label asp-for="Vehicle.PurchaseDate"></label>
+      <input asp-for="Vehicle.PurchaseDate" type="date" asp-format="{0:yyyy-MM-dd}"/>
+      <span asp-validation-for="Vehicle.PurchaseDate"></span>
+    </div>
+    <div class="form-group">
+      <label asp-for="Vehicle.Note"></label>
+      <textarea asp-for="Vehicle.Note" rows="4" placeholder="Anteckningar"></textarea>
+      <span asp-validation-for="Vehicle.Note"></span>
+    </div>
     @Html.AntiForgeryToken()
-    <div>
-      <input type="submit" value="Skapa fordon" class="btn btn-primary"/>
-    </div>
+    <button class="btn btn-primary">Skapa</button>
   </form>
 </section>

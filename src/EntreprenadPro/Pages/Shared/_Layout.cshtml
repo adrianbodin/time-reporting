@@ -13,7 +13,7 @@
   <header>
     <nav>
       <ul>
-        <li><a href="/Tid">Tid</a></li>
+        <li><a class="selected" href="/Tid">Tid</a></li>
         <li><a href="/Projekt">Projekt</a></li>
         <li><a href="/Kunder">Kunder</a></li>
         <li><a href="/Fordon">Fordon</a></li>
@@ -22,6 +22,7 @@
           <li><a href="/Anstallda">Anstallda</a></li>
         }
         <li><a href="/Worktypes">Arbetstyper</a></li>
+        <hr>
         <li><a href="/Account/Manage">Mitt Konto</a></li>
         <li>
           <form id="logoutForm" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
